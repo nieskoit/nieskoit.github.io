@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Zanurz się w magiczny świat serii 'Magowie Nocy' – opowieści o magii, tajemnicach i walce o przyszłość. Odkryj moc, która przebudziła się nocą.">
+<meta name="keywords" content="Magowie Nocy, magia, przygoda, opowieść fantasy, Nieskot, magiczny świat">
+<meta name="author" content="Nieskot">
+<meta property="og:title" content="Magowie Nocy">
+<meta property="og:description" content="Zanurz się w magiczny świat serialu 'Magowie Nocy' – pełnego zaklęć, przyjaźni i niebezpieczeństw.">
+<meta property="og:image" content="images/mn.webp"> 
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://twojastrona.pl">
+<link rel="icon" href="images/mn.ico" type="image/x-icon">
+<title>Magowie Nocy</title>
+<style>
+@font-face {
+  font-family: 'Pirata One';
+  src: url('./fonts/PirataOne-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Quicksand';
+  src: url('./fonts/Quicksand-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Quicksand';
+  src: url('./fonts/Quicksand-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+body {
+  position: relative;
+  background: linear-gradient(135deg, #07070d, #1b1b2f);
+  font-family: 'Quicksand', sans-serif;
+  color: #dddcdc;
+  overflow-y: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 100vw;
+  overflow-x: hidden;
+  flex-direction: column;
+  text-align: center;
+  padding: 0 1rem 2rem;
+  min-height: 100vh;
+  animation: bgPulse 12s ease-in-out infinite alternate;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  pointer-events: none;
+  background: radial-gradient(circle at center, rgba(150,100,255,0.15), transparent 70%);
+  animation: mistMove 60s linear infinite;
+  z-index: 0;
+}
+
+/* Magiczne, delikatne cząsteczki z obracaniem */
+body::after {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  background: transparent;
+  box-shadow:
+    30vw 20vh 1px 1px #a29bff88,
+    50vw 80vh 2px 1.5px #b4a0ffcc,
+    70vw 40vh 1.5px 1px #9681ffaa,
+    85vw 90vh 2px 1.8px #a09fffbb,
+    10vw 70vh 1.3px 1.2px #b4a3ffcc;
+  animation: twinkle 8s linear infinite alternate, particleSpin 40s linear infinite;
+  z-index: 0;
+}
+
+
+/* Animacje dla mgiełki i cząsteczek */
+@keyframes mistMove {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(50px, 50px); }
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+/* Obrót cząsteczek dla dodatkowego efektu */
+@keyframes particleSpin {
+  0% { transform: rotate(0deg) translateX(10px) rotate(0deg); opacity: 0.7; }
+  50% { opacity: 1; }
+  100% { transform: rotate(360deg) translateX(10px) rotate(-360deg); opacity: 0.7; }
+}
+
+/* Napis nagłówka z efektem iskrzenia i drobinkami */
+h1 {
+  font-family: 'Pirata One', cursive;
+  font-size: 5rem;
+  color: #9a8cff;
+  letter-spacing: 0.14em;
+  margin: 0 0 1rem 0;
+  text-shadow:
+    0 0 50px #7c6effcc,
+    0 0 55px #a397ffdd,
+    0 0 40px #7d6effbb;
+  animation: glowPulse 3.5s ease-in-out infinite alternate;
+  position: relative;
+  z-index: 11;
+}
+
+h1::before, h1::after {
+  content: "✨";
+  position: absolute;
+  font-size: 2rem;
+  color: #a9a2ff;
+  animation: sparkleFloat 6s ease-in-out infinite;
+  opacity: 0.8;
+  user-select: none;
+  pointer-events: none;
+}
+
+h1::before {
+  top: -60px;  
+  left: -80px; 
+  animation-delay: 0s;
+}
+
+h1::after {
+  top: 100%;  
+  right: -90px; 
+  animation-delay: 3s;
+}
+
+/* Delikatne unoszenie i migotanie drobinek */
+@keyframes sparkleFloat {
+  0%, 100% { transform: translateY(0) scale(1); opacity: 0.8; }
+  50% { transform: translateY(-10px) scale(1.2); opacity: 1; }
+}
+
+/* Magiczny button z lekkim szkłem i błyskiem */
+button#magic-btn {
+  background: linear-gradient(135deg, #4b3fdb, #7c6eff);
+  color: #f0f0f0;
+  border: 1.5px solid #9a8dffcc;
+  padding: 1rem 3rem;
+  font-size: 1.3rem;
+  font-weight: 700;
+  border-radius: 16px;
+  cursor: pointer;
+  box-shadow: 0 0 35px #7c6effcc;
+  backdrop-filter: blur(8px);
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.25s ease,
+    border-color 0.4s ease;
+  user-select: none;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtelna animacja przycisku */
+button#magic-btn::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at center, #c9c4ff44, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 16px;
+  pointer-events: none;
+}
+
+button#magic-btn:hover::before {
+  opacity: 1;
+}
+
+/* Dodany shimmer przesuwający się po buttonie */
+button#magic-btn::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  pointer-events: none;
+  background: linear-gradient(120deg, transparent 30%, #d0cfff88 50%, transparent 70%);
+  transform: translateX(-100%) rotate(25deg);
+  border-radius: 16px;
+  animation: shimmerMove 3s linear infinite;
+  opacity: 0;
+  z-index: 10;
+  transition: none;
+}
+
+button#magic-btn:hover::after {
+  opacity: 1;
+}
+
+@keyframes shimmerMove {
+  0% { transform: translateX(-100%) rotate(25deg); }
+  100% { transform: translateX(100%) rotate(25deg); }
+}
+
+@media (max-width: 600px) {
+  body {
+    padding: 1rem; /* Dodanie dodatkowego paddingu dla lepszej responsywności */
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  h1 {
+    font-size: 3rem;
+    text-shadow: 0 0 5px #7c6effaa;
+    margin-bottom: 1rem;
+  }
+
+  button#magic-btn {
+    font-size: 1rem;
+    padding: 0.8rem 2rem;
+    width: 80%;
+    max-width: 300px;
+  }
+
+  body::after {
+    display: none; /* Wyłączanie efektów graficznych dla lepszej wydajności */
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+
+  footer {
+    font-size: 0.9rem;
+    padding: 0.5rem;
+  }
+
+  /* Poprawka dla sekcji, aby uniknąć niechcianego przesunięcia */
+  section {
+    width: 90%;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  #warning-message {
+    display: block;
+    font-size: 1.4rem;
+    color: #ffcccc;
+    text-align: center;
+    padding: 2rem;
+    background-color: rgba(50, 50, 50, 0.8);
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(255, 50, 50, 0.5);
+  }
+}
+
+
+/* Linki i h2 też dostają trochę magii */
+h2 {
+  font-family: 'Quicksand', regular;
+  color: #a89aff;
+  text-shadow: 0 0 10px #9a8cffbb;
+  margin-bottom: 1rem;
+}
+
+p.description, main p {
+  font-size: 1.2rem;
+  color: #ccccee;
+  text-shadow: 0 0 3px #4a4a8e88;
+  line-height: 1.5;
+  max-width: 650px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Footer delikatny, ale magiczny */
+footer {
+  padding: 1rem 0;
+  font-size: 1rem;
+  color: #bbbbee;
+  letter-spacing: 0.06em;
+  text-shadow: 0 0 5px #4a4a8e88;
+  user-select: none;
+  opacity: 0.9;
+}
+
+/* Animacje */
+
+@keyframes glowPulse {
+  0% {
+    text-shadow: 0 0 8px #665eff99, 0 0 20px #9a8cffcc;
+  }
+  100% {
+    text-shadow: 0 0 20px #665effcc, 0 0 40px #b5a8ffcc;
+  }
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Magowie Nocy</h1>
+</header>
+
+<main id="main-content">
+  <section id="image-section">
+    <!-- Obrazki wg godziny pojawią się tutaj po kliknięciu -->
+  </section>
+
+  <button id="magic-btn">Wejdź do świata ✨</button>
+
+  <section>
+    <h2>O Magach Nocy</h2>
+    <p>
+      „Magowie Nocy” to fanowski projekt inspirowany światem Minecraft,
+      opowiadający o młodych czarodziejach, którzy uczą się kontrolować swoje moce i walczą z mrokiem.
+      Ten projekt jest tworzony z pasji i nie jest związany z Mojang ani Microsoftem.
+    </p>
+  </section>
+</main>
+<footer>
+  Projekt nie jest powiązany w żaden sposób z Mojang/Microsoft
+</footer>
+
+<script>
+function setImageByTime() {
+  const now = new Date();
+  const day = now.getDay(); // 0 = niedziela, 5 = piątek
+  const hour = now.getHours();
+  const imgSection = document.getElementById('image-section');
+
+  if (day !== 5) {
+    imgSection.innerHTML = '<p style="text-align:center; font-size:1.4rem; color:#d6bfff; margin-top: 2rem;">Magia działa tylko w piątek! ✨🥺</p>';
+    return;
+  }
+
+  let imgSrc = '';
+  let alt = '';
+
+  if (hour >= 6 && hour < 12) {
+    imgSrc = 'images/';
+    alt = 'Poranek u Magów Nocy';
+  } else if (hour >= 12 && hour < 18) {
+    imgSrc = 'images/';
+    alt = 'Popołudnie u Magów Nocy';
+  } else if (hour >= 18 && hour < 22) {
+    imgSrc = 'images/';
+    alt = 'Wieczór u Magów Nocy';
+  } else {
+    imgSection.innerHTML = '<p style="text-align:center; font-size:1.4rem; color:#d6bfff; margin-top: 2rem;">Czas na odpoczynek – Magowie Nocy śpią... 11.07.2025 🌙</p>';
+    return;
+  }
+  imgSection.innerHTML = `<img src="${imgSrc}" alt="${alt}" />`;
+}
+
+function activateMagic() {
+  const now = new Date();
+  if (now.getDay() !== 5) {
+    alert('Magia działa tylko w piątek! 🥺');
+    return;
+  }
+
+  const main = document.getElementById('main-content');
+  const btn = document.getElementById('magic-btn');
+  const imageSection = document.getElementById('image-section');
+  const otherSections = main.querySelectorAll('section:not(#image-section)');
+
+  main.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+  btn.style.transition = 'opacity 0.8s ease';
+  
+  main.style.opacity = '0';
+  main.style.transform = 'translateY(20px)';
+  btn.style.opacity = '0';
+
+  setTimeout(() => {
+    btn.style.display = 'none';
+    otherSections.forEach(section => section.style.display = 'none');
+    imageSection.style.display = 'block';
+    setImageByTime();
+    main.style.opacity = '1';
+    main.style.transform = 'translateY(0)';
+  }, 900);
+}
+
+window.onload = () => {
+  const btn = document.getElementById('magic-btn');
+  const main = document.getElementById('main-content');
+  const day = new Date().getDay();
+
+  if (day === 5) {
+    if (btn) {
+      btn.disabled = false;
+      btn.textContent = 'Wejdź do świata ✨';
+      btn.style.cursor = 'pointer';
+      btn.style.opacity = '1';
+      btn.addEventListener('click', activateMagic);
+    }
+  } else {
+    if (btn) {
+      btn.disabled = true;
+      btn.textContent = 'Jeszcze niedostępne';
+      btn.style.cursor = 'not-allowed';
+      btn.style.opacity = '0.6';
+    }
+    main.querySelector('#image-section').innerHTML = '<p style="color:#d6bfff; margin-top:2rem;">Magia działa tylko w piątek! 🌙</p>';
+  }
+};
+</script>
+
+</body>
+</html>
