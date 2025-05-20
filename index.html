@@ -366,14 +366,14 @@ function setImageByTime() {
   let alt = '';
 
   if (hour >= 6 && hour < 12) {
-    imgSrc = 'images/';
-    alt = 'Poranek u Magów Nocy';
+    imgSrc = 'images/mama.webp';
+    alt = 'Mama';
   } else if (hour >= 12 && hour < 18) {
-    imgSrc = 'images/';
-    alt = 'Popołudnie u Magów Nocy';
+    imgSrc = 'images/ciocia.webp';
+    alt = 'Ciocia';
   } else if (hour >= 18 && hour < 22) {
-    imgSrc = 'images/';
-    alt = 'Wieczór u Magów Nocy';
+    imgSrc = 'images/kosmita.webp';
+    alt = 'Kosmita';
   } else {
     imgSection.innerHTML = '<p style="text-align:center; font-size:1.4rem; color:#d6bfff; margin-top: 2rem;">Czas na odpoczynek – Magowie Nocy śpią... 11.07.2025 🌙</p>';
     return;
