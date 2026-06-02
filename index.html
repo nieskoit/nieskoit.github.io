@@ -2,751 +2,815 @@
 <html lang="pl">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Kraina Twórców</title>
-    <meta name="description"
-        content="Kraina Twórców to coś więcej niż zwykły serwer Minecraft. Odkryj rozbudowane, fabularne uniwersum i historię, która wciąga tysiące widzów!">
-    <meta name="keywords" content="Kraina Twórców, Minecraft, Roleplay, Nieskot, Rekskyy, Serwer Minecraft, Fabuła, Scripted SMP">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.krainatworcow.pl/">
-    <meta property="og:description"
-        content="Kraina Twórców to coś więcej niż zwykły serwer Minecraft. Odkryj rozbudowane, fabularne uniwersum i historię, która wciąga tysiące widzów!">
-    <meta property="og:image" content="https://krainatworcow.pl/img/ktb.png">
-    <meta property="og:site_name" content="Kraina Twórców">
-    <meta name="theme-color" content="#76c63f">
+		<title>Kraina Twórców</title>
 
-    <meta property="twitter:card" content="summary">
-    <meta property="twitter:url" content="https://www.krainatworcow.pl/">
-    <meta property="twitter:title" content="Kraina Twórców">
-    <meta property="twitter:description" content="Odkryj rozbudowane, fabularne SMP i historię, która wciąga tysiące widzów!">
-    <meta property="twitter:image" content="https://krainatworcow.pl/img/ktb.webp">
+		<meta name="description"
+			content="Kraina Twórców to coś więcej niż zwykły serwer Minecraft. Odkryj rozbudowane, fabularne uniwersum i historię, która wciąga tysiące widzów!">
 
-    <link rel="icon" type="image/png" sizes="96x96" href="img/kt.png">
-    <link rel="stylesheet" href="css/style.css?v3">
-</head>
+		<meta name="keywords"
+			content="Kraina Twórców, Minecraft, Roleplay, Nieskot, Rekskyy, Serwer Minecraft, Fabuła, Scripted SMP">
+
+		<meta name="robots" content="index, follow">
+
+		<link rel="canonical" href="https://www.krainatworcow.pl/">
+
+		<meta property="og:type" content="website">
+		<meta property="og:url" content="https://www.krainatworcow.pl/">
+		<meta property="og:title" content="Kraina Twórców">
+
+		<meta property="og:description"
+			content="Kraina Twórców to coś więcej niż zwykły serwer Minecraft. Odkryj rozbudowane, fabularne uniwersum i historię, która wciąga tysiące widzów!">
+
+		<meta property="og:image" content="https://krainatworcow.pl/img/ktb.png">
+		<meta property="og:image:width" content="1200">
+		<meta property="og:image:height" content="630">
+
+		<meta property="og:site_name" content="Kraina Twórców">
+
+		<meta name="theme-color" content="#76c63f">
+
+		<meta name="twitter:card" content="summary">
+		<meta name="twitter:url" content="https://www.krainatworcow.pl/">
+		<meta name="twitter:title" content="Kraina Twórców">
+
+		<meta name="twitter:description"
+			content="Odkryj rozbudowane, fabularne SMP i historię, która wciąga tysiące widzów!">
+
+		<meta name="twitter:image" content="https://krainatworcow.pl/img/ktb.webp">
+
+		<link rel="icon" type="image/png" sizes="96x96" href="img/kt.png">
+		<link rel="apple-touch-icon" href="img/kt.png">
+
+		<link rel="preload" as="image" href="img/ktbt.webp">
+
+		<link rel="stylesheet" href="css/style.css?v4">
+	</head>
 
 <body>
-    <div id="loader">
-        <img src="img/ktbt.png" alt="Logo" class="loader-logo">
-        <div class="loader-bar"></div>
+	<div id="loader">
+		<img src="img/ktbt.png" alt="Logo" class="loader-logo">
+		<div class="loader-bar"></div>
+	</div>
+
+	<header class="header">
+		<div class="logo-area">
+			<img src="img/ktbt.webp" alt="Logo">
+		</div>
+		<nav class="nav">
+			<button class="nav-btn active" data-target="home">START</button>
+			<button class="nav-btn" data-target="rules">REGULAMIN</button>
+			<button class="nav-btn" data-target="faq">FAQ</button>
+		</nav>
+	</header>
+
+	<main class="container">
+		<section id="home" class="page active">
+
+			<div class="panel hero-panel">
+
+				<div class="hero-info">
+
+					<span class="section-badge">
+						KRAINA TWÓRCÓW
+					</span>
+
+					<h1>
+						Historia, która zmienia się
+						z każdym kolejnym rozdziałem.
+					</h1>
+
+					<p class="hero-description">
+						Kraina Twórców to coś więcej niż zwykły serwer Minecraft. To rozbudowane, fabularne uniwersum,
+						gdzie autorska mechanika kryształów i skomplikowane relacje między graczami tworzą
+						wielogodzinne, kinowe przeżycie.
+					</p>
+
+					<div class="hero-tags">
+
+						<div class="hero-tag">
+							💎 Autorska mechanika Kryształów
+						</div>
+
+						<div class="hero-tag">
+							🎥 Fabuła tworzona z udziałem społeczności
+						</div>
+
+					</div>
+
+				</div>
+
+				<div class="command-center">
+
+					<div class="ip-card" onclick="copyIP()">
+
+						<div class="status-top">
+
+							<div id="status-dot" class="dot online"></div>
+
+							<strong id="ip-text">
+								krainatworcow.pl
+							</strong>
+
+						</div>
+
+						<span id="server-players" class="server-status-text">
+
+							Kliknij, aby skopiować IP
+
+						</span>
+
+						<div id="server-motd" style="display:none"></div>
+
+					</div>
+
+					<a href="https://discord.gg/jRWkeeDrTb" target="_blank" class="ds-btn">
+
+						<span>
+							Dołącz na Serwer Discord
+						</span>
+
+					</a>
+
+				</div>
+
+			</div>
+
+			<div class="panel trailer-panel">
+
+				<div class="trailer-copy">
+
+					<span class="section-badge">
+						OFICJALNY ZWIASTUN
+					</span>
+
+					<h2>
+						Wejdź do świata Krainy Twórców
+					</h2>
+
+					<p>
+						Krótka zapowiedź pokazuje klimat projektu, jego bohaterów i pierwszy rozdział historii. To
+						najlepszy punkt startowy przed przejściem do pełnej historii na YouTube.
+					</p>
+
+					<div class="trailer-actions">
+	<a href="https://youtube.com/playlist?list=PLssT-xPG13FeXKVVndw_C_CKdcanyUFmN"
+		target="_blank"
+		class="ds-btn trailer-primary"
+		style="text-decoration: none; background: #ff3c3c; color: #fff;">
+		Obejrzyj wszystkie odcinki ↗
+	</a>
+</div>
+
+				</div>
+
+				<a id="featured-trailer-card" class="trailer-card" href="https://youtu.be/ha_eBawOiBc" target="_blank"
+					rel="noreferrer">
+
+					<div class="trailer-thumb">
+						<img id="featured-trailer-thumb" src="img/trailer.webp" alt="Zwiastun projektu">
+						<div class="trailer-thumb-overlay"></div>
+						<span class="trailer-play">▶</span>
+					</div>
+
+					<div class="trailer-card-content">
+						<span class="yt-tag" id="featured-trailer-channel">KRAINA TWÓRCÓW</span>
+						<h3 id="featured-trailer-title">Kraina Twórców: Wielkie Odrodzenie | Zwiastun</h3>
+					</div>
+				</a>
+
+			</div>
+
+			<div class="panel creators-panel">
+
+<div class="creators-top">
+
+    <div>
+        <span class="section-badge">
+            TWÓRCY PROJEKTU
+        </span>
+
+        <h2>
+            Oglądaj historię z różnych perspektyw
+        </h2>
+
+        <p class="creators-description">
+            Każdy twórca przedstawia wydarzenia ze swojej perspektywy,
+            rozwijając wspólne uniwersum Krainy Twórców.
+        </p>
     </div>
 
-    <div id="cookie-overlay" style="display: none;">
-        <div id="cookie-notice-modal">
-            <h2 style="color: var(--accent); margin-bottom: 20px;">Prywatność i Treści</h2>
-            <p style="margin-bottom: 30px; line-height: 1.6;">
-                Witaj w Krainie! Aby strona działała poprawnie, wczytujemy treści zewnętrzne (filmy z YouTube oraz awatary graczy).
-                Wiąże się to z przesyłaniem Twojego adresu IP do dostawców tych usług. Czy zgadzasz się na ich
-                załadowanie?
-            </p>
-            <div style="display: flex; flex-direction: column; gap: 10px;">
-                <button onclick="handleConsent('all')" class="ds-btn"
-                    style="background: var(--accent); color: #000; width: 100%; border: none; cursor: pointer;">Akceptuję
-                    i wchodzę</button>
-                <button onclick="handleConsent('essential')" class="nav-btn"
-                    style="width: 100%; border: 1px solid rgba(255,255,255,0.1); cursor: pointer;">Tylko
-                    niezbędne</button>
-            </div>
-            <p style="font-size: 0.7rem; margin-top: 20px; opacity: 0.5;">
-                Szczegóły znajdziesz w <a href="#rules" onclick="hideBannerTemporarily()"
-                    style="color: var(--accent);">Polityce Prywatności (§3)</a>.
-            </p>
+</div>
+
+<div class="creators-showcase">
+
+    <a href="https://www.youtube.com/@nieskot"
+       target="_blank"
+       rel="noopener noreferrer"
+       class="creator-card cinematic">
+
+        <div class="creator-render">
+            <img src="img/nieskot.webp" alt="Nieskot">
         </div>
-    </div>
 
-    <header class="header">
-        <div class="logo-area">
-            <img src="img/ktbt.webp" alt="Logo">
+        <div class="creator-overlay"></div>
+
+        <div class="creator-content">
+
+            <span class="creator-role">
+                TWÓRCA
+            </span>
+
+            <h3>
+                Nieskot
+            </h3>
+
+            <p>
+    Postać uwikłana w wydarzenia odkrywające coraz mroczniejsze tajemnice świata.
+</p>
         </div>
-        <nav class="nav">
-            <button class="nav-btn active" data-target="home">START</button>
-            <button class="nav-btn" data-target="media">FILMY</button>
-            <button class="nav-btn" data-target="rules">REGULAMIN</button>
-            <button class="nav-btn" data-target="faq">FAQ</button>
-        </nav>
-    </header>
 
-    <main class="container">
-        <section id="home" class="page active">
+    </a>
 
-            <div class="panel hero-panel">
+    <a href="https://www.youtube.com/@Rekskyy"
+       target="_blank"
+       rel="noopener noreferrer"
+       class="creator-card cinematic">
 
-                <div class="hero-info">
-
-                    <span class="hero-badge">
-                        KRAINA TWÓRCÓW
-                    </span>
-
-                    <h1>
-                        Historia, która zmienia się
-                        z każdym kolejnym rozdziałem.
-                    </h1>
-
-                    <p class="hero-description">
-                        Kraina Twórców to coś więcej niż zwykły serwer Minecraft. To rozbudowane, fabularne uniwersum, gdzie autorska mechanika kryształów i skomplikowane relacje między graczami tworzą wielogodzinne, kinowe przeżycie.
-                    </p>
-
-                    <div class="hero-tags">
-
-                        <div class="hero-tag">
-                            💎 Autorska mechanika Kryształów
-                        </div>
-
-                        <div class="hero-tag">
-                            🎥 Fabuła tworzona z udziałem społeczności
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="command-center">
-
-                    <div class="ip-card" onclick="copyIP()">
-
-                        <div class="status-top">
-
-                            <div id="status-dot" class="dot online"></div>
-
-                            <strong id="ip-text">
-                                krainatworcow.pl
-                            </strong>
-
-                        </div>
-
-                        <span id="server-players" class="server-status-text">
-
-                            Kliknij, aby skopiować IP
-
-                        </span>
-
-                        <div id="server-motd" style="display:none"></div>
-
-                    </div>
-
-                    <a href="https://discord.gg/jRWkeeDrTb" target="_blank" class="ds-btn">
-
-                        <span>
-                            Dołącz na Serwer Discord
-                        </span>
-
-                    </a>
-
-                    <div class="hero-mini-stats">
-
-                        <div class="mini-stat">
-
-                            <span class="stat-number" data-target="4">
-                                0
-                            </span>
-
-                            <small>FILMY</small>
-
-                        </div>
-
-                        <div class="mini-stat">
-
-                            <span class="stat-number" data-target="17753">
-                                0
-                            </span>
-
-                            <small>WYŚWIETLEŃ</small>
-
-                        </div>
-
-                        <div class="mini-stat">
-
-                            <span class="stat-number" data-target="2">
-                                0
-                            </span>
-
-                            <small>TWÓRCÓW</small>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="panel creators-panel">
-
-                <div class="creators-top">
-
-                    <div>
-
-                        <h2>
-                            Twórcy
-                        </h2>
-
-                    </div>
-
-                </div>
-
-                <div class="creators-mini-grid">
-                    <a href="https://www.youtube.com/@nieskot" target="_blank" class="creator-node">
-                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
-                            data-src="https://mc-heads.net/avatar/Nieskot/64" alt="Nieskot" class="consent-avatar">
-                        <div class="creator-info">
-                            <strong class="creator-name">Nieskot</strong>
-                        </div>
-                    </a>
-
-                    <a href="https://www.youtube.com/@Rekskyy" target="_blank" class="creator-node">
-                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
-                            data-src="https://mc-heads.net/avatar/Rekskyy/64" alt="Rekskyy" class="consent-avatar">
-                        <div class="creator-info">
-                            <strong class="creator-name">Rekskyy</strong>
-                        </div>
-                    </a>
-                </div>
-
-                </a>
-
-            </div>
-
-            </div>
-
-        </section>
-
-        <section id="rules" class="page">
-            <div class="panel rules-panel">
-                <h2>Regulamin Projektu</h2>
-                <p
-                    style="font-size: 0.75rem; opacity: 0.5; margin-bottom: 20px; margin-top: -10px; text-transform: uppercase; letter-spacing: 1px;">
-                    Ostatnia aktualizacja: 30.05.2026
-                </p>
-
-                <div class="rules-scroll-container">
-                    <div class="rules-content">
-
-                        <div class="rules-category-title">REGULAMIN OGÓLNY</div>
-
-                        <div class="accordion-item">
-                            <div class="accordion-header">
-                                <h4>§1.1. Społeczność i Bezpieczeństwo</h4>
-                                <span class="accordion-icon"></span>
-                            </div>
-                            <div class="accordion-content">
-                                <div class="accordion-inner">
-                                    <ol>
-                                        <li><strong>Atmosfera i Szacunek:</strong> Serwer jest miejscem wolnym od
-                                            agresji. Zakazuje się obrażania, poniżania oraz dyskryminacji innych
-                                            użytkowników.</li>
-                                        <li><strong>Treści Niestosowne:</strong> Zabrania się publikowania treści
-                                            uznanych za powszechnie nieodpowiednie, w tym drastycznych obrazów,
-                                            podejrzanych linków oraz mediów naruszających estetykę serwera.</li>
-                                        <li><strong>Tematy Wrażliwe:</strong> W celu uniknięcia zbędnych konfliktów,
-                                            zakazuje się poruszania tematów politycznych, religijnych oraz
-                                            światopoglądowych, które nie są częścią fabuły projektu.</li>
-                                        <li><strong>Poufność i Bezpieczeństwo:</strong> Surowo zabrania się
-                                            udostępniania danych wrażliwych oraz oszukiwania innych uczestników
-                                            projektu.</li>
-                                        <li><strong>Tożsamość:</strong> Zakazuje się podszywania pod innych
-                                            użytkowników, członków ekipy oraz postacie fabularne.</li>
-                                    </ol>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="accordion-item">
-                            <div class="accordion-header">
-                                <h4>§1.2. Komunikacja i Porządek</h4>
-                                <span class="accordion-icon"></span>
-                            </div>
-                            <div class="accordion-content">
-                                <div class="accordion-inner">
-                                    <ol>
-                                        <li><strong>Komunikacja z Administracją:</strong> Oznaczenia (pingi)
-                                            Administracji oraz Moderacji are dopuszczalne wyłącznie w sytuacjach nagłych
-                                            (np. łamania regulaminu). W sprawach spornych należy korzystać z systemu
-                                            ticketów.</li>
-                                        <li><strong>Kultura Języka:</strong> Dopuszcza się sporadyczne używanie
-                                            wulgaryzmów, jednak ich nadużywanie jest traktowane jako brak kultury i
-                                            będzie skutkować upomnieniem.</li>
-                                        <li><strong>Spam i Estetyka Chatu:</strong> Zakazuje się spamu, nadużywania Caps
-                                            Locka oraz tzw. floodu. Uczestnicy are zobowiązani do dbania o przejrzystość
-                                            rozmów.</li>
-                                        <li><strong>Kanały Głosowe:</strong> Na publicznych kanałach głosowych zabrania
-                                            się używania modulatorów (poza sesjami nagraniowymi wg §2.3), bindów oraz
-                                            emitowania irytujących dźwięków.</li>
-                                        <li><strong>Kanał Propozycji:</strong> Zakazuje się wysyłania na kanał <span
-                                                style="background: rgba(144, 238, 144, 0.1); color: var(--accent); padding: 2px 4px; border-radius: 4px;">#💼┃propozycje</span>
-                                            treści niemerytorycznych, które mogą zawierać podtekst wojenny, seksualny
-                                            lub wrogi wobec innych uczestników.</li>
-                                    </ol>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="accordion-item">
-                            <div class="accordion-header">
-                                <h4>§1.3. Postanowienia Końcowe</h4>
-                                <span class="accordion-icon"></span>
-                            </div>
-                            <div class="accordion-content">
-                                <div class="accordion-inner">
-                                    <p>Użytkownik jest zobowiązany do przestrzegania Regulaminu Discorda. Nieznajomość
-                                        powyższych zasad nie zwalnia z odpowiedzialności za ich łamanie. Administracja
-                                        zastrzega sobie prawo do zmian w Regulaminie. Informacje o zmianach będą
-                                        publikowane na kanale <span
-                                            style="background: rgba(144, 238, 144, 0.1); color: var(--accent); padding: 2px 4px; border-radius: 4px;">#🚨┃ogłoszenia</span>.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="rules-category-title" style="margin-top: 30px;">REGULAMIN NAGRYWEK</div>
-
-                        <div class="accordion-item">
-                            <div class="accordion-header">
-                                <h4>§2.1. Postanowienia Ogólne</h4>
-                                <span class="accordion-icon"></span>
-                            </div>
-                            <div class="accordion-content">
-                                <div class="accordion-inner">
-                                    <ol>
-                                        <li><strong>Kraina Twórców</strong> to projekt fabularny realizowany na serwerze
-                                            Minecraft w formie sesji nagraniowych.</li>
-                                        <li>Materiały z sesji are publikowane wyłącznie na kanałach: <br><strong>Kraina
-                                                Twórców</strong>, <strong>Nieskot</strong>, <strong>Rekskyy</strong>.
-                                        </li>
-                                        <li>Serwer jest publiczny, jednak wstęp do stref nagrań oraz udział w fabule
-                                            zależy od posiadanej roli i decyzji Włodarzy.</li>
-                                    </ol>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="accordion-item">
-                            <div class="accordion-header">
-                                <h4>§2.2. Struktura i Role</h4>
-                                <span class="accordion-icon"></span>
-                            </div>
-                            <div class="accordion-content">
-                                <div class="accordion-inner">
-                                    <ul>
-                                        <li><strong>Włodarze:</strong> Producenci i główni scenarzyści (<strong>Nieskot
-                                                i Rekskyy</strong>). Podejmują ostateczne decyzje projektowe i
-                                            fabularne.</li>
-                                        <li><strong>Admin:</strong> Wsparcie techniczne i moderacja. Dba o porządek na
-                                            serwerze i egzekwuje dyscyplinę na planie.</li>
-                                        <li><strong>Moderator:</strong> Moderacja serwera. Dba o porządek na serwerze
-                                            oraz chacie.</li>
-                                        <li><strong>Członek:</strong> Główna obsada aktorska. Osoba z przypisaną rolą,
-                                            odpowiedzialna za odgrywanie postaci i realizację scenariusza.</li>
-                                        <li><strong>Osoby bez roli:</strong> Statyści stanowiący tło wydarzeń (postacie
-                                            3-planowe).</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="accordion-item">
-                            <div class="accordion-header">
-                                <h4>§2.3. Tożsamość Utajniona (System Nicked)</h4>
-                                <span class="accordion-icon"></span>
-                            </div>
-                            <div class="accordion-content">
-                                <div class="accordion-inner">
-                                    <ol>
-                                        <li>Funkcja <strong>Nicked</strong> (zmiana tożsamości gracza) jest nadawana
-                                            wyłącznie przez <strong>Włodarzy</strong> lub <strong>Adminów</strong> na
-                                            potrzeby scenariusza.</li>
-                                        <li>Gracz, któremu nadano status <em>Nicked</em>, ma bezwzględny obowiązek
-                                            zachowania pełnej anonimowości.</li>
-                                        <li>W zależności od decyzji Włodarzy lub Adminów, osoba z ukrytym nickiem ma
-                                            obowiązek używania <strong>modulatora głosu</strong> lub całkowitego
-                                            <strong>wyciszenia mikrofonu</strong>.
-                                        </li>
-                                        <li>W przypadku pozostałych osób, kwestia posiadania lub używania mikrofonu jest
-                                            ustalana indywidualnie przez Włodarzy przed każdą sesją.</li>
-                                    </ol>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="accordion-item">
-                            <div class="accordion-header">
-                                <h4>§2.4. Sesje Nagraniowe i Dyscyplina</h4>
-                                <span class="accordion-icon"></span>
-                            </div>
-                            <div class="accordion-content">
-                                <div class="accordion-inner">
-                                    <ol>
-                                        <li><strong>Obecność Członków:</strong> Osoby z rolą <strong>Członek</strong>
-                                            muszą zgłaszać każdą nieobecność z wyprzedzeniem. Notoryczne absencje
-                                            skutkują usunięciem z roli fabularnej.</li>
-                                        <li><strong>Osoby bez roli:</strong> Uczestniczą w sesjach dobrowolnie, jednak
-                                            na planie muszą bezwzględnie stosować się do poleceń Administracji pod
-                                            rygorem usunięcia z serwera.</li>
-                                        <li><strong>Trollowanie i przeszkadzanie:</strong> Celowe utrudnianie nagrań,
-                                            odwalanie w scenach lub przeszkadzanie aktorom jest niedozwolone i skutkuje
-                                            upomnieniem lub natychmiastowym banem.</li>
-                                    </ol>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="accordion-item">
-                            <div class="accordion-header">
-                                <h4>§2.5. Zasady Fabularne i Kreatywność</h4>
-                                <span class="accordion-icon"></span>
-                            </div>
-                            <div class="accordion-content">
-                                <div class="accordion-inner">
-                                    <ol>
-                                        <li><strong>Inicjatywa:</strong> Włodarze are otwarci na pomysły fabularne od
-                                            Adminów i Członków. Każda propozycja musi zostać przedstawiona i
-                                            zaakceptowana przez Produkcję przed sesją.</li>
-                                        <li><strong>Immersja:</strong> Podczas nagrań obowiązuje całkowity zakaz
-                                            wychodzenia z roli (brak rozmów OOC). Jakiekolwiek przeszkadzanie aktorom
-                                            lub griefing jest surowo karane.</li>
-                                        <li><strong>Zakaz shipowania:</strong> Obowiązuje całkowity zakaz "shipowania"
-                                            (wymuszania lub sugerowania relacji romantycznych) pomiędzy postaciami oraz
-                                            uczestnikami projektu. Wątki romantyczne mogą pojawić się wyłącznie za zgodą
-                                            zainteresowanych stron i po zatwierdzeniu przez Włodarzy.</li>
-                                    </ol>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="accordion-item">
-                            <div class="accordion-header">
-                                <h4>§2.6. Media i Poufność</h4>
-                                <span class="accordion-icon"></span>
-                            </div>
-                            <div class="accordion-content">
-                                <div class="accordion-inner">
-                                    <ol>
-                                        <li><strong>Zakaz Spoilerów:</strong> Całkowity zakaz udostępniania
-                                            screenshotów, nagrań "zza kulis" oraz szczegółów fabuły przed oficjalną
-                                            premierą na kanałach głównych.</li>
-                                        <li><strong>Wizerunek:</strong> Wejście na serwer podczas nagrań oznacza zgodę
-                                            na wykorzystanie głosu i wizerunku postaci (skin) w materiałach Włodarzy.
-                                        </li>
-                                        <li><strong>Materiały po usunięciu z projektu:</strong> Włodarze mogą, według
-                                            własnego uznania, decydować o pozostawieniu lub usunięciu materiałów
-                                            zawierających osoby, które zostały usunięte lub zbanowane.</li>
-                                    </ol>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="accordion-item">
-                            <div class="accordion-header">
-                                <h4>§2.7. Zasady Techniczne i Fair Play</h4>
-                                <span class="accordion-icon"></span>
-                            </div>
-                            <div class="accordion-content">
-                                <div class="accordion-inner">
-                                    <ol>
-                                        <li><strong>Zero tolerancji dla oszustw:</strong> Surowo zabrania się używania
-                                            cheatów, skryptów czy tekstur typu X-Ray. Złamanie tego punktu oznacza
-                                            natychmiastowy i permanentny ban.</li>
-                                        <li><strong>Sprzęt:</strong> Każdy uczestnik biorący udział w fabule musi zadbać
-                                            o sprawny mikrofon i stabilne łącze.</li>
-                                    </ol>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="accordion-item">
-                            <div class="accordion-header">
-                                <h4>§2.8. Sankcje</h4>
-                                <span class="accordion-icon"></span>
-                            </div>
-                            <div class="accordion-content">
-                                <div class="accordion-inner">
-                                    <p>Włodarze oraz Admini zastrzegają sobie prawo do usunięcia z projektu każdej
-                                        osoby, która:</p>
-                                    <ul>
-                                        <li>łamie regulamin,</li>
-                                        <li>zdratza fabułę,</li>
-                                        <li>działa na szkodę wizerunkową <strong>Krainy Twórców</strong>.</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="rules-category-title" style="margin-top: 30px;">POLITYKA PRYWATNOŚCI (RODO)</div>
-
-                        <div class="accordion-item">
-                            <div class="accordion-header">
-                                <h4>§3.1. Administrator i Dane</h4>
-                                <span class="accordion-icon"></span>
-                            </div>
-                            <div class="accordion-content">
-                                <div class="accordion-inner">
-                                    <p>Właścicielem strony jest projekt Kraina Twórców. Administrator dokłada wszelkich
-                                        starań, aby przetwarzanie danych odbywało się zgodnie z przepisami RODO. Serwis
-                                        został zaprojektowany tak, aby maksymalnie chronić prywatność: nie prowadzimy
-                                        rejestracji, nie posiadamy bazy danych użytkowników i nie zbieramy informacji
-                                        pozwalających na identyfikację osób. Jedynymi danymi przetwarzanymi w celach
-                                        technicznych i statystycznych są adresy IP, obsługiwane bezpośrednio przez
-                                        zewnętrznych dostawców usług (§3.2).</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="accordion-item">
-                            <div class="accordion-header">
-                                <h4>§3.2. Usługi zewnętrzne</h4>
-                                <span class="accordion-icon"></span>
-                            </div>
-                            <div class="accordion-content">
-                                <div class="accordion-inner">
-                                    <p>W celu zapewnienia pełnej funkcjonalności, witryna korzysta z usług podmiotów
-                                        trzecich. Korzystanie ze strony oznacza zapoznanie się z ich regulaminami:</p>
-                                    <ul>
-                                        <li><strong>YouTube Data API:</strong> integracja oraz wyświetlanie materiałów
-                                            wideo projektu bezpośrednio z platformy YouTube. Użytkownicy są związani <a
-                                                href="https://www.youtube.com/t/terms" target="_blank"
-                                                style="color: var(--accent); text-decoration: underline;">Warunkami
-                                                korzystania z usługi YouTube</a> oraz <a
-                                                href="https://policies.google.com/privacy" target="_blank"
-                                                style="color: var(--accent); text-decoration: underline;">Polityka
-                                                Prywatności Google</a>.</li>
-                                        <li><strong>MCHeads:</strong> wyświetlanie awatarów graczy na podstawie ich nazw w grze.</li>
-                                        <li><strong>Infrastruktura (GitHub Pages & OVHcloud):</strong> hosting plików strony na platformie GitHub Pages (Użytkownicy są związani <a href="https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement" target="_blank" style="color: var(--accent); text-decoration: underline;">Polityką Prywatności GitHub</a>) oraz obsługa domeny głównej przez OVHcloud.</li>
-                                    </ul>
-                                    <p>Dodatkowo witryna wykorzystuje niezbędne techniczne pliki cookies (dostarczane
-                                        przez hosting) oraz lokalną pamięć przeglądarki do zapamiętania Twojej zgody na
-                                        powyższe warunki. Zapobiega to ponownemu wyświetlaniu komunikatu przy każdej
-                                        wizycie.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="accordion-item">
-                            <div class="accordion-header">
-                                <h4>§3.3. Kontakt</h4>
-                                <span class="accordion-icon"></span>
-                            </div>
-                            <div class="accordion-content">
-                                <div class="accordion-inner">
-                                    <p>Wszelkie pytania dotyczące projektu oraz ochrony prywatności można kierować pod
-                                        adres e-mail: <strong id="mail-placeholder">Ładowanie...</strong> lub poprzez
-                                        oficjalny serwer Discord:</p>
-                                    <div style="margin-top: 15px;">
-                                        <a href="https://discord.gg/jRWkeeDrTb" target="_blank"
-                                            class="discord-link-box">
-                                            <img src="img/Discord-Symbol-Blurple.svg" alt="Discord"
-                                                class="discord-icon">
-                                            discord.gg/jRWkeeDrTb
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="accordion-item">
-                            <div class="accordion-header">
-                                <h4>§3.4. Twoje prawa</h4>
-                                <span class="accordion-icon"></span>
-                            </div>
-                            <div class="accordion-content">
-                                <div class="accordion-inner">
-                                    <p>Szanujemy Twoją prywatność. Nasza strona wykorzystuje niezbędne pliki cookie
-                                        (bezpieczeństwo antybot) oraz technologie przechowywania (localStorage) do
-                                        zapamiętania Twoich ustawień. Dodatkowo, za Twoją zgodą, wczytujemy treści
-                                        zewnętrzne (miniatury YouTube oraz avatary graczy), co wiąże się z
-                                        przekazaniem Twojego adresu IP do dostawców tych usług. Nie zbieramy danych w
-                                        celach marketingowych.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="faq" class="page">
-            <div class="panel rules-panel">
-                <h2>Najczęściej Zadawane Pytania</h2>
-                <p
-                    style="font-size: 0.75rem; opacity: 0.5; margin-bottom: 20px; margin-top: -10px; text-transform: uppercase; letter-spacing: 1px;">
-                    Centrum informacji Krainy Twórców
-                </p>
-
-                <div class="rules-scroll-container">
-                    <div class="rules-content">
-
-                        <div class="accordion-item">
-                            <div class="accordion-header">
-                                <h4>Jak dostać się na nagrywkę?</h4>
-                                <span class="accordion-icon"></span>
-                            </div>
-                            <div class="accordion-content">
-                                <div class="accordion-inner">
-                                    <p>Są na to dwa sposoby w zależności od roli, jaką chcesz pełnić:</p>
-                                    <ul>
-                                        <li><strong>Jako statysta (Nicked):</strong> W dzień nagrywki, kiedy na serwerze
-                                            zostaje otworzone podium, musisz po prostu wejść na nie na czas. W ten
-                                            sposób automatycznie dołączasz do sesji z ukrytą tożsamością.</li>
-                                        <li><strong>Jako oficjalny Członek z rolą:</strong> Musisz przejść proces
-                                            rekrutacji. W tym celu złóż oficjalne podanie na naszym Discordzie na kanale
-                                            <span
-                                                style="background: rgba(144, 238, 144, 0.1); color: var(--accent); padding: 2px 4px; border-radius: 4px;">#🎫┃rekrutacja</span>.
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="accordion-item">
-                            <div class="accordion-header">
-                                <h4>Kiedy odbywają się nagrywki?</h4>
-                                <span class="accordion-icon"></span>
-                            </div>
-                            <div class="accordion-content">
-                                <div class="accordion-inner">
-                                    <p>Harmonogram wszystkich nadchodzących sesji znajdziesz bezpośrednio na naszym
-                                        serwerze Discord. Wszystko jest dokładnie rozpisane w sekcji wydarzeń na samej
-                                        górze listy kanałów:</p>
-                                    <ul>
-                                        <li><strong>Na komputerze:</strong> Kliknij w ikonę kalendarza z napisem
-                                            <strong>"Przeglądaj wydarzenia"</strong> na samym szczycie listy.
-                                        </li>
-                                        <li><strong>Na telefonie:</strong> Stuknij w charakterystyczną <strong>emotkę
-                                                kalendarza</strong> wyświetlaną nad kanałami tekstowymi.</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="accordion-item">
-                            <div class="accordion-header">
-                                <h4>Czy można nagrywać materiały na swój własny kanał?</h4>
-                                <span class="accordion-icon"></span>
-                            </div>
-                            <div class="accordion-content">
-                                <div class="accordion-inner">
-                                    <p>
-                                        <strong>Nie.</strong> Nagrywanie oraz publikowanie własnych materiałów
-                                        bezpośrednio z wnętrza projektu jest zabronione. Oficjalne treści fabularne
-                                        publikujemy wyłącznie na kanałach: <strong>Nieskot</strong>,
-                                        <strong>Rekskyy</strong> oraz <strong>Kraina Twórców</strong>.
-                                        <br><br>
-                                        <strong>Co z funny moments?</strong> Jeśli chcesz tworzyć kompilacje lub analizy
-                                        na bazie naszych gotowych filmów (tzw. fan-content), jest to jak najbardziej
-                                        dozwolone. Pamiętaj jedynie o podaniu źródła w opisie oraz o tym, by w żaden
-                                        sposób nie sugerować, że jesteś oficjalnym twórcą projektu.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="accordion-item">
-                            <div class="accordion-header">
-                                <h4>Czym dokładnie jest Kraina Twórców?</h4>
-                                <span class="accordion-icon"></span>
-                            </div>
-                            <div class="accordion-content">
-                                <div class="accordion-inner">
-                                    <p>To najbardziej zaawansowany i unikalny projekt fabularny (Roleplay) w Polsce
-                                        realizowany w grze Minecraft. Nasz projekt łączy profesjonalną grę aktorską,
-                                        zaplanowane sesje scenariuszowe oraz niesamowite zwroty akcji tworząc wciągający
-                                        serial, który śledzą tysiące widzów.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="accordion-item">
-                            <div class="accordion-header">
-                                <h4>Jaki jest lore tego świata?</h4>
-                                <span class="accordion-icon"></span>
-                            </div>
-                            <div class="accordion-content">
-                                <div class="accordion-inner">
-                                    <p>Wiele lat temu powstała pewna kraina, gdzie zaczęli pojawiać się pierwsi gracze.
-                                        Atmosfera była dość pokojowa - gracze budowali budowle, wygłupiali się i
-                                        wspólnie spędzali czas. Jednakże po jakimś czasie zaczęło pojawiać się coraz
-                                        więcej osób, co doprowadziło do pierwszych walk. Wielu pokojowych graczy chowało
-                                        się w podziemiach na dalekich koordynatach, inni przechodzili na złą stronę.</p>
-                                    <p>Wtedy również rządził pierwszy władca serwera, który był koszmarny dla wielu
-                                        osób. Kazał osobom, które się jemu sprzeciwiały, jak i swoim poddanym, niszczyć
-                                        kryształy, które dają możliwość ponownego odrodzenia się po śmierci. Po jakimś
-                                        czasie wybuchła wojna w równoległej krainie, której skutkiem było to, że każdy
-                                        po zostaniu wyeliminowanym za pomocą nielegalnego miecza, lądował w głównej
-                                        krainie.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="accordion-item">
-                            <div class="accordion-header">
-                                <h4>Co to jest "System Nicked" wspomniany w regulaminie?</h4>
-                                <span class="accordion-icon"></span>
-                            </div>
-                            <div class="accordion-content">
-                                <div class="accordion-inner">
-                                    <p>System Nicked to techniczne narzędzie pozwalające ukryć lub całkowicie zmienić
-                                        nick gracza nad głową oraz na liście tab. Jest to kluczowy element budowania
-                                        tajemniczości w scenariuszu. Gracz z taką funkcją ma kategoryczny zakaz
-                                        wyjawiania kim jest, a w zależności od wytycznych reżyserskich musi używać
-                                        specjalnego modulatora dźwięku lub grać bez używania mikrofonu.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="accordion-item">
-                            <div class="accordion-header">
-                                <h4>Gdzie zgłaszać błędy lub propozycje fabularne?</h4>
-                                <span class="accordion-icon"></span>
-                            </div>
-                            <div class="accordion-content">
-                                <div class="accordion-inner">
-                                    <p>Wszystkie sprawy techniczne, problemy z grą oraz kreatywne pomysły przyjmujemy na
-                                        naszym serwerze Discord. Od spraw spornych i błędów posiadamy specjalny system
-                                        ticketów (<span
-                                            style="background: rgba(144, 238, 144, 0.1); color: var(--accent); padding: 2px 4px; border-radius: 4px;">#📥┃stwórz-ticket</span>), z kolei merytoryczne pomysły na rozwój świata gry możecie wysyłać na
-                                        kanale <span
-                                            style="background: rgba(144, 238, 144, 0.1); color: var(--accent); padding: 2px 4px; border-radius: 4px;">#💼┃propozycje</span>.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="media" class="page">
-            <div class="panel" style="grid-column: span 2;">
-                <h2>Ostatnio na YouTube</h2>
-                <div id="yt-dynamic-grid"
-                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 20px;">
-                    <div class="loader-text" style="text-align: center; opacity: 0.5;">Ładowanie najnowszych filmów...
-                    </div>
-                </div>
-                <div style="text-align: center; margin-top: 40px; margin-bottom: 20px;">
-                    <a href="https://youtube.com/playlist?list=PLssT-xPG13FeXKVVndw_C_CKdcanyUFmN" target="_blank"
-                        class="ds-btn"
-                        style="background: #c4302b; text-decoration: none; display: inline-flex; align-items: center; gap: 10px;">
-                        <span>Zobacz wszystkie odcinki na YouTube</span>
-                    </a>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <p>Projekt nie jest powiązany z firmą Mojang AB.</p>
-        <div style="margin-top: 10px;">
-            <a href="javascript:void(0)" onclick="resetKrainaPrivacy()"
-                style="color: var(--accent); opacity: 0.5; font-size: 0.8rem; text-decoration: none;">Zmień ustawienia
-                prywatności</a>
+        <div class="creator-render">
+            <img src="img/rekskyy.webp" alt="Rekskyy">
         </div>
-    </footer>
 
-    <script src="js/main.js?v6"></script>
-    <script src="js/privacy.js"></script>
+        <div class="creator-overlay"></div>
+
+        <div class="creator-content">
+
+            <span class="creator-role">
+                TWÓRCA
+            </span>
+
+            <h3>
+                Rekskyy
+            </h3>
+
+            <p>
+    Tajemnicza postać balansująca pomiędzy chaosem,
+    kontrolą i własnymi ukrytymi motywami.
+</p>
+
+        </div>
+
+    </a>
+	
+</div>
+
+</div>
+
+
+		</section>
+
+		<section id="rules" class="page">
+			<div class="panel rules-panel">
+				<h2>Regulamin Projektu</h2>
+				<p
+					style="font-size: 0.75rem; opacity: 0.5; margin-bottom: 20px; margin-top: -10px; text-transform: uppercase; letter-spacing: 1px;">
+					Ostatnia aktualizacja: 2.06.2026
+				</p>
+
+				<div class="rules-scroll-container">
+					<div class="rules-content">
+
+						<div class="rules-category-title">REGULAMIN OGÓLNY</div>
+
+						<div class="accordion-item">
+							<div class="accordion-header">
+								<h4>§1.1. Społeczność i Bezpieczeństwo</h4>
+								<span class="accordion-icon"></span>
+							</div>
+							<div class="accordion-content">
+								<div class="accordion-inner">
+									<ol>
+										<li><strong>Atmosfera i Szacunek:</strong> Serwer jest miejscem wolnym od
+											agresji. Zakazuje się obrażania, poniżania oraz dyskryminacji innych
+											użytkowników.</li>
+										<li><strong>Treści Niestosowne:</strong> Zabrania się publikowania treści
+											uznanych za powszechnie nieodpowiednie, w tym drastycznych obrazów,
+											podejrzanych linków oraz mediów naruszających estetykę serwera.</li>
+										<li><strong>Tematy Wrażliwe:</strong> W celu uniknięcia zbędnych konfliktów,
+											zakazuje się poruszania tematów politycznych, religijnych oraz
+											światopoglądowych, które nie są częścią fabuły projektu.</li>
+										<li><strong>Poufność i Bezpieczeństwo:</strong> Surowo zabrania się
+											udostępniania danych wrażliwych oraz oszukiwania innych uczestników
+											projektu.</li>
+										<li><strong>Tożsamość:</strong> Zakazuje się podszywania pod innych
+											użytkowników, członków ekipy oraz postacie fabularne.</li>
+									</ol>
+								</div>
+							</div>
+						</div>
+
+						<div class="accordion-item">
+							<div class="accordion-header">
+								<h4>§1.2. Komunikacja i Porządek</h4>
+								<span class="accordion-icon"></span>
+							</div>
+							<div class="accordion-content">
+								<div class="accordion-inner">
+									<ol>
+										<li><strong>Komunikacja z Administracją:</strong> Oznaczenia (pingi)
+											Administracji oraz Moderacji są dopuszczalne wyłącznie w sytuacjach nagłych
+											(np. łamania regulaminu). W sprawach spornych należy korzystać z systemu
+											ticketów.</li>
+										<li><strong>Kultura Języka:</strong> Dopuszcza się sporadyczne używanie
+											wulgaryzmów, jednak ich nadużywanie jest traktowane jako brak kultury i
+											będzie skutkować upomnieniem.</li>
+										<li><strong>Spam i Estetyka Chatu:</strong> Zakazuje się spamu, nadużywania Caps
+											Locka oraz tzw. floodu. Uczestnicy są zobowiązani do dbania o przejrzystość
+											rozmów.</li>
+										<li><strong>Kanały Głosowe:</strong> Na publicznych kanałach głosowych zabrania
+											się używania modulatorów (poza sesjami nagraniowymi wg §2.3), bindów oraz
+											emitowania irytujących dźwięków.</li>
+										<li><strong>Kanał Propozycji:</strong> Zakazuje się wysyłania na kanał <span
+												style="background: rgba(144, 238, 144, 0.1); color: var(--accent); padding: 2px 4px; border-radius: 4px;">#💼┃propozycje</span>
+											treści niemerytorycznych, które mogą zawierać podtekst wojenny, seksualny
+											lub wrogi wobec innych uczestników.</li>
+									</ol>
+								</div>
+							</div>
+						</div>
+
+						<div class="accordion-item">
+							<div class="accordion-header">
+								<h4>§1.3. Postanowienia Końcowe</h4>
+								<span class="accordion-icon"></span>
+							</div>
+							<div class="accordion-content">
+								<div class="accordion-inner">
+									<p>Użytkownik jest zobowiązany do przestrzegania Regulaminu Discorda. Nieznajomość
+										powyższych zasad nie zwalnia z odpowiedzialności za ich łamanie. Administracja
+										zastrzega sobie prawo do zmian w Regulaminie. Informacje o zmianach będą
+										publikowane na kanale <span
+											style="background: rgba(144, 238, 144, 0.1); color: var(--accent); padding: 2px 4px; border-radius: 4px;">#🚨┃ogłoszenia</span>.
+									</p>
+								</div>
+							</div>
+						</div>
+
+						<div class="rules-category-title" style="margin-top: 30px;">REGULAMIN NAGRYWEK</div>
+
+						<div class="accordion-item">
+							<div class="accordion-header">
+								<h4>§2.1. Postanowienia Ogólne</h4>
+								<span class="accordion-icon"></span>
+							</div>
+							<div class="accordion-content">
+								<div class="accordion-inner">
+									<ol>
+										<li><strong>Kraina Twórców</strong> to projekt fabularny realizowany na serwerze
+											Minecraft w formie sesji nagraniowych.</li>
+										<li>Materiały z sesji są publikowane wyłącznie na kanałach: <br><strong>Kraina
+												Twórców</strong>, <strong>Nieskot</strong>, <strong>Rekskyy</strong>.
+										</li>
+										<li>Serwer jest publiczny, jednak wstęp do stref nagrań oraz udział w fabule
+											zależy od posiadanej roli i decyzji Włodarzy.</li>
+									</ol>
+								</div>
+							</div>
+						</div>
+
+						<div class="accordion-item">
+							<div class="accordion-header">
+								<h4>§2.2. Struktura i Role</h4>
+								<span class="accordion-icon"></span>
+							</div>
+							<div class="accordion-content">
+								<div class="accordion-inner">
+									<ul>
+										<li><strong>Włodarze:</strong> Producenci i główni scenarzyści (<strong>Nieskot
+												i Rekskyy</strong>). Podejmują ostateczne decyzje projektowe i
+											fabularne.</li>
+										<li><strong>Admin:</strong> Wsparcie techniczne i moderacja. Dba o porządek na
+											serwerze i egzekwuje dyscyplinę na planie.</li>
+										<li><strong>Moderator:</strong> Moderacja serwera. Dba o porządek na serwerze
+											oraz chacie.</li>
+										<li><strong>Członek:</strong> Główna obsada aktorska. Osoba z przypisaną rolą,
+											odpowiedzialna za odgrywanie postaci i realizację scenariusza.</li>
+										<li><strong>Osoby bez roli:</strong> Statyści stanowiący tło wydarzeń (postacie
+											3-planowe).</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+						<div class="accordion-item">
+							<div class="accordion-header">
+								<h4>§2.3. Tożsamość Utajniona (System Nicked)</h4>
+								<span class="accordion-icon"></span>
+							</div>
+							<div class="accordion-content">
+								<div class="accordion-inner">
+									<ol>
+										<li>Funkcja <strong>Nicked</strong> (zmiana tożsamości gracza) jest nadawana
+											wyłącznie przez <strong>Włodarzy</strong> lub <strong>Adminów</strong> na
+											potrzeby scenariusza.</li>
+										<li>Gracz, któremu nadano status <em>Nicked</em>, ma bezwzględny obowiązek
+											zachowania pełnej anonimowości.</li>
+										<li>W zależności od decyzji Włodarzy lub Adminów, osoba z ukrytym nickiem ma
+											obowiązek używania <strong>modulatora głosu</strong> lub całkowitego
+											<strong>wyciszenia mikrofonu</strong>.
+										</li>
+										<li>W przypadku pozostałych osób, kwestia posiadania lub używania mikrofonu jest
+											ustalana indywidualnie przez Włodarzy przed każdą sesją.</li>
+									</ol>
+								</div>
+							</div>
+						</div>
+
+						<div class="accordion-item">
+							<div class="accordion-header">
+								<h4>§2.4. Sesje Nagraniowe i Dyscyplina</h4>
+								<span class="accordion-icon"></span>
+							</div>
+							<div class="accordion-content">
+								<div class="accordion-inner">
+									<ol>
+										<li><strong>Obecność Członków:</strong> Osoby z rolą <strong>Członek</strong>
+											muszą zgłaszać każdą nieobecność z wyprzedzeniem. Notoryczne absencje
+											skutkują usunięciem z roli fabularnej.</li>
+										<li><strong>Osoby bez roli:</strong> Uczestniczą w sesjach dobrowolnie, jednak
+											na planie muszą bezwzględnie stosować się do poleceń Administracji pod
+											rygorem usunięcia z serwera.</li>
+										<li><strong>Trollowanie i przeszkadzanie:</strong> Celowe utrudnianie nagrań,
+											odwalanie w scenach lub przeszkadzanie aktorom jest niedozwolone i skutkuje
+											upomnieniem lub natychmiastowym banem.</li>
+									</ol>
+								</div>
+							</div>
+						</div>
+
+						<div class="accordion-item">
+							<div class="accordion-header">
+								<h4>§2.5. Zasady Fabularne i Kreatywność</h4>
+								<span class="accordion-icon"></span>
+							</div>
+							<div class="accordion-content">
+								<div class="accordion-inner">
+									<ol>
+										<li><strong>Inicjatywa:</strong> Włodarze są otwarci na pomysły fabularne od
+											Adminów i Członków. Każda propozycja musi zostać przedstawiona i
+											zaakceptowana przez Produkcję przed sesją.</li>
+										<li><strong>Immersja:</strong> Podczas nagrań obowiązuje całkowity zakaz
+											wychodzenia z roli (brak rozmów OOC). Jakiekolwiek przeszkadzanie aktorom
+											lub griefing jest surowo karane.</li>
+										<li><strong>Zakaz shipowania:</strong> Obowiązuje całkowity zakaz "shipowania"
+											(wymuszania lub sugerowania relacji romantycznych) pomiędzy postaciami oraz
+											uczestnikami projektu. Wątki romantyczne mogą pojawić się wyłącznie za zgodą
+											zainteresowanych stron i po zatwierdzeniu przez Włodarzy.</li>
+									</ol>
+								</div>
+							</div>
+						</div>
+
+						<div class="accordion-item">
+							<div class="accordion-header">
+								<h4>§2.6. Media i Poufność</h4>
+								<span class="accordion-icon"></span>
+							</div>
+							<div class="accordion-content">
+								<div class="accordion-inner">
+									<ol>
+										<li><strong>Zakaz Spoilerów:</strong> Całkowity zakaz udostępniania
+											screenshotów, nagrań "zza kulis" oraz szczegółów fabuły przed oficjalną
+											premierą na kanałach głównych.</li>
+										<li><strong>Wizerunek:</strong> Wejście na serwer podczas nagrań oznacza zgodę
+											na wykorzystanie głosu i wizerunku postaci (skin) w materiałach Włodarzy.
+										</li>
+										<li><strong>Materiały po usunięciu z projektu:</strong> Włodarze mogą, według
+											własnego uznania, decydować o pozostawieniu lub usunięciu materiałów
+											zawierających osoby, które zostały usunięte lub zbanowane.</li>
+									</ol>
+								</div>
+							</div>
+						</div>
+
+						<div class="accordion-item">
+							<div class="accordion-header">
+								<h4>§2.7. Zasady Techniczne i Fair Play</h4>
+								<span class="accordion-icon"></span>
+							</div>
+							<div class="accordion-content">
+								<div class="accordion-inner">
+									<ol>
+										<li><strong>Zero tolerancji dla oszustw:</strong> Surowo zabrania się używania
+											cheatów, skryptów czy tekstur typu X-Ray. Złamanie tego punktu oznacza
+											natychmiastowy i permanentny ban.</li>
+										<li><strong>Sprzęt:</strong> Każdy uczestnik biorący udział w fabule musi zadbać
+											o sprawny mikrofon i stabilne łącze.</li>
+									</ol>
+								</div>
+							</div>
+						</div>
+
+						<div class="accordion-item">
+							<div class="accordion-header">
+								<h4>§2.8. Sankcje</h4>
+								<span class="accordion-icon"></span>
+							</div>
+							<div class="accordion-content">
+								<div class="accordion-inner">
+									<p>Włodarze oraz Admini zastrzegają sobie prawo do usunięcia z projektu każdej
+										osoby, która:</p>
+									<ul>
+										<li>łamie regulamin,</li>
+										<li>zdradza fabułę,</li>
+										<li>działa na szkodę wizerunkową <strong>Krainy Twórców</strong>.</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+						<div class="rules-category-title" style="margin-top: 30px;">POLITYKA PRYWATNOŚCI (RODO)</div>
+
+						<div class="accordion-item">
+							<div class="accordion-header">
+								<h4>§3.1. Administrator i zakres danych</h4>
+								<span class="accordion-icon"></span>
+							</div>
+
+							<div class="accordion-content">
+								<div class="accordion-inner">
+									<p>
+										Właścicielem strony jest projekt Kraina Twórców.
+										Serwis nie prowadzi rejestracji ani systemu kont użytkowników.
+										Nie stosujemy profilowania, śledzenia marketingowego ani automatycznej analityki
+										użytkowników.
+									</p>
+
+									<p>
+										Strona została zaprojektowana w sposób możliwie prosty i lokalny, bez zbędnego
+										przetwarzania danych użytkowników.
+									</p>
+								</div>
+							</div>
+
+						</div>
+
+						<div class="accordion-item">
+							<div class="accordion-header">
+								<h4>§3.2. Treści zewnętrzne i hosting</h4>
+								<span class="accordion-icon"></span>
+							</div>
+
+							<div class="accordion-content">
+								<div class="accordion-inner">
+
+									<p>
+										Strona zawiera odnośniki do zewnętrznych usług, takich jak YouTube oraz Discord.
+										Po przejściu do tych serwisów obowiązują ich własne regulaminy oraz polityki
+										prywatności.
+									</p>
+
+									<ul>
+										<li>
+											<strong>YouTube:</strong> platforma wykorzystywana do publikacji oficjalnych
+											materiałów projektu.
+										</li>
+
+										<li>
+											<strong>Discord:</strong> oficjalny serwer społeczności projektu.
+										</li>
+
+										<li>
+											<strong>Hosting:</strong> witryna jest publikowana z wykorzystaniem GitHub
+											Pages oraz domeny obsługiwanej przez OVHcloud.
+											Podmioty te mogą technicznie przetwarzać podstawowe dane niezbędne do
+											działania strony, takie jak adres IP lub dane diagnostyczne.
+										</li>
+									</ul>
+
+								</div>
+							</div>
+						</div>
+
+						<div class="accordion-item">
+							<div class="accordion-header">
+								<h4>§3.3. Kontakt</h4>
+								<span class="accordion-icon"></span>
+							</div>
+
+							<div class="accordion-content">
+								<div class="accordion-inner">
+
+									<p>
+										Wszelkie pytania dotyczące projektu oraz ochrony prywatności można kierować pod
+										adres e-mail:
+										<strong id="mail-placeholder">Ładowanie...</strong>
+										lub poprzez oficjalny serwer Discord:
+									</p>
+
+									<div style="margin-top: 15px;">
+										<a href="https://discord.gg/jRWkeeDrTb" target="_blank"
+											rel="noopener noreferrer" class="discord-link-box">
+
+											<img src="img/Discord-Symbol-Blurple.svg" alt="Discord"
+												class="discord-icon">
+
+											discord.gg/jRWkeeDrTb
+										</a>
+									</div>
+
+								</div>
+							</div>
+
+						</div>
+
+						<div class="accordion-item">
+							<div class="accordion-header">
+								<h4>§3.4. Twoje prawa</h4>
+								<span class="accordion-icon"></span>
+							</div>
+							<div class="accordion-content">
+								<div class="accordion-inner">
+
+									<p>
+										Masz prawo do kontaktu z administratorem oraz do uzyskania informacji
+										dotyczących przetwarzania danych związanych z kontaktem mailowym lub komunikacją
+										poprzez Discord.
+									</p>
+
+								</div>
+							</div>
+
+						</div>
+
+
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section id="faq" class="page">
+			<div class="panel rules-panel">
+				<h2>Najczęściej Zadawane Pytania</h2>
+				<p
+					style="font-size: 0.75rem; opacity: 0.5; margin-bottom: 20px; margin-top: -10px; text-transform: uppercase; letter-spacing: 1px;">
+					Centrum informacji Krainy Twórców
+				</p>
+
+				<div class="rules-scroll-container">
+					<div class="rules-content">
+
+						<div class="accordion-item">
+							<div class="accordion-header">
+								<h4>Jak dostać się na nagrywkę?</h4>
+								<span class="accordion-icon"></span>
+							</div>
+							<div class="accordion-content">
+								<div class="accordion-inner">
+									<p>Są na to dwa sposoby w zależności od roli, jaką chcesz pełnić:</p>
+									<ul>
+										<li><strong>Jako statysta (Nicked):</strong> W dzień nagrywki, kiedy na serwerze
+											zostaje otworzone podium, musisz po prostu wejść na nie na czas. W ten
+											sposób automatycznie dołączasz do sesji z ukrytą tożsamością.</li>
+										<li><strong>Jako oficjalny Członek z rolą:</strong> Musisz przejść proces
+											rekrutacji. W tym celu złóż oficjalne podanie na naszym Discordzie na kanale
+											<span
+												style="background: rgba(144, 238, 144, 0.1); color: var(--accent); padding: 2px 4px; border-radius: 4px;">#🎫┃rekrutacja</span>.
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+						<div class="accordion-item">
+							<div class="accordion-header">
+								<h4>Kiedy odbywają się nagrywki?</h4>
+								<span class="accordion-icon"></span>
+							</div>
+							<div class="accordion-content">
+								<div class="accordion-inner">
+									<p>Harmonogram wszystkich nadchodzących sesji znajdziesz bezpośrednio na naszym
+										serwerze Discord. Wszystko jest dokładnie rozpisane w sekcji wydarzeń na samej
+										górze listy kanałów:</p>
+									<ul>
+										<li><strong>Na komputerze:</strong> Kliknij w ikonę kalendarza z napisem
+											<strong>"Przeglądaj wydarzenia"</strong> na samym szczycie listy.
+										</li>
+										<li><strong>Na telefonie:</strong> Stuknij w charakterystyczną <strong>emotkę
+												kalendarza</strong> wyświetlaną nad kanałami tekstowymi.</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+						<div class="accordion-item">
+							<div class="accordion-header">
+								<h4>Czy można nagrywać materiały na swój własny kanał?</h4>
+								<span class="accordion-icon"></span>
+							</div>
+							<div class="accordion-content">
+								<div class="accordion-inner">
+									<p>
+										<strong>Nie.</strong> Nagrywanie oraz publikowanie własnych materiałów
+										bezpośrednio z wnętrza projektu jest zabronione. Oficjalne treści fabularne
+										publikujemy wyłącznie na kanałach: <strong>Nieskot</strong>,
+										<strong>Rekskyy</strong> oraz <strong>Kraina Twórców</strong>.
+										<br><br>
+										<strong>Co z funny moments?</strong> Jeśli chcesz tworzyć kompilacje lub analizy
+										na bazie naszych gotowych filmów (tzw. fan-content), jest to jak najbardziej
+										dozwolone. Pamiętaj jedynie o podaniu źródła w opisie oraz o tym, by w żaden
+										sposób nie sugerować, że jesteś oficjalnym twórcą projektu.
+									</p>
+								</div>
+							</div>
+						</div>
+
+						<div class="accordion-item">
+							<div class="accordion-header">
+								<h4>Czym dokładnie jest Kraina Twórców?</h4>
+								<span class="accordion-icon"></span>
+							</div>
+							<div class="accordion-content">
+								<div class="accordion-inner">
+									<p>To najbardziej zaawansowany i unikalny projekt fabularny (Roleplay) w Polsce
+										realizowany w grze Minecraft. Nasz projekt łączy profesjonalną grę aktorską,
+										zaplanowane sesje scenariuszowe oraz niesamowite zwroty akcji tworząc wciągający
+										serial, który śledzą tysiące widzów.</p>
+								</div>
+							</div>
+						</div>
+
+						<div class="accordion-item">
+							<div class="accordion-header">
+								<h4>Jaki jest lore tego świata?</h4>
+								<span class="accordion-icon"></span>
+							</div>
+							<div class="accordion-content">
+								<div class="accordion-inner">
+									<p>Wiele lat temu powstała pewna kraina, gdzie zaczęli pojawiać się pierwsi gracze.
+										Atmosfera była dość pokojowa - gracze budowali budowle, wygłupiali się i
+										wspólnie spędzali czas. Jednakże po jakimś czasie zaczęło pojawiać się coraz
+										więcej osób, co doprowadziło do pierwszych walk. Wielu pokojowych graczy chowało
+										się w podziemiach na dalekich koordynatach, inni przechodzili na złą stronę.</p>
+									<p>Wtedy również rządził pierwszy władca serwera, który był koszmarny dla wielu
+										osób. Kazał osobom, które się jemu sprzeciwiały, jak i swoim poddanym, niszczyć
+										kryształy, które dają możliwość ponownego odrodzenia się po śmierci. Po jakimś
+										czasie wybuchła wojna w równoległej krainie, której skutkiem było to, że każdy
+										po zostaniu wyeliminowanym za pomocą nielegalnego miecza, lądował w głównej
+										krainie.</p>
+								</div>
+							</div>
+						</div>
+
+						<div class="accordion-item">
+							<div class="accordion-header">
+								<h4>Co to jest "System Nicked" wspomniany w regulaminie?</h4>
+								<span class="accordion-icon"></span>
+							</div>
+							<div class="accordion-content">
+								<div class="accordion-inner">
+									<p>System Nicked to techniczne narzędzie pozwalające ukryć lub całkowicie zmienić
+										nick gracza nad głową oraz na liście tab. Jest to kluczowy element budowania
+										tajemniczości w scenariuszu. Gracz z taką funkcją ma kategoryczny zakaz
+										wyjawiania kim jest, a w zależności od wytycznych reżyserskich musi używać
+										specjalnego modulatora dźwięku lub grać bez używania mikrofonu.</p>
+								</div>
+							</div>
+						</div>
+
+						<div class="accordion-item">
+							<div class="accordion-header">
+								<h4>Gdzie zgłaszać błędy lub propozycje fabularne?</h4>
+								<span class="accordion-icon"></span>
+							</div>
+							<div class="accordion-content">
+								<div class="accordion-inner">
+									<p>Wszystkie sprawy techniczne, problemy z grą oraz kreatywne pomysły przyjmujemy na
+										naszym serwerze Discord. Od spraw spornych i błędów posiadamy specjalny system
+										ticketów (<span
+											style="background: rgba(144, 238, 144, 0.1); color: var(--accent); padding: 2px 4px; border-radius: 4px;">#📥┃stwórz-ticket</span>),
+										z kolei merytoryczne pomysły na rozwój świata gry możecie wysyłać na
+										kanale <span
+											style="background: rgba(144, 238, 144, 0.1); color: var(--accent); padding: 2px 4px; border-radius: 4px;">#💼┃propozycje</span>.
+									</p>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<footer>
+			<p>Projekt nie jest powiązany z firmą Mojang AB.</p>
+		</footer>
+
+		<script src="js/main.js?v7"></script>
 </body>
 
 </html>
