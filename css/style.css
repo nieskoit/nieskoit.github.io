@@ -247,6 +247,16 @@ p {
 	letter-spacing: 1px;
 }
 
+.inline-link {
+    color: var(--accent);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.inline-link:hover {
+    opacity: 0.8;
+}
+
 .ds-btn {
 	background: #5865F2;
 	color: white;
