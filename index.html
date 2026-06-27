@@ -55,19 +55,32 @@
 
 		<noscript>
 		<style>
-			#loader { 
-				display: none !important; 
-				visibility: hidden !important; 
-			}
-			.page.active { 
+			#loader { display: none !important; }
+			
+			.page { 
 				display: flex !important; 
 				opacity: 1 !important;
 				transform: none !important;
 				animation: none !important;
+				margin-bottom: 60px;
 			}
+			
+			.accordion-content {
+				max-height: none !important;
+				overflow: visible !important;
+			}
+			.accordion-item {
+				background: rgba(255, 255, 255, 0.03) !important;
+				border-color: rgba(118, 198, 63, 0.3) !important;
+			}
+			.accordion-header h4 {
+				color: var(--accent) !important;
+			}
+			
+			.nav { display: none !important; }
 		</style>
-		<div style="background: #ff9800; color: #000; text-align: center; padding: 12px 20px; font-weight: 800; font-size: 0.9rem; position: fixed; top: 0; left: 0; width: 100%; z-index: 999999; box-shadow: 0 4px 15px rgba(0,0,0,0.5); letter-spacing: 0.5px;">
-			⚠️ Wygląda na to, że masz wyłączony JavaScript. Strona została dostosowana do trybu tekstowego – możesz przeczytać Regulamin i FAQ, ale zakładki nie będą się rozwijać automatycznie.
+		<div style="background: #ff9800; color: #000; text-align: center; padding: 12px 20px; font-weight: 800; font-size: 0.9rem; position: fixed; top: 0; left: 0; width: 100%; z-index: 999999; box-shadow: 0 4px 15px rgba(0,0,0,0.5);">
+			⚠️ Masz wyłączony JavaScript. Strona została wyświetlona w pełnej wersji tekstowej. Przewiń w dół, aby przeczytać Regulamin i FAQ.
 		</div>
 	</noscript>
 
