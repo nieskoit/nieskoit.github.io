@@ -3,49 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <meta name="robots" content="noindex, nofollow">
 
     <title>404 | Kraina Twórców</title>
     
     <meta name="theme-color" content="#76c63f">
-
     <link rel="icon" type="image/png" sizes="96x96" href="https://www.krainatworcow.pl/img/kt.png">
-
-    <link rel="stylesheet" href="/css/style.css?v3">
+    <link rel="stylesheet" href="css/style.css?v=1">
 </head>
 <body>
     
     <div id="loader">
-        <img src="/img/ktbt.png" alt="Logo" class="loader-logo">
+        <img src="img/ktbt.png" alt="Logo" class="loader-logo">
         <div class="loader-bar"></div>
     </div>
 
     <header class="header">
         <div class="logo-area">
-            <a href="/"><img src="/img/ktbt.png" alt="Logo"></a>
+            <a href="/"><img src="img/ktbt.webp" alt="Logo"></a>
         </div>
     </header>
 
-    <main class="container" style="display: flex; align-items: center; justify-content: center; min-height: 80vh;">
-    <div class="panel" style="max-width: 600px; width: 100%; text-align: center;">
-        
-        <div class="error-id" style="font-size: 5rem; font-weight: 800; color: var(--accent); margin-bottom: 10px;">404</div>
-        <div class="error-subtitle" style="text-transform: uppercase; letter-spacing: 3px; color: rgba(255, 255, 255, 0.4); font-weight: 700; margin-bottom: 25px;">Strona nieodnaleziona</div>
-        
-        <h2 style="color: #fff; margin-bottom: 15px;">Zgubiłeś ścieżkę?</h2>
-        <p style="margin-bottom: 30px; opacity: 0.8;">Miejsce, którego szukasz, zostało pochłonięte przez mgłę lub nigdy nie istniało w tym zakątku Krainy.</p>
+    <main class="container error-container">
+        <div class="panel error-panel-box">
+            
+            <div class="error-id">404</div>
+            <div class="error-subtitle">Strona nieodnaleziona</div>
+            
+            <h2>Zgubiłeś ścieżkę?</h2>
+            <p class="error-description">Miejsce, którego szukasz, zostało pochłonięte przez mgłę lub nigdy nie istniało w tym zakątku Krainy.</p>
 
-        <a href="/" class="ds-btn" style="display: inline-flex; width: auto; padding: 14px 40px; background: var(--accent); color: #000; text-decoration: none; border-radius: 14px; font-weight: 800;">
-            Wróć na start
-        </a>
-    </div>
-</main>
+            <a href="/" class="btn-primary">
+                Wróć na start
+            </a>
+        </div>
+    </main>
 
     <footer>
         <p>Projekt nie jest powiązany z firmą Mojang AB.</p>
     </footer>
 
-    <script src="/js/loader.js" defer></script>
+    <script src="js/loader.js" defer></script>
 </body>
 </html>
