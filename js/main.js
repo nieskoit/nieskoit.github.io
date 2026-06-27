@@ -1,1 +1,206 @@
-const _0x40e4e8=_0x1fae;(function(_0x532142,_0x912198){const _0x4f7e57=_0x1fae,_0x3351e4=_0x532142();while(!![]){try{const _0x1635f5=-parseInt(_0x4f7e57(0x15b))/0x1*(parseInt(_0x4f7e57(0x14c))/0x2)+parseInt(_0x4f7e57(0x12f))/0x3*(-parseInt(_0x4f7e57(0x148))/0x4)+-parseInt(_0x4f7e57(0x13f))/0x5*(parseInt(_0x4f7e57(0x13a))/0x6)+parseInt(_0x4f7e57(0x12b))/0x7*(parseInt(_0x4f7e57(0x12a))/0x8)+-parseInt(_0x4f7e57(0x145))/0x9+parseInt(_0x4f7e57(0x154))/0xa*(parseInt(_0x4f7e57(0x139))/0xb)+parseInt(_0x4f7e57(0x125))/0xc;if(_0x1635f5===_0x912198)break;else _0x3351e4['push'](_0x3351e4['shift']());}catch(_0x4e91de){_0x3351e4['push'](_0x3351e4['shift']());}}}(_0x3892,0xca6fe));function setActivePage(_0x4f3d05){const _0x5428f1=_0x1fae;document[_0x5428f1(0x12e)](_0x5428f1(0x14d))[_0x5428f1(0x142)](_0x191e6c=>{const _0xc7ffae=_0x5428f1;_0x191e6c[_0xc7ffae(0x12d)][_0xc7ffae(0x137)](_0xc7ffae(0x14b),_0x191e6c[_0xc7ffae(0x129)]('data-target')===_0x4f3d05);}),document[_0x5428f1(0x12e)](_0x5428f1(0x158))['forEach'](_0x1d1c3d=>{const _0x4e1b3e=_0x5428f1;_0x1d1c3d['classList'][_0x4e1b3e(0x137)](_0x4e1b3e(0x14b),_0x1d1c3d['id']===_0x4f3d05);});}function _0x1fae(_0x476443,_0xb781fa){_0x476443=_0x476443-0x122;const _0x389278=_0x3892();let _0x1faed1=_0x389278[_0x476443];return _0x1faed1;}function _0x3892(){const _0x45053b=['classList','querySelectorAll','287961IGdDSp','data-target','hash','.accordion-item','style','color','clipboard','writeText','toggle','toFixed','54175PhbKeu','345336sCWvPz','home','querySelector','#76c63f','maxHeight','85eBrGJd','#fff','rules','forEach','.accordion-content','replace','9235440mhHGYj','SKOPIOWANO\x20DO\x20SCHOWKA!','floor','48waGCfn','loader','server-players','active','2oDdTVj','.nav-btn','pow','innerText','catch','\x22\x20style=\x22color:\x20var(--accent);\x20text-decoration:\x20underline;\x22>','addEventListener','<a\x20href=\x22mailto:','1730tNpXms','</a>','requestAnimationFrame','.nav-btn[data-target=\x22','.page','opacity','scrollHeight','1411462nUxfGI','contains','remove','backgroundColor','click','length','getElementById','parentElement','45834396APjtiZ','location','.accordion-header','faq','getAttribute','5804336qIvhUl','7ZbKVNo','innerHTML'];_0x3892=function(){return _0x45053b;};return _0x3892();}function copyIP(){const _0x4771bc=_0x1fae,_0x51b36f='krainatworcow.pl';navigator[_0x4771bc(0x135)][_0x4771bc(0x136)](_0x51b36f)[_0x4771bc(0x150)](()=>{});const _0x1de366=document[_0x4771bc(0x123)](_0x4771bc(0x14a)),_0x4fcdfc=document[_0x4771bc(0x123)]('ip-text'),_0x489487=document[_0x4771bc(0x123)]('status-dot');if(!_0x1de366||!_0x4fcdfc)return;const _0x278732=_0x1de366[_0x4771bc(0x14f)],_0x509053=_0x4fcdfc['innerText'];_0x1de366['innerText']=_0x4771bc(0x146),_0x1de366[_0x4771bc(0x133)][_0x4771bc(0x134)]=_0x4771bc(0x140),_0x1de366[_0x4771bc(0x133)][_0x4771bc(0x159)]='1',_0x4fcdfc['innerText']=_0x51b36f,_0x489487&&(_0x489487[_0x4771bc(0x133)][_0x4771bc(0x15e)]=_0x4771bc(0x13d)),setTimeout(()=>{const _0x8d2f6b=_0x4771bc;_0x1de366[_0x8d2f6b(0x14f)]=_0x278732,_0x1de366[_0x8d2f6b(0x133)][_0x8d2f6b(0x134)]='',_0x1de366[_0x8d2f6b(0x133)]['opacity']='',_0x4fcdfc[_0x8d2f6b(0x14f)]=_0x509053,_0x489487&&(_0x489487[_0x8d2f6b(0x133)][_0x8d2f6b(0x15e)]='');},0x5dc);}function animateCounters(){const _0x540892=_0x1fae,_0x4620c2=document['querySelectorAll']('.stat-number');if(!_0x4620c2[_0x540892(0x122)])return;_0x4620c2[_0x540892(0x142)](_0x2a3a7e=>{const _0x5d1411=_0x540892,_0x537b9a=Number(_0x2a3a7e[_0x5d1411(0x129)](_0x5d1411(0x130))||'0'),_0x55bf2b=0x9c4;let _0x4af052=null;const _0x176ab8=_0x192f55=>0x1-Math[_0x5d1411(0x14e)](0x1-_0x192f55,0x3),_0x49a6f8=_0x2112cf=>{const _0x4aa6a1=_0x5d1411;if(!_0x4af052)_0x4af052=_0x2112cf;const _0x1f9022=Math['min']((_0x2112cf-_0x4af052)/_0x55bf2b,0x1),_0x5e0ce3=_0x176ab8(_0x1f9022),_0x34bc7f=_0x5e0ce3*_0x537b9a;_0x537b9a>=0x3e8?_0x2a3a7e[_0x4aa6a1(0x14f)]=(_0x34bc7f/0x3e8)[_0x4aa6a1(0x138)](0x1)+'K':_0x2a3a7e['innerText']=Math[_0x4aa6a1(0x147)](_0x34bc7f);if(_0x1f9022<0x1)window[_0x4aa6a1(0x156)](_0x49a6f8);else{if(_0x537b9a>=0x3e8)_0x2a3a7e[_0x4aa6a1(0x14f)]=(_0x537b9a/0x3e8)['toFixed'](0x1)+'K+';else _0x537b9a>0xa?_0x2a3a7e[_0x4aa6a1(0x14f)]=_0x537b9a+'+':_0x2a3a7e[_0x4aa6a1(0x14f)]=String(_0x537b9a);}};window['requestAnimationFrame'](_0x49a6f8);});}function handleDeepLink(){const _0x37708a=_0x1fae,_0x3992e4=window[_0x37708a(0x126)][_0x37708a(0x131)][_0x37708a(0x144)]('#','');if(!_0x3992e4)return;const _0xcd6f78={'start':_0x37708a(0x13b),'regulamin':_0x37708a(0x141),'rules':_0x37708a(0x141),'faq':_0x37708a(0x128)},_0x4fefb7=_0xcd6f78[_0x3992e4];if(!_0x4fefb7)return;const _0x41b70=document[_0x37708a(0x13c)](_0x37708a(0x157)+_0x4fefb7+'\x22]');if(_0x41b70)_0x41b70[_0x37708a(0x15f)]();}function bindAccordionHandlers(){const _0x238e0b=_0x1fae;document[_0x238e0b(0x12e)](_0x238e0b(0x127))[_0x238e0b(0x142)](_0x354324=>{const _0x5b5be5=_0x238e0b;_0x354324[_0x5b5be5(0x152)](_0x5b5be5(0x15f),()=>{const _0x172881=_0x5b5be5,_0x37bd46=_0x354324['parentElement'],_0x40e6b0=_0x37bd46?.['querySelector'](_0x172881(0x143)),_0x99dbc7=_0x37bd46?.[_0x172881(0x124)]?.[_0x172881(0x12e)](_0x172881(0x132))||[];_0x99dbc7[_0x172881(0x142)](_0x17f7af=>{const _0xfaa391=_0x172881;if(_0x17f7af!==_0x37bd46){_0x17f7af[_0xfaa391(0x12d)][_0xfaa391(0x15d)](_0xfaa391(0x14b));const _0x2c8cec=_0x17f7af[_0xfaa391(0x13c)](_0xfaa391(0x143));if(_0x2c8cec)_0x2c8cec[_0xfaa391(0x133)][_0xfaa391(0x13e)]=null;}}),_0x37bd46[_0x172881(0x12d)][_0x172881(0x137)](_0x172881(0x14b));if(_0x37bd46[_0x172881(0x12d)][_0x172881(0x15c)](_0x172881(0x14b))&&_0x40e6b0)_0x40e6b0['style']['maxHeight']=_0x40e6b0[_0x172881(0x15a)]+'px';else _0x40e6b0&&(_0x40e6b0[_0x172881(0x133)][_0x172881(0x13e)]=null);});});}document[_0x40e4e8(0x152)]('DOMContentLoaded',()=>{const _0x1a574b=_0x40e4e8;document[_0x1a574b(0x12e)]('.nav-btn')['forEach'](_0x30d708=>{const _0x20d5d7=_0x1a574b;_0x30d708[_0x20d5d7(0x152)](_0x20d5d7(0x15f),()=>{const _0xc5b46e=_0x20d5d7,_0x41919a=_0x30d708[_0xc5b46e(0x129)]('data-target');_0x41919a&&setActivePage(_0x41919a);});}),animateCounters(),handleDeepLink(),bindAccordionHandlers();const _0x2ae234='kontakt@krainatworcow.pl',_0x10652c=document[_0x1a574b(0x123)]('mail-placeholder');_0x10652c&&(_0x10652c[_0x1a574b(0x12c)]=_0x1a574b(0x153)+_0x2ae234+_0x1a574b(0x151)+_0x2ae234+_0x1a574b(0x155));}),window[_0x40e4e8(0x152)]('load',()=>{const _0x30a3d0=_0x40e4e8,_0x2421c8=document[_0x30a3d0(0x123)](_0x30a3d0(0x149));_0x2421c8&&setTimeout(()=>_0x2421c8[_0x30a3d0(0x12d)]['add']('loader-hidden'),0x1f4);}),window[_0x40e4e8(0x152)]('hashchange',handleDeepLink);
+const ROUTES = {
+    start: "home",
+    home: "home",
+    regulamin: "rules",
+    rules: "rules",
+    faq: "faq"
+};
+
+const HASHES = {
+    home: "start",
+    rules: "regulamin",
+    faq: "faq"
+};
+
+function setActivePage(targetId, updateHash = true) {
+
+    document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.classList.toggle(
+            'active',
+            btn.dataset.target === targetId
+        );
+    });
+
+    document.querySelectorAll('.page').forEach(page => {
+        page.classList.toggle(
+            'active',
+            page.id === targetId
+        );
+    });
+
+    if (updateHash) {
+
+        const hash = HASHES[targetId] || "start";
+
+        if (location.hash !== "#" + hash) {
+            history.pushState(null, "", "#" + hash);
+        }
+
+    }
+
+    window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "auto"
+    });
+
+    document.querySelectorAll(".rules-scroll-container").forEach(container => {
+        container.scrollTop = 0;
+    });
+
+}
+
+function copyIP() {
+
+    const text = "krainatworcow.pl";
+
+    navigator.clipboard.writeText(text).catch(() => {});
+
+    const serverText = document.getElementById("server-players");
+    const ipText = document.getElementById("ip-text");
+    const statusDot = document.getElementById("status-dot");
+
+    if (!serverText || !ipText) return;
+
+    const oldText = serverText.innerText;
+    const oldIpText = ipText.innerText;
+
+    serverText.innerText = "SKOPIOWANO DO SCHOWKA!";
+    serverText.style.color = "#fff";
+    serverText.style.opacity = "1";
+
+    ipText.innerText = text;
+
+    if (statusDot) {
+        statusDot.style.backgroundColor = "#76c63f";
+    }
+
+    setTimeout(() => {
+
+        serverText.innerText = oldText;
+        serverText.style.color = "";
+        serverText.style.opacity = "";
+        ipText.innerText = oldIpText;
+
+        if (statusDot) {
+            statusDot.style.backgroundColor = "";
+        }
+
+    }, 1500);
+
+}
+
+function handleHashNavigation() {
+
+    if (!location.hash) {
+        history.replaceState(null, "", "#start");
+    }
+
+    const hash = location.hash
+        .replace("#", "")
+        .trim()
+        .toLowerCase();
+
+    const target = ROUTES[hash] || "home";
+
+    setActivePage(target, false);
+
+}
+
+function bindAccordionHandlers() {
+
+    document.querySelectorAll(".accordion-header").forEach(header => {
+
+        header.addEventListener("click", () => {
+
+            const item = header.parentElement;
+
+            const content =
+                item.querySelector(".accordion-content");
+
+            document.querySelectorAll(".accordion-item").forEach(other => {
+
+                if (other === item) return;
+
+                other.classList.remove("active");
+
+                const otherContent =
+                    other.querySelector(".accordion-content");
+
+                if (otherContent) {
+                    otherContent.style.maxHeight = null;
+                }
+
+            });
+
+            item.classList.toggle("active");
+
+            if (item.classList.contains("active")) {
+
+                content.style.maxHeight =
+                    content.scrollHeight + "px";
+
+            } else {
+
+                content.style.maxHeight = null;
+
+            }
+
+        });
+
+    });
+
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    document.querySelectorAll(".nav-btn").forEach(button => {
+
+        button.addEventListener("click", () => {
+
+            const target = button.dataset.target;
+
+            if (!target) return;
+
+            setActivePage(target);
+
+        });
+
+    });
+
+    bindAccordionHandlers();
+
+    handleHashNavigation();
+
+    const email = "kontakt@krainatworcow.pl";
+
+    const placeholder = document.getElementById("mail-placeholder");
+
+    if (placeholder) {
+
+        placeholder.innerHTML =
+            `<a href="mailto:${email}" style="color: var(--accent); text-decoration: underline;">${email}</a>`;
+
+    }
+
+});
+
+window.addEventListener("hashchange", () => {
+
+    handleHashNavigation();
+
+});
+
+window.addEventListener("load", () => {
+
+    const loader = document.getElementById("loader");
+
+    if (!loader) return;
+
+    setTimeout(() => {
+
+        loader.classList.add("loader-hidden");
+
+    }, 500);
+
+});
