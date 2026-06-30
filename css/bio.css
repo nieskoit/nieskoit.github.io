@@ -4,15 +4,16 @@
 .bio-wrapper {
     display: flex;
     justify-content: center;
+    align-items: flex-start; 
     min-height: 100dvh;
     padding: 40px 20px;
-    overflow-y: auto; 
+    box-sizing: border-box;
 }
 
 .bio-card {
     width: 100%;
     max-width: 800px;
-    margin: 40px 0; 
+    margin: auto; 
     background: rgba(7, 9, 14, 0.65);
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
@@ -259,21 +260,21 @@
     display: inline-flex;
     align-items: center;
     gap: 12px;
-    color: rgba(255, 255, 255, 0.7); /* Poprawiona czytelność */
+    color: rgba(255, 255, 255, 0.7); /* Poprawiona czytelność z 0.35 na 0.7 */
     font-size: 0.9rem;
     font-weight: 600;
     text-decoration: none;
     transition: all 0.3s ease;
 }
 
-.back-link:hover {
-    color: var(--accent);
-    opacity: 1;
-}
-
 .back-arrow {
     font-size: 1.2rem;
     transition: transform 0.3s ease;
+}
+
+.back-link:hover {
+    color: var(--accent);
+    opacity: 1; /* Pełne krycie przy najechaniu */
 }
 
 .back-link:hover .back-arrow {
@@ -294,9 +295,9 @@
 /* =========================================
    RESPONSYWNOŚĆ - WERSJA MOBILNA
    ========================================= */
-@media (max-width: 768px) {
+@media (max-width: 950px) {
     .bio-wrapper {
-        padding: 20px 16px;
+        padding: 40px 16px;
         display: block; 
     }
     
@@ -304,7 +305,7 @@
         max-width: 450px;
         padding: 32px 24px;
         border-radius: 32px;
-        margin: 20px auto;
+        margin: 0 auto;
     }
     
     .bio-links-grid {
