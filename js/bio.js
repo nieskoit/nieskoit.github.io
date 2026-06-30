@@ -36,7 +36,7 @@ const i18n = {
         "btn_dc_nieskot_2": "Discord: Nagrywkowy",
 
         // --- REKSKYY ---
-        "desc_rekskyy": "Zarządca serwera. Witaj na moim profilu!",
+        "desc_rekskyy": "Twórca Krainy Twórców. Witaj na moim profilu!",
         "btn_dc_rekskyy_1": "Discord: RexRP",
         "btn_dc_rekskyy_2": "Discord: Nagrywkowy"
     },
@@ -54,7 +54,7 @@ const i18n = {
         "btn_dc_nieskot_2": "Discord: Recording Server",
 
         // --- REKSKYY ---
-        "desc_rekskyy": "Server Administrator. Welcome to my profile!",
+        "desc_rekskyy": "Creator of Kraina Twórców. Welcome to my profile!",
         "btn_dc_rekskyy_1": "Discord: RexRP",
         "btn_dc_rekskyy_2": "Discord: Recording Server"
     }
