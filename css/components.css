@@ -1,0 +1,8 @@
+/* Shared component/accessibility overrides. */
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.avatar, .creator-avatar { object-fit: cover; flex: 0 0 auto; }
+@media (hover: hover) { .creator-card { cursor: pointer; } }
+
+
+/* Creator image source wrapper: no layout change. */
+.creator-icon-source { display: contents; }

@@ -1,0 +1,297 @@
+
+/* =========================================================
+   KT STATUS PAGES
+   Shared visual language for index.html (temporary) + 404.html.
+   Scoped to .kt-status-page only.
+   ========================================================= */
+
+.kt-status-page {
+  font-family: "Inter", sans-serif;
+  --status-accent: #b7e44f;
+  --status-bg: #0b0d0a;
+  --status-surface: #10140e;
+  --status-line: #252b22;
+  --status-text: #edf3e8;
+  --status-muted: #7d8779;
+
+  min-height: 100svh;
+  width: 100%;
+  box-sizing: border-box;
+  display: grid;
+  place-items: center;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  padding: 32px;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(183,228,79,.055), transparent 28%),
+    var(--status-bg);
+  color: var(--status-text);
+}
+
+.kt-status-page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: .23;
+  background-image:
+    linear-gradient(rgba(255,255,255,.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.028) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: linear-gradient(to bottom, transparent, #000 22%, #000 78%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 22%, #000 78%, transparent);
+}
+
+.kt-status-page::after {
+  content: "";
+  position: absolute;
+  width: min(62vw, 760px);
+  aspect-ratio: 1;
+  border: 1px solid rgba(183,228,79,.045);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 52px rgba(183,228,79,.014),
+    0 0 0 104px rgba(183,228,79,.009);
+  pointer-events: none;
+  animation: kt-status-orbit 9s ease-in-out infinite;
+}
+
+.kt-status-card {
+  position: relative;
+  z-index: 2;
+  width: min(820px, 100%);
+  padding: clamp(42px, 6vw, 76px);
+  box-sizing: border-box;
+  text-align: center;
+  border: 1px solid rgba(255,255,255,.075);
+  border-radius: 12px;
+  background:
+    linear-gradient(145deg, rgba(255,255,255,.035), rgba(255,255,255,.012)),
+    rgba(10,13,9,.72);
+  box-shadow:
+    0 34px 100px rgba(0,0,0,.34),
+    inset 0 1px rgba(255,255,255,.035);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  animation: kt-status-card-in 700ms cubic-bezier(.2,.7,.2,1) both;
+}
+
+.kt-status-mark {
+  width: 58px;
+  height: 82px;
+  margin: 0 auto 32px;
+  position: relative;
+  transform: rotate(18deg);
+  clip-path: polygon(50% 0, 100% 24%, 83% 100%, 17% 100%, 0 24%);
+  background: linear-gradient(135deg, #d2f86d 0%, #91c931 55%, #5b971b 100%);
+  box-shadow:
+    0 0 0 8px rgba(183,228,79,.025),
+    0 0 55px rgba(183,228,79,.14);
+  animation: kt-status-crystal 5s ease-in-out infinite;
+}
+
+.kt-status-mark::before {
+  content: "";
+  position: absolute;
+  width: 9px;
+  height: 38px;
+  left: 14px;
+  top: 14px;
+  background: rgba(255,255,255,.16);
+}
+
+.kt-status-kicker {
+  margin-bottom: 14px;
+  color: var(--status-accent);
+  font-size: 10px;
+  line-height: 1.2;
+  font-weight: 900;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.kt-status-title {
+  margin: 0;
+  font-size: clamp(52px, 7vw, 104px);
+  line-height: .88;
+  letter-spacing: -.065em;
+  font-weight: 800;
+}
+
+.kt-status-title span {
+  color: var(--status-muted);
+}
+
+.kt-status-copy {
+  max-width: 570px;
+  margin: 26px auto 0;
+  color: var(--status-text);
+  font-size: clamp(15px, 1.25vw, 18px);
+  line-height: 1.6;
+}
+
+.kt-status-countdown {
+  display: none;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 9px;
+  max-width: 610px;
+  margin: 36px auto 0;
+}
+
+.kt-status-countdown.is-active {
+  display: grid;
+}
+
+.kt-status-unit {
+  min-width: 0;
+  padding: 18px 12px 15px;
+  border: 1px solid var(--status-line);
+  border-radius: 8px;
+  background: rgba(255,255,255,.018);
+}
+
+.kt-status-number {
+  display: block;
+  font-size: clamp(27px, 3vw, 42px);
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: -.045em;
+  font-variant-numeric: tabular-nums;
+}
+
+.kt-status-number.tick {
+  animation: kt-status-tick 280ms ease both;
+}
+
+.kt-status-label {
+  display: block;
+  margin-top: 8px;
+  color: #626c5f;
+  font-size: 9px;
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.kt-status-finished {
+  display: none;
+  margin: 34px auto 0;
+  padding: 17px 20px;
+  max-width: 590px;
+  border: 1px solid rgba(183,228,79,.16);
+  border-radius: 8px;
+  background: rgba(183,228,79,.035);
+  color: var(--status-accent);
+  font-size: 13px;
+  line-height: 1.55;
+  font-weight: 700;
+}
+
+.kt-status-finished.is-visible {
+  display: block;
+  animation: kt-status-finished-in 500ms ease both;
+}
+
+.kt-status-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 32px;
+}
+
+.kt-status-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 0 20px;
+  box-sizing: border-box;
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 7px;
+  color: var(--status-text);
+  background: rgba(255,255,255,.025);
+  text-decoration: none;
+  font-size: 12px;
+  line-height: 1;
+  font-weight: 800;
+  transition: transform .18s ease, border-color .18s ease, background .18s ease;
+}
+
+.kt-status-link:hover {
+  transform: translateY(-2px);
+  border-color: rgba(183,228,79,.28);
+  background: rgba(183,228,79,.045);
+}
+
+.kt-status-note {
+  margin: 22px 0 0;
+  color: #626c5f;
+  font-size: 15px;
+  line-height: 1.55;
+  letter-spacing: .01em;
+}
+
+@keyframes kt-status-card-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes kt-status-crystal {
+  0%, 100% { transform: rotate(18deg) translateY(0); }
+  50% { transform: rotate(18deg) translateY(-5px); }
+}
+
+@keyframes kt-status-orbit {
+  0%, 100% { transform: scale(.96); opacity: .55; }
+  50% { transform: scale(1.035); opacity: 1; }
+}
+
+@keyframes kt-status-tick {
+  0% { opacity: .4; transform: translateY(4px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes kt-status-finished-in {
+  from { opacity: 0; transform: translateY(7px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 680px) {
+  .kt-status-page {
+  font-family: "Inter", sans-serif;
+    padding: 18px;
+  }
+
+  .kt-status-card {
+    padding: 40px 22px;
+    border-radius: 10px;
+  }
+
+  .kt-status-title {
+    font-size: clamp(48px, 15vw, 72px);
+  }
+
+  .kt-status-countdown {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .kt-status-page::after {
+    width: 115vw;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kt-status-card,
+  .kt-status-mark,
+  .kt-status-page::after,
+  .kt-status-number.tick,
+  .kt-status-finished.is-visible {
+    animation: none;
+  }
+
+  .kt-status-link {
+    transition: none;
+  }
+}
