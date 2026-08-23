@@ -3,45 +3,215 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
   <title>404 | Kraina Twórców</title>
   <meta name="description" content="Ta strona nie istnieje. Wróć na stronę główną Krainy Twórców.">
-  <meta name="theme-color" content="#0b0d0a">
+  <meta name="theme-color" content="#090b09">
   <meta name="robots" content="noindex,follow">
 
   <link rel="canonical" href="https://krainatworcow.pl/404.html">
-  <link rel="icon" href="./assets/kt-logo.png" type="image/png">
+  <link rel="icon" href="assets/kt.webp" type="image/webp">
 
-  <link rel="stylesheet" href="./css/main.css">
-  <link rel="stylesheet" href="./css/components.css">
-  <link rel="stylesheet" href="./css/responsive.css">
-  <link rel="stylesheet" href="./css/status.css">
+  <style>
+    @font-face {
+      font-family: "Inter";
+      src: url("fonts/inter/Inter-VariableFont_opsz,wght.woff2") format("woff2");
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: "DM Serif Display";
+      src: url("fonts/dm-serif-display/DMSerifDisplay-Regular.woff2") format("woff2");
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+    }
+
+    :root {
+      --bg: #090b09;
+      --text: #f2f4ed;
+      --muted: #8e9687;
+      --line: rgba(255, 255, 255, 0.08);
+      --accent: #b7e44f;
+      --accent-hover: #c7f46a;
+      --purple: #a855f7;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 24px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .bg-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: min(90vw, 750px);
+      height: min(90vw, 550px);
+      background: radial-gradient(circle, rgba(168, 85, 247, 0.1) 0%, rgba(9, 11, 9, 0) 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .status-container {
+      position: relative;
+      z-index: 2;
+      max-width: 580px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Fioletowy Kryształ Artefaktu */
+    .crystal-shard {
+      position: relative;
+      width: 76px;
+      height: 110px;
+      margin-bottom: 24px;
+      transform: rotate(18deg);
+      background: linear-gradient(135deg, #f3e8ff 0%, #a855f7 50%, #6b21a8 100%);
+      clip-path: polygon(50% 0, 100% 24%, 83% 100%, 17% 100%, 0 24%);
+      box-shadow: 
+        0 0 0 8px rgba(168, 85, 247, 0.04),
+        0 0 45px rgba(168, 85, 247, 0.35);
+      animation: crystalFloat 5s ease-in-out infinite alternate;
+    }
+
+    @keyframes crystalFloat {
+      0% { transform: translateY(-5px) rotate(16deg); }
+      100% { transform: translateY(5px) rotate(20deg); }
+    }
+
+    .crystal-shard i, .crystal-shard b, .crystal-shard em {
+      position: absolute;
+      display: block;
+    }
+
+    .crystal-shard i {
+      width: 12px; height: 48px; left: 18px; top: 14px;
+      background: rgba(255, 255, 255, 0.32);
+    }
+
+    .crystal-shard b {
+      width: 28px; height: 8px; left: 14px; bottom: 20px;
+      background: rgba(59, 7, 100, 0.3);
+    }
+
+    .crystal-shard em {
+      width: 10px; height: 28px; right: 14px; top: 30px;
+      background: rgba(74, 10, 125, 0.3);
+    }
+
+    .badge {
+      display: inline-block;
+      color: var(--purple);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      font-size: clamp(52px, 8vw, 84px);
+      font-weight: 800;
+      line-height: 0.92;
+      letter-spacing: -0.05em;
+      margin-bottom: 18px;
+    }
+
+    h1 span {
+      color: var(--muted);
+      font-family: "DM Serif Display", Georgia, serif;
+      font-weight: 400;
+    }
+
+    p {
+      color: var(--muted);
+      font-size: clamp(15px, 1.1vw, 17px);
+      line-height: 1.6;
+      max-width: 440px;
+      margin-bottom: 30px;
+    }
+
+    /* Przycisk 1:1 z index.html */
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 52px;
+      padding: 0 28px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      background: var(--accent);
+      color: #0c1108;
+      border: 1px solid var(--accent);
+      transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      background: var(--accent-hover);
+      border-color: var(--accent-hover);
+    }
+
+    .footer-mark {
+      position: absolute;
+      bottom: 24px;
+      color: #434c3f;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+  </style>
 </head>
-
 <body>
-  <main class="kt-status-page">
-    <section class="kt-status-card" aria-labelledby="error-title">
-      <div class="kt-status-mark" aria-hidden="true"></div>
+  <div class="bg-glow"></div>
 
-      <h1 class="kt-status-title" id="error-title">
-        Tego <span>tu nie ma.</span>
-      </h1>
+  <main class="status-container">
+    <div class="crystal-shard" aria-hidden="true">
+      <i></i>
+      <b></b>
+      <em></em>
+    </div>
 
-      <p class="kt-status-copy">
-        Wygląda na to, że trafiłeś poza znany szlak.
-        Ta strona nie istnieje albo została przeniesiona.
-      </p>
+    <span class="badge">Błąd 404</span>
 
-      <div class="kt-status-actions">
-        <a class="kt-status-link" href="/">
-          Wróć na stronę główną
-        </a>
-      </div>
+    <h1>
+      Poza<br><span>mapą.</span>
+    </h1>
 
-      <p class="kt-status-note">
-        Błąd 404 · Strona nie została znaleziona
-      </p>
-    </section>
+    <p>
+      Trafiłeś poza wyznaczony obszar. Ta strona nie istnieje lub została przeniesiona.
+    </p>
+
+    <a class="button" href="/">
+      Wróć na stronę główną <span>↗</span>
+    </a>
   </main>
+
+  <span class="footer-mark">KRAINA TWÓRCÓW</span>
 </body>
 </html>
