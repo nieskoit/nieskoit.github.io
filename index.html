@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="pl">
- <head>
+<head>
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
-  <title>
-   Kraina Twórców
-  </title>
-  <meta content="Kraina Twórców to fabularny projekt typu Scripted SMP osadzony w świecie Minecrafta." name="description"/>
-  <meta content="#0b0d0a" name="theme-color"/>
+  <title>Kraina Twórców</title>
+  <meta content="Kraina Twórców to fabularny projekt Scripted SMP w Minecraftcie tworzony przez 4 twórców." name="description"/>
+  <meta content="#090b09" name="theme-color"/>
   <link href="assets/kt.webp" rel="icon" type="image/webp"/>
   <meta content="index, follow, max-image-preview:large" name="robots"/>
   <meta content="Kraina Twórców" name="author"/>
@@ -16,279 +14,300 @@
   <meta content="pl_PL" property="og:locale"/>
   <meta content="Kraina Twórców" property="og:site_name"/>
   <meta content="Kraina Twórców" property="og:title"/>
-  <meta content="Kraina Twórców to fabularny projekt typu Scripted SMP osadzony w świecie Minecrafta." property="og:description"/>
+  <meta content="Kraina Twórców to fabularny projekt Scripted SMP w Minecraftcie tworzony przez 4 twórców." property="og:description"/>
   <meta content="https://krainatworcow.pl/" property="og:url"/>
   <meta content="https://krainatworcow.pl/assets/kt.webp" property="og:image"/>
-  <meta content="Kraina Twórców" property="og:image:alt"/>
   <meta content="summary_large_image" name="twitter:card"/>
   <meta content="Kraina Twórców" name="twitter:title"/>
-  <meta content="Kraina Twórców to fabularny projekt typu Scripted SMP osadzony w świecie Minecrafta." name="twitter:description"/>
+  <meta content="Kraina Twórców to fabularny projekt Scripted SMP w Minecraftcie tworzony przez 4 twórców." name="twitter:description"/>
   <meta content="https://krainatworcow.pl/assets/kt.webp" name="twitter:image"/>
   <link href="css/main.css" rel="stylesheet"/>
-  <link href="css/components.css" rel="stylesheet"/>
-  <link href="css/responsive.css" rel="stylesheet"/>
   <script type="application/ld+json">
-   {
-     "@context": "https://schema.org",
-     "@type": "WebSite",
-     "name": "Kraina Twórców",
-     "url": "https://krainatworcow.pl/",
-     "description": "Kraina Twórców to fabularny projekt typu Scripted SMP osadzony w świecie Minecrafta.",
-     "inLanguage": "pl-PL"
-   }
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Kraina Twórców",
+    "url": "https://krainatworcow.pl/",
+    "description": "Kraina Twórców to fabularny projekt Scripted SMP w Minecraftcie tworzony przez 4 twórców.",
+    "inLanguage": "pl-PL"
+  }
   </script>
- </head>
- <body>
+</head>
+<body>
+  <!-- NAWIGACJA -->
   <header class="nav">
-   <a aria-label="Kraina Twórców" class="nav-logo" href="#top">
-    <img alt="KT" src="assets/kt-logo.webp"/>
-   </a>
-   <nav aria-label="Główna nawigacja" class="nav-links">
-    <a href="#projekt">
-     O projekcie
-    </a>
-    <a href="#krysztal">
-     Mechanika
-    </a>
-    <a href="#tworcy">
-     Twórcy
-    </a>
-    <a class="nav-discord" href="DISCORD_URL">
-     Discord
-     <span>
-      ↗
-     </span>
-    </a>
-   </nav>
-   <button aria-expanded="false" aria-label="Otwórz menu" class="menu-toggle" type="button">
-    <span>
-    </span>
-    <span>
-    </span>
-   </button>
+    <div class="nav-container">
+      <a aria-label="Kraina Twórców - Strona główna" class="nav-logo" href="#top">
+        <img alt="KT" src="assets/kt-logo.webp"/>
+      </a>
+      
+      <nav aria-label="Główna nawigacja" class="nav-links" id="navMenu">
+        <a href="#projekt">O projekcie</a>
+        <a href="#krysztal">Mechanika</a>
+        <a href="#tworcy">Twórcy</a>
+        <a class="nav-discord" href="https://discord.gg/jRWkeeDrTb" target="_blank" rel="noopener noreferrer">
+          Dołącz na Discord <span>↗</span>
+        </a>
+      </nav>
+
+      <button aria-expanded="false" aria-controls="navMenu" aria-label="Przełącz menu nawigacji" class="menu-toggle" type="button">
+        <span></span>
+        <span></span>
+      </button>
+    </div>
   </header>
+
   <main id="top">
-   <section class="hero">
-    <div class="hero-copy">
-     <h1>
-      Kraina
-      <br/>
-      <span>
-       Twórców.
-      </span>
-     </h1>
-     <p class="hero-description">
-      Fabularny projekt Minecraft tworzony przez czterech twórców wraz ze społecznością.
-     </p>
-     <div class="hero-actions">
-      <a class="button button-primary" href="DISCORD_URL">
-       Dołącz na serwer Discord
-       <span>
-        ↗
-       </span>
+    <!-- HERO SECTION -->
+    <section class="hero">
+      <div class="hero-glow"></div>
+      <div class="hero-content">
+        <h1>
+          Kraina<br/>
+          <span>Twórców.</span>
+        </h1>
+        
+        <p class="hero-description">
+          Fabularny projekt w Minecraftcie tworzony przez 4 twórców wspólnie z widzami.
+        </p>
+
+        <div class="hero-actions">
+          <a class="button button-primary" href="https://discord.gg/jRWkeeDrTb" target="_blank" rel="noopener noreferrer">
+            Wbijaj na Discorda <span>↗</span>
+          </a>
+          <a class="button button-secondary" href="#projekt">
+            O co w tym chodzi?
+          </a>
+        </div>
+      </div>
+
+      <a href="#projekt" class="hero-scroll" aria-label="Przewiń do treści">
+        <span class="scroll-arrow">↓</span>
       </a>
-      <a class="button button-secondary" href="#projekt">
-       O projekcie
-      </a>
-     </div>
-     <div class="hero-meta">
-      <div class="creator-meta">
-       <div aria-label="Twórcy projektu" class="avatar-stack">
-        <picture class="creator-icon-source"><source srcset="assets/creators/nieskot.webp" type="image/webp"/><img alt="Nieskot" class="avatar avatar-nieskot" src="assets/creators/nieskot.svg"/></picture>
-        <picture class="creator-icon-source"><source srcset="assets/creators/kaicek.webp" type="image/webp"/><img alt="Kaicek" class="avatar avatar-kaicek" src="assets/creators/kaicek.svg"/></picture>
-        <picture class="creator-icon-source"><source srcset="assets/creators/dombeek.webp" type="image/webp"/><img alt="Dombeek" class="avatar avatar-dombeek" src="assets/creators/dombeek.svg"/></picture>
-        <picture class="creator-icon-source"><source srcset="assets/creators/pawelul.webp" type="image/webp"/><img alt="Pawelul" class="avatar avatar-pawelul" src="assets/creators/pawelul.svg"/></picture>
-       </div>
-       <div class="creator-meta-copy">
-        <strong>
-         4 twórców
-        </strong>
-        <span>
-         Nieskot · Kaicek · Dombeek · pawelul
-        </span>
-       </div>
+    </section>
+
+    <!-- O PROJEKCIE (NATURALNE TEKSTY I 4 FILARY) -->
+    <section class="section project" id="projekt">
+      <div class="section-container">
+        <div class="project-grid">
+          <div class="project-head">
+            <span class="section-badge">Fabuła</span>
+            <h2>Historia,<br/><span>którą piszemy razem.</span></h2>
+          </div>
+          
+          <div class="project-card">
+            <p class="project-lead">
+              Kraina Twórców to fabularny projekt typu Scripted SMP osadzony w świecie Minecrafta.
+            </p>
+            <p class="project-desc">
+              Postacie, wydarzenia i decyzje graczy składają się na historię, która rozwija się razem z kolejnymi odcinkami.
+            </p>
+            
+            <div class="project-pillars">
+              <!-- 1. AUTORSKA MAPA -->
+              <div class="pillar-item">
+                <div class="pillar-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"></polygon>
+                    <line x1="9" y1="3" x2="9" y2="18"></line>
+                    <line x1="15" y1="6" x2="15" y2="21"></line>
+                  </svg>
+                </div>
+                <div class="pillar-text">
+                  <strong>Własna mapa</strong>
+                  <span>Miejscówki i budowle tworzone specjalnie pod odcinki i lore.</span>
+                </div>
+              </div>
+
+              <!-- 2. SIMPLE VOICE CHAT -->
+              <div class="pillar-item">
+                <div class="pillar-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path>
+                    <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                    <line x1="12" y1="19" x2="12" y2="22"></line>
+                  </svg>
+                </div>
+                <div class="pillar-text">
+                  <strong>Voice chat w grze</strong>
+                  <span>Słyszysz tylko tych graczy, którzy stoją blisko Ciebie.</span>
+                </div>
+              </div>
+
+              <!-- 3. 4 PERSPEKTYWY -->
+              <div class="pillar-item">
+                <div class="pillar-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5"></path>
+                    <rect x="2" y="6" width="14" height="12" rx="2"></rect>
+                  </svg>
+                </div>
+                <div class="pillar-text">
+                  <strong>4 Perspektywy</strong>
+                  <span>Każdy twórca nagrywa swoje odcinki i ma własne cele.</span>
+                </div>
+              </div>
+
+              <!-- 4. OTWARTE NAGRYWKI -->
+              <div class="pillar-item">
+                <div class="pillar-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="9" cy="7" r="4"></circle>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                  </svg>
+                </div>
+                <div class="pillar-text">
+                  <strong>Otwarte nagrywki</strong>
+                  <span>Widzowie z Discorda biorą udział w scenach i wielkich akcjach.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="views-stat">
-       <div>
-        <strong>
-         20K+
-        </strong>
-        <span>
-         łącznych wyświetleń
-        </span>
-       </div>
-       <small>
-        projekt i społeczność
-       </small>
+    </section>
+
+    <!-- KRYSZTAŁ ODRODZENIA -->
+    <section class="section crystal" id="krysztal">
+      <div class="section-container">
+        <div class="crystal-layout">
+          <div class="crystal-copy">
+            <span class="section-badge badge-purple">Główna zasada</span>
+            <h2>Jedno życie?<br/><span>Nie od razu.</span></h2>
+            <p>
+              Każdy gracz ma nieskończoną liczbę żyć, dopóki nie straci swojego <strong>Kryształu Odrodzenia</strong>. Jego utrata oznacza, że kolejna śmierć jest ostateczna.
+            </p>
+          </div>
+
+          <div aria-hidden="true" class="crystal-visual">
+            <div class="crystal-glow"></div>
+            <div class="crystal-grid-line crystal-grid-line-v"></div>
+            <div class="crystal-grid-line crystal-grid-line-h"></div>
+            <div class="crystal-shard">
+              <i></i>
+              <b></b>
+              <em></em>
+            </div>
+          </div>
+        </div>
       </div>
-     </div>
-    </div>
-    <div aria-hidden="true" class="hero-logo">
-     <img alt="KT" class="logo-art" src="assets/kt-logo.webp"/>
-    </div>
-   </section>
-   <section class="project section" id="projekt">
-    <div class="project-grid">
-     <h2>
-      Historia,
-      <br/>
-      <span>
-       która się tworzy.
-      </span>
-     </h2>
-     <div class="project-text">
-      <p class="large">
-       Kraina Twórców to fabularny projekt typu Scripted SMP osadzony
-            w świecie Minecrafta.
-      </p>
-      <p>
-       Postacie, wydarzenia i decyzje graczy składają się na historię,
-            która rozwija się razem z kolejnymi odcinkami. Każdy z twórców
-            wnosi do niej własną perspektywę.
-      </p>
-     </div>
-    </div>
-   </section>
-   <section class="crystal section" id="krysztal">
-    <div class="crystal-layout">
-     <div class="crystal-copy">
-      <h2>
-       Jedno życie?
-       <br/>
-       <span>
-        Nie tutaj.
-       </span>
-      </h2>
-      <p>
-       Każdy gracz ma nieskończoną liczbę żyć, dopóki nie straci
-            swojego Kryształu Odrodzenia.
-      </p>
-     </div>
-     <div aria-hidden="true" class="crystal-visual">
-      <div class="crystal-glow">
+    </section>
+
+    <!-- TWÓRCY -->
+    <section class="section creators" id="tworcy">
+      <div class="section-container">
+        <div class="creators-heading">
+          <span class="section-badge">Ekipa</span>
+          <h2>Twórcy<br/><span>Krainy Twórców.</span></h2>
+        </div>
+
+        <div class="creator-grid">
+          <a class="creator-card" href="https://www.youtube.com/@Nieskot" target="_blank" rel="noopener noreferrer">
+            <div class="avatar-wrap">
+              <picture>
+                <source srcset="assets/creators/nieskot.webp" type="image/webp"/>
+                <img alt="Nieskot" class="creator-avatar" src="assets/creators/nieskot.svg"/>
+              </picture>
+            </div>
+            <div class="creator-meta">
+              <strong>Nieskot</strong>
+              <span>YouTube</span>
+            </div>
+            <span class="creator-arrow">↗</span>
+          </a>
+
+          <a class="creator-card" href="https://www.youtube.com/@Kaicekreal" target="_blank" rel="noopener noreferrer">
+            <div class="avatar-wrap">
+              <picture>
+                <source srcset="assets/creators/kaicek.webp" type="image/webp"/>
+                <img alt="Kaicek" class="creator-avatar" src="assets/creators/kaicek.svg"/>
+              </picture>
+            </div>
+            <div class="creator-meta">
+              <strong>Kaicek</strong>
+              <span>YouTube</span>
+            </div>
+            <span class="creator-arrow">↗</span>
+          </a>
+
+          <a class="creator-card" href="https://www.youtube.com/@Dombeeek" target="_blank" rel="noopener noreferrer">
+            <div class="avatar-wrap">
+              <picture>
+                <source srcset="assets/creators/dombeek.webp" type="image/webp"/>
+                <img alt="Dombeek" class="creator-avatar" src="assets/creators/dombeek.svg"/>
+              </picture>
+            </div>
+            <div class="creator-meta">
+              <strong>Dombeek</strong>
+              <span>YouTube</span>
+            </div>
+            <span class="creator-arrow">↗</span>
+          </a>
+
+          <a class="creator-card" href="https://www.youtube.com/@pawelull1" target="_blank" rel="noopener noreferrer">
+            <div class="avatar-wrap avatar-pawelul">
+              <picture>
+                <source srcset="assets/creators/pawelul.webp" type="image/webp"/>
+                <img alt="pawelul" class="creator-avatar" src="assets/creators/pawelul.svg"/>
+              </picture>
+            </div>
+            <div class="creator-meta">
+              <strong>pawelul</strong>
+              <span>YouTube</span>
+            </div>
+            <span class="creator-arrow">↗</span>
+          </a>
+        </div>
       </div>
-      <div class="crystal-grid-line crystal-grid-line-v">
+    </section>
+
+    <!-- DISCORD -->
+    <section class="section discord">
+      <div class="section-container">
+        <div class="discord-panel">
+          <div class="discord-copy">
+            <span class="section-badge">Społeczność</span>
+            <h2>Wpadaj na<br/><span>nasze nagrywki.</span></h2>
+          </div>
+          
+          <div class="discord-right">
+            <div class="discord-note">
+              <p>
+                Organizujemy otwarte nagrywki, w których każdy może zagrać razem z nami. Wszystkie terminy i role podajemy na bieżąco na Discordzie.
+              </p>
+            </div>
+            <a class="button button-primary button-discord" href="https://discord.gg/jRWkeeDrTb" target="_blank" rel="noopener noreferrer">
+              Dołącz do społeczności <span>↗</span>
+            </a>
+          </div>
+        </div>
       </div>
-      <div class="crystal-grid-line crystal-grid-line-h">
-      </div>
-      <div class="crystal-shard">
-       <i>
-       </i>
-       <b>
-       </b>
-       <em>
-       </em>
-      </div>
-     </div>
-    </div>
-   </section>
-   <section class="creators section" id="tworcy">
-    <div class="creators-heading">
-     <h2>
-      Twórcy
-      <br/>
-      <span>
-       Krainy Twórców.
-      </span>
-     </h2>
-    </div>
-    <div class="creator-grid">
-     <a class="creator-card" href="https://www.youtube.com/@Nieskot">
-      <picture class="creator-icon-source"><source srcset="assets/creators/nieskot.webp" type="image/webp"/><img alt="Nieskot" class="creator-avatar avatar-nieskot" src="assets/creators/nieskot.svg"/></picture>
-      <strong>
-       Nieskot
-      </strong>
-      <span>
-       ↗
-      </span>
-     </a>
-     <a class="creator-card" href="https://www.youtube.com/@Kaicekreal">
-      <picture class="creator-icon-source"><source srcset="assets/creators/kaicek.webp" type="image/webp"/><img alt="Kaicek" class="creator-avatar avatar-kaicek" src="assets/creators/kaicek.svg"/></picture>
-      <strong>
-       Kaicek
-      </strong>
-      <span>
-       ↗
-      </span>
-     </a>
-     <a class="creator-card" href="https://www.youtube.com/@Dombeeek">
-      <picture class="creator-icon-source"><source srcset="assets/creators/dombeek.webp" type="image/webp"/><img alt="Dombeek" class="creator-avatar avatar-dombeek" src="assets/creators/dombeek.svg"/></picture>
-      <strong>
-       Dombeek
-      </strong>
-      <span>
-       ↗
-      </span>
-     </a>
-     <a class="creator-card" href="https://www.youtube.com/@pawelull1">
-      <picture class="creator-icon-source"><source srcset="assets/creators/pawelul.webp" type="image/webp"/><img alt="Pawelul" class="creator-avatar avatar-pawelul" src="assets/creators/pawelul.svg"/></picture>
-      <strong>
-       pawelul
-      </strong>
-      <span>
-       ↗
-      </span>
-     </a>
-    </div>
-   </section>
-   <section class="discord section">
-    <div class="discord-panel">
-     <div class="discord-copy">
-      <h2>
-       Dołącz do
-       <br/>
-       <span>
-        naszych nagrywek.
-       </span>
-      </h2>
-     </div>
-     <div class="discord-right">
-      <div class="discord-note">
-       <p>
-        Co jakiś czas organizujemy publiczne nagrywki. Każdy może dołączyć - terminy i szczegóły podajemy na Discordzie. Do udziału potrzebujesz Minecrafta i Discorda.
-       </p>
-      </div>
-      <a class="button button-primary button-discord" href="DISCORD_URL">
-       Dołącz na serwer Discord
-       <span>
-        ↗
-       </span>
-      </a>
-     </div>
-     <div aria-hidden="true" class="discord-mark">
-      <img alt="KT" src="assets/kt-logo.webp"/>
-     </div>
-    </div>
-   </section>
+    </section>
   </main>
+
+  <!-- STOPKA -->
   <footer class="footer">
-   <div class="footer-main">
-    <div>
-     <strong>
-      KT
-      <span>
-       .
-      </span>
-     </strong>
+    <div class="section-container footer-content">
+      <div class="footer-brand">
+        <strong>KT<span>.</span></strong>
+      </div>
+
+      <div class="footer-links">
+        <a href="#projekt">O projekcie</a>
+        <a href="#krysztal">Mechanika</a>
+        <a href="#tworcy">Twórcy</a>
+      </div>
     </div>
-    <div class="footer-links">
-     <a href="#projekt">
-      O projekcie
-     </a>
-     <a href="#krysztal">
-      Mechanika
-     </a>
-     <a href="#tworcy">
-      Twórcy
-     </a>
+
+    <div class="section-container">
+      <p class="footer-disclaimer">
+        Kraina Twórców nie jest powiązana ani zatwierdzona przez Mojang AB lub Microsoft Corporation. Minecraft jest znakiem towarowym firmy Mojang AB.
+      </p>
     </div>
-   </div>
-   <p class="footer-disclaimer">
-    Kraina Twórców nie jest powiązana, sponsorowana ani zatwierdzona przez
-      Mojang AB lub Microsoft Corporation. Minecraft jest znakiem towarowym firmy Mojang AB.
-   </p>
   </footer>
-<script defer="True" src="js/main.js">
-  </script>
- </body>
+
+  <script src="js/main.js"></script>
+</body>
 </html>
