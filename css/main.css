@@ -631,27 +631,20 @@ button {
 }
 
 .footer {
-  padding: 40px 0;
+  padding: 32px 0;
   border-top: 1px solid var(--line);
 }
 
 .footer-content {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin-bottom: 24px;
+  justify-content: flex-start;
+  margin-bottom: 16px;
 }
-
-.footer-brand strong {
-  font-size: 20px;
-  font-weight: 800;
-}
-
-.footer-brand strong span { color: var(--accent); }
 
 .footer-links {
   display: flex;
-  gap: 24px;
+  gap: 28px;
 }
 
 .footer-links a {
@@ -667,7 +660,7 @@ button {
   color: #555d52;
   font-size: 12px;
   line-height: 1.65;
-  max-width: 820px;
+  max-width: 700px;
 }
 
 @media (max-width: 900px) {
