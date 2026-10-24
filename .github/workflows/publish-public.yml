@@ -23,38 +23,40 @@ jobs:
           ref: pv
           path: source
 
-      - name: Validate website
-        working-directory: source
+      - name: Validate source
         run: |
-          test -f public/index.html
-          test -f public/404.html
-          test -f public/CNAME
-          test -f public/robots.txt
-          test -f public/sitemap.xml
-          echo "Required website files found."
+          test -f source/public/index.html
+          test -f source/public/404.html
+          test -f source/public/CNAME
+          test -f source/public/robots.txt
+          test -f source/public/sitemap.xml
 
       - name: Checkout main
         uses: actions/checkout@v4
         with:
           ref: main
           path: target
+          fetch-depth: 0
 
-      - name: Copy only public
+      - name: Copy public
         run: |
           mkdir -p target/public
-          rsync -a --delete source/public/ target/public/
+          rsync -av --delete source/public/ target/public/
+          test -f target/public/index.html
+          echo "Files copied to target/public:"
+          find target/public -maxdepth 2 -type f | head -80
 
       - name: Commit and push
         working-directory: target
         run: |
-          if git diff --quiet -- public; then
-            echo "public is already up to date."
-            exit 0
-          fi
-
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add public
-          git commit -m "Publish website from pv"
-          git push origin HEAD:main
+          git add -A -- public
+
+          if git diff --cached --quiet; then
+            echo "No changes detected in public."
+          else
+            git commit -m "Publish website from pv"
+            git push origin HEAD:main
+          fi
