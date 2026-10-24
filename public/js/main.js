@@ -167,6 +167,32 @@ document.addEventListener("DOMContentLoaded", () => {
   if (creatorFilter && params.get("creator")) creatorFilter.value = params.get("creator");
   const norm = value => String(value || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleLowerCase("pl");
   const esc = value => String(value ?? "").replace(/[&<>"']/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
+  // Security boundary for URLs from the wiki index: allow same-site paths only.
+  const safeLocalUrl = value => {
+    if (typeof value !== "string" || !value || value.startsWith("//") || /[\\\s\u0000-\u001f\u007f]/.test(value) || /%(?:2f|5c|00|0[0-9a-f]|1[0-9a-f]|7f)/i.test(value)) return "/";
+    let parsed;
+    try { parsed = new URL(value, window.location.origin); } catch (_) { return "/"; }
+    if (parsed.origin !== window.location.origin || !parsed.pathname.startsWith("/") || /(?:^|\/)\.{1,2}(?:\/|$)/.test(parsed.pathname)) return "/";
+    return `${parsed.pathname}${parsed.search}${parsed.hash}`;
+  };
+  const safeAsset = value => {
+    if (typeof value !== "string" || !value.startsWith("/assets/") || value.startsWith("//") || /[\\\s\u0000-\u001f\u007f]/.test(value) || /%(?:2f|5c|00|0[0-9a-f]|1[0-9a-f]|7f)/i.test(value)) return "/assets/kt.webp";
+    let parsed;
+    try { parsed = new URL(value, window.location.origin); } catch (_) { return "/assets/kt.webp"; }
+    if (parsed.origin !== window.location.origin || !parsed.pathname.startsWith("/assets/") || parsed.pathname.split("/").some(part => part === "." || part === "..")) return "/assets/kt.webp";
+    return `${parsed.pathname}${parsed.search}${parsed.hash}`;
+  };
+  const safeYouTubeUrl = value => {
+    if (typeof value !== "string") return "";
+    try {
+      const parsed = new URL(value);
+      const host = parsed.hostname.toLowerCase().replace(/^www\./, "");
+      if (parsed.protocol !== "https:" || !["youtube.com", "m.youtube.com", "youtu.be"].includes(host)) return "";
+      if (host === "youtu.be" && !parsed.pathname.slice(1)) return "";
+      if (host.endsWith("youtube.com") && !["/watch", "/shorts/", "/embed/"].some(prefix => parsed.pathname.startsWith(prefix))) return "";
+      return parsed.href;
+    } catch (_) { return ""; }
+  };
   const highlight = (value, query) => {
     let html = esc(value);
     const terms = query.trim().split(/\s+/).filter(term => term.length > 1).sort((a,b) => b.length-a.length);
@@ -219,10 +245,10 @@ document.addEventListener("DOMContentLoaded", () => {
         .filter(entry => entry.reason)
         .filter((entry, i, arr) => arr.findIndex(other => other.rel.id===entry.rel.id)===i)
         .slice(0,3);
-      const relationBlock = relations.length ? `<div class="wiki-relations"><strong>Dlaczego powiązane?</strong><ul>${relations.map(({rel,reason})=>`<li><a class="relation-chip" href="${esc(rel.url)}">${esc(rel.title)}</a><span>${esc(reason)}</span></li>`).join("")}</ul></div>` : "";
+      const relationBlock = relations.length ? `<div class="wiki-relations"><strong>Dlaczego powiązane?</strong><ul>${relations.map(({rel,reason})=>`<li><a class="relation-chip" href="${esc(safeLocalUrl(rel.url))}">${esc(rel.title)}</a><span>${esc(reason)}</span></li>`).join("")}</ul></div>` : "";
       const creatorLink = item.creator ? `<span>Twórca: <a href="/#tworcy${norm(item.creator)==='kaicek'?'kaicek':norm(item.creator)==='dombeek'?'dombeek':'nieskot'}/">${esc(item.creator)}</a></span>` : "";
       const seasonLink = item.season ? `<span><a href="/odcinki/#${norm(item.season).replace(/\s+/g,'-')}">${esc(item.season)}</a></span>` : "";
-      return `<article class="wiki-result is-direct"><span class="result-kind">${esc(item.kind)}</span><h3><a href="${esc(item.url)}">${highlight(item.title,query)}</a></h3><p>${highlight(item.summary,query)}</p><div class="wiki-result-meta">${creatorLink}${seasonLink}</div>${relationBlock}</article>`;
+      return `<article class="wiki-result is-direct"><span class="result-kind">${esc(item.kind)}</span><h3><a href="${esc(safeLocalUrl(item.url))}">${highlight(item.title,query)}</a></h3><p>${highlight(item.summary,query)}</p><div class="wiki-result-meta">${creatorLink}${seasonLink}</div>${relationBlock}</article>`;
     }).join("");
     const title = document.querySelector("#wikiResultsTitle");
     const count = document.querySelector("#wikiResultsCount");
@@ -272,7 +298,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const search = new URLSearchParams({search_query: `${item.creator} ${item.title}`});
     const episodeImage = [item.thumbnail, item.image]
       .find(src => typeof src === "string" && src.startsWith("/assets/") && !src.includes(".."));
-    const image = episodeImage || creatorImages[item.creator] || "/assets/kt.webp";
+    const image = safeAsset(episodeImage || creatorImages[item.creator] || "/assets/kt.webp");
     return {
       title: item.title,
       creator: item.creator,
@@ -283,8 +309,8 @@ document.addEventListener("DOMContentLoaded", () => {
       imageAlt: item.thumbnailAlt || (episodeImage
         ? `Miniatura odcinka: ${item.title}`
         : creatorImages[item.creator] ? item.creator : "Logo Krainy Twórców"),
-      watch: item.youtube || `https://www.youtube.com/results?${search.toString()}`,
-      read: item.url
+      watch: safeYouTubeUrl(item.youtube) || `https://www.youtube.com/results?${search.toString()}`,
+      read: safeLocalUrl(item.url)
     };
   });
   if (!items.length) {
@@ -303,18 +329,44 @@ document.addEventListener("DOMContentLoaded", () => {
   const prev = document.querySelector("#featured-prev");
   const next = document.querySelector("#featured-next");
   const esc = value => String(value ?? "").replace(/[&<>"']/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
+  // Security boundary for URLs from the wiki index: allow same-site paths only.
+  const safeLocalUrl = value => {
+    if (typeof value !== "string" || !value || value.startsWith("//") || /[\\\s\u0000-\u001f\u007f]/.test(value) || /%(?:2f|5c|00|0[0-9a-f]|1[0-9a-f]|7f)/i.test(value)) return "/";
+    let parsed;
+    try { parsed = new URL(value, window.location.origin); } catch (_) { return "/"; }
+    if (parsed.origin !== window.location.origin || !parsed.pathname.startsWith("/") || /(?:^|\/)\.{1,2}(?:\/|$)/.test(parsed.pathname)) return "/";
+    return `${parsed.pathname}${parsed.search}${parsed.hash}`;
+  };
+  const safeAsset = value => {
+    if (typeof value !== "string" || !value.startsWith("/assets/") || value.startsWith("//") || /[\\\s\u0000-\u001f\u007f]/.test(value) || /%(?:2f|5c|00|0[0-9a-f]|1[0-9a-f]|7f)/i.test(value)) return "/assets/kt.webp";
+    let parsed;
+    try { parsed = new URL(value, window.location.origin); } catch (_) { return "/assets/kt.webp"; }
+    if (parsed.origin !== window.location.origin || !parsed.pathname.startsWith("/assets/") || parsed.pathname.split("/").some(part => part === "." || part === "..")) return "/assets/kt.webp";
+    return `${parsed.pathname}${parsed.search}${parsed.hash}`;
+  };
+  const safeYouTubeUrl = value => {
+    if (typeof value !== "string") return "";
+    try {
+      const parsed = new URL(value);
+      const host = parsed.hostname.toLowerCase().replace(/^www\./, "");
+      if (parsed.protocol !== "https:" || !["youtube.com", "m.youtube.com", "youtu.be"].includes(host)) return "";
+      if (host === "youtu.be" && !parsed.pathname.slice(1)) return "";
+      if (host.endsWith("youtube.com") && !["/watch", "/shorts/", "/embed/"].some(prefix => parsed.pathname.startsWith(prefix))) return "";
+      return parsed.href;
+    } catch (_) { return ""; }
+  };
   const render = () => {
     grid.innerHTML = order.slice(0, 3).map(item => `
       <article class="featured-card">
-        <a class="featured-card-image" href="${esc(item.read)}" aria-label="Czytaj opis: ${esc(item.title)}">
-          <img src="${esc(item.image)}" alt="${esc(item.imageAlt)}" loading="lazy" onerror="this.onerror=null;this.src='/assets/kt.webp';this.alt='Logo Krainy Twórców'">
+        <a class="featured-card-image" href="${esc(safeLocalUrl(item.read))}" aria-label="Czytaj opis: ${esc(item.title)}">
+          <img src="${esc(safeAsset(item.image))}" alt="${esc(item.imageAlt)}" loading="lazy" onerror="this.onerror=null;this.src='/assets/kt.webp';this.alt='Logo Krainy Twórców'">
         </a>
         <div class="featured-card-body">
-          <h3><a href="${esc(item.read)}">${esc(item.title)}</a></h3>
+          <h3><a href="${esc(safeLocalUrl(item.read))}">${esc(item.title)}</a></h3>
           <div class="featured-card-meta">${esc(item.creator)}${item.year ? ` <span aria-hidden="true">·</span> ${esc(item.year)}` : ""}</div>
           <div class="featured-card-actions">
-            <a class="button button-secondary" href="${esc(item.read)}">Czytaj opis</a>
-            <a class="button button-primary" href="${esc(item.watch)}" target="_blank" rel="noopener noreferrer">Obejrzyj na YouTube ↗</a>
+            <a class="button button-secondary" href="${esc(safeLocalUrl(item.read))}">Czytaj opis</a>
+            <a class="button button-primary" href="${esc(safeYouTubeUrl(item.watch) || "/")}" target="_blank" rel="noopener noreferrer">Obejrzyj na YouTube ↗</a>
           </div>
         </div>
       </article>`).join("");
@@ -377,8 +429,34 @@ document.addEventListener("DOMContentLoaded", () => {
   const fullSearchLink = overlay.querySelector(".kt-search-all");
   const norm = value => String(value || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleLowerCase("pl").trim();
   const esc = value => String(value ?? "").replace(/[&<>"']/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
+  // Security boundary for URLs from the wiki index: allow same-site paths only.
+  const safeLocalUrl = value => {
+    if (typeof value !== "string" || !value || value.startsWith("//") || /[\\\s\u0000-\u001f\u007f]/.test(value) || /%(?:2f|5c|00|0[0-9a-f]|1[0-9a-f]|7f)/i.test(value)) return "/";
+    let parsed;
+    try { parsed = new URL(value, window.location.origin); } catch (_) { return "/"; }
+    if (parsed.origin !== window.location.origin || !parsed.pathname.startsWith("/") || /(?:^|\/)\.{1,2}(?:\/|$)/.test(parsed.pathname)) return "/";
+    return `${parsed.pathname}${parsed.search}${parsed.hash}`;
+  };
+  const safeAsset = value => {
+    if (typeof value !== "string" || !value.startsWith("/assets/") || value.startsWith("//") || /[\\\s\u0000-\u001f\u007f]/.test(value) || /%(?:2f|5c|00|0[0-9a-f]|1[0-9a-f]|7f)/i.test(value)) return "/assets/kt.webp";
+    let parsed;
+    try { parsed = new URL(value, window.location.origin); } catch (_) { return "/assets/kt.webp"; }
+    if (parsed.origin !== window.location.origin || !parsed.pathname.startsWith("/assets/") || parsed.pathname.split("/").some(part => part === "." || part === "..")) return "/assets/kt.webp";
+    return `${parsed.pathname}${parsed.search}${parsed.hash}`;
+  };
+  const safeYouTubeUrl = value => {
+    if (typeof value !== "string") return "";
+    try {
+      const parsed = new URL(value);
+      const host = parsed.hostname.toLowerCase().replace(/^www\./, "");
+      if (parsed.protocol !== "https:" || !["youtube.com", "m.youtube.com", "youtu.be"].includes(host)) return "";
+      if (host === "youtu.be" && !parsed.pathname.slice(1)) return "";
+      if (host.endsWith("youtube.com") && !["/watch", "/shorts/", "/embed/"].some(prefix => parsed.pathname.startsWith(prefix))) return "";
+      return parsed.href;
+    } catch (_) { return ""; }
+  };
   // Use the same manually maintained metadata as the rest of the wiki index.
-  const entityImages = Object.fromEntries(index.filter(item => { const src = item.thumbnail || item.image; return typeof src === "string" && src.startsWith("/assets/") && !src.includes(".."); }).map(item => [item.id, item.thumbnail || item.image]));
+  const entityImages = Object.fromEntries(index.filter(item => { const src = item.thumbnail || item.image; return safeAsset(src) !== "/assets/kt.webp" || src === "/assets/kt.webp"; }).map(item => [item.id, safeAsset(item.thumbnail || item.image)]));
   let previousFocus = null;
   const renderRow = item => {
     const isEpisode = item.kind === "Odcinek";
@@ -398,8 +476,8 @@ document.addEventListener("DOMContentLoaded", () => {
             : `Miniatura odcinka: ${item.title}`
     );
     const meta = [item.kind, item.creator, item.year || item.season].filter(Boolean).join(" · ");
-    return `<a class="kt-search-result${isEpisode ? " is-episode" : ""}" href="${esc(item.url)}">
-      ${image ? `<span class="kt-search-thumb"><img src="${esc(image)}" alt="${esc(imageAlt)}" loading="lazy"></span>` : `<span class="kt-search-symbol" aria-hidden="true">${item.kind === "Postać" ? "◇" : item.kind === "Twórca" ? "@" : item.kind === "Rozdział" ? "§" : item.kind === "Sezon" ? "↗" : "⌕"}</span>`}
+    return `<a class="kt-search-result${isEpisode ? " is-episode" : ""}" href="${esc(safeLocalUrl(item.url))}">
+      ${image ? `<span class="kt-search-thumb"><img src="${esc(safeAsset(image))}" alt="${esc(imageAlt)}" loading="lazy"></span>` : `<span class="kt-search-symbol" aria-hidden="true">${item.kind === "Postać" ? "◇" : item.kind === "Twórca" ? "@" : item.kind === "Rozdział" ? "§" : item.kind === "Sezon" ? "↗" : "⌕"}</span>`}
       <span class="kt-search-result-copy"><span class="kt-search-meta">${esc(meta)}</span><strong>${esc(item.title)}</strong>${item.summary ? `<span class="kt-search-summary">${esc(item.summary)}</span>` : ""}</span>
       <span class="kt-search-arrow" aria-hidden="true">↗</span>
     </a>`;
