@@ -45,7 +45,6 @@ window.KT_WIKI_INDEX = [
     "creator": "Kaicek",
     "season": "Sezon 1",
     "related": [
-      "episode-kaicek-1",
       "episode-nieskot-1",
       "episode-nieskot-3",
       "episode-nieskot-4"
@@ -166,7 +165,7 @@ window.KT_WIKI_INDEX = [
     "summary": "Początki serwera i historia Dombka sprzed głównej osi fabularnej.",
     "creator": "Dombeek",
     "season": "Sezon 1",
-    "related": ["episode-dombeek-1"],
+    "related": [],
     "aliases": []
   },
   {
@@ -291,32 +290,6 @@ window.KT_WIKI_INDEX = [
     "year": "2026",
     "duration": "52:48"
   },
-  {
-  "id": "episode-kaicek-1",
-  "title": "Wkrótce",
-  "kind": "Odcinek",
-  "published": false,
-  "summary": "",
-  "description": "",
-  "creator": "Kaicek",
-  "season": "Sezon 1",
-  "related": [],
-  "aliases": [],
-  "year": "2026"
-},
-{
-  "id": "episode-dombeek-1",
-  "title": "Wkrótce",
-  "kind": "Odcinek",
-  "published": false,
-  "summary": "",
-  "description": "",
-  "creator": "Dombeek",
-  "season": "Sezon 1",
-  "related": [],
-  "aliases": [],
-  "year": "2026"
-},
   {
     "id": "season-2",
     "title": "Sezon 2",
