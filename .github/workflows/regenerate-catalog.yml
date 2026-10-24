@@ -24,7 +24,7 @@ jobs:
           node-version: 22
 
       - name: Regenerate catalog
-        run: node tools/generate-catalog.js
+        run: node tools/generate-catalog.js --generated-only
 
       - name: Check whitespace
         run: git diff --check
@@ -40,7 +40,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add -A -- public/odcinki public/rozdzialy public/szukaj/index.html pv/drafts/odcinki pv/drafts/rozdzialy
+          git add -- public/odcinki/index.html public/szukaj/index.html
 
           if git diff --cached --quiet; then
             echo "No relevant generated changes to commit."
