@@ -18,7 +18,9 @@ window.KT_WIKI_INDEX = [
       "episode-nieskot-5",
       "chapter-wladca"
     ],
-    "aliases": []
+    "aliases": [
+      "Nieskota"
+    ]
   },
   {
     "id": "creator-dombeek",
