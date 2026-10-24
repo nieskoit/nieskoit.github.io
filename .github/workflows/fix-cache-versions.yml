@@ -30,22 +30,17 @@ jobs:
           import sys
 
           public = Path("public")
-
           if not public.is_dir():
               sys.exit("ERROR: public/ directory not found.")
 
           replacements = [
               (
-                  re.compile(
-                      r'(/css/main\.css\?v=)[^"\'&\s]+'
-                  ),
+                  re.compile(r'(/css/main\.css\?v=)[^"\'&\s]+'),
                   r'\g<1>20261024-episode-title-white2',
                   "main.css",
               ),
               (
-                  re.compile(
-                      r'(/js/wiki-search-index\.js\?v=)[^"\'&\s]+'
-                  ),
+                  re.compile(r'(/js/wiki-search-index\.js\?v=)[^"\'&\s]+'),
                   r'\g<1>20261023-polish3',
                   "wiki-search-index.js",
               ),
@@ -55,14 +50,14 @@ jobs:
           changed_files = 0
 
           for file in public.rglob("*.html"):
-              text = file.read_text(encoding="utf-8")
-              updated = text
+              original = file.read_text(encoding="utf-8")
+              updated = original
 
               for pattern, replacement, name in replacements:
                   updated, count = pattern.subn(replacement, updated)
                   totals[name] += count
 
-              if updated != text:
+              if updated != original:
                   file.write_text(updated, encoding="utf-8")
                   changed_files += 1
 
@@ -72,10 +67,7 @@ jobs:
 
           missing = [name for name, count in totals.items() if count == 0]
           if missing:
-              sys.exit(
-                  "ERROR: No matching references found for: "
-                  + ", ".join(missing)
-              )
+              sys.exit("ERROR: No matching references found for: " + ", ".join(missing))
           PY
 
       - name: Check changes
