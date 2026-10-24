@@ -122,7 +122,10 @@ window.KT_WIKI_INDEX = [
       "chapter-wladca",
       "episode-nieskot-3"
     ],
-    "aliases": []
+    "aliases": [
+      "bajzel",
+      "Bajzla"
+    ]
   },
   {
     "id": "character-zjavex",
