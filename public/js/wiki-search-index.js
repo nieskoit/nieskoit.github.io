@@ -166,7 +166,6 @@ window.KT_WIKI_INDEX = [
     "summary": "Początki serwera i historia Dombka sprzed głównej osi fabularnej.",
     "creator": "Dombeek",
     "season": "Sezon 1",
-    "thumbnail": "/assets/episodes/d1.webp",
     "related": ["episode-dombeek-1"],
     "aliases": []
   },
