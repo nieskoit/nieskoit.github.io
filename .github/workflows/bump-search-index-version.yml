@@ -6,6 +6,9 @@ on:
       - pv
     paths:
       - 'public/js/wiki-search-index.js'
+      - 'public/js/main.js'
+      - 'public/js/catalog-render.js'
+      - 'public/js/catalog-sync.js'
   workflow_dispatch:
 
 permissions:
@@ -41,7 +44,7 @@ jobs:
               r'wiki-search-index\.js\?v=(\d+)'
           )
 
-          html_files = list(root.rglob("*.html"))
+          html_files = [path for root in roots if root.exists() for path in root.rglob("*.html")]
           current_versions = []
 
           for path in html_files:
@@ -80,13 +83,15 @@ jobs:
       - name: Regenerate catalog and search fallback
         run: node tools/generate-catalog.js --generated-only
 
+      - name: Synchronize JavaScript cache versions
+        run: node tools/update-asset-versions.js
+
       - name: Commit version changes
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add -u -- public
-          git add -- public/odcinki/index.html public/szukaj/index.html
+          git add -u -- public pv/SZABLONY-HTML
 
           if git diff --cached --quiet; then
             echo "No HTML references needed updating."
