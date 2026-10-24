@@ -1,0 +1,52 @@
+name: Sync generated catalog pages
+
+on:
+  push:
+    branches:
+      - pv
+    paths:
+      - 'public/js/catalog-render.js'
+      - 'tools/generate-catalog.js'
+      - '.github/workflows/sync-generated-catalog.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-generated-catalog-pv
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout pv branch
+        uses: actions/checkout@v4
+        with:
+          ref: pv
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Regenerate generated pages without changing draft publication state
+        run: node tools/generate-catalog.js --generated-only
+
+      - name: Check whitespace
+        run: git diff --check
+
+      - name: Commit generated pages if needed
+        shell: bash
+        run: |
+          if git diff --quiet -- public/odcinki/index.html public/szukaj/index.html; then
+            echo "Generated pages are already up to date."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- public/odcinki/index.html public/szukaj/index.html
+          git commit -m "chore: sync generated catalog pages"
+          git push origin HEAD:pv
