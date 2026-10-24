@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+
+<html lang="pl">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>
+   404 | Kraina Twórców
+  </title>
+<meta content="Nie znaleziono tej strony. Wróć do Krainy Twórców lub przejdź do katalogu odcinków." name="description"/>
+<meta content="#090b09" name="theme-color"/>
+<meta content="noindex, follow" name="robots"/>
+<link href="/assets/kt.webp" rel="icon" type="image/webp"/>
+<link href="/css/main.css?v=20261023-palette14" rel="stylesheet"/>
+<style>
+body.error-page {
+  padding: 0;
+  text-align: left;
+}
+.error-hero {
+  min-height: min(78svh, 760px);
+  background:
+    radial-gradient(ellipse at 78% 52%, rgb(183 228 79 / 0.12), transparent 38%),
+    linear-gradient(135deg, var(--bg-raised), var(--bg));
+}
+.error-hero::after {
+  background: linear-gradient(to top, var(--bg) 0%, transparent 55%);
+}
+.error-mark {
+  position: absolute;
+  z-index: 0;
+  top: 50%;
+  right: clamp(20px, 8vw, 120px);
+  transform: translateY(-50%);
+  color: transparent;
+  font-family: var(--font-display);
+  font-size: clamp(14rem, 38vw, 34rem);
+  line-height: 1;
+  -webkit-text-stroke: 1px rgb(183 228 79 / 0.24);
+  pointer-events: none;
+  user-select: none;
+}
+.error-copy {
+  position: relative;
+  z-index: 1;
+  max-width: 640px;
+}
+.error-copy .hero-kicker {
+  margin-bottom: var(--space-4);
+}
+.error-copy h1 {
+  max-width: 12ch;
+}
+.error-copy p {
+  max-width: 44ch;
+  margin-top: var(--space-6);
+  color: var(--muted);
+  font-size: var(--step-1);
+}
+.error-copy .hero-actions {
+  margin-top: var(--space-8);
+}
+@media (max-width: 600px) {
+  .error-hero {
+    min-height: min(74svh, 680px);
+  }
+  .error-mark {
+    top: 25%;
+    right: 0;
+    font-size: clamp(12rem, 58vw, 20rem);
+  }
+}
+</style>
+<script>
+(function () {
+  var path = window.location.pathname.replace(/\/+$/, '');
+  if (path === '/tworcy' || path.indexOf('/tworcy/') === 0 || path === '/tworca') {
+    window.location.replace('/#tworcy');
+  }
+})();
+</script>
+</head>
+<body class="error-page" id="top">
+<a class="skip-link" href="#main">
+   Przejdź do treści
+  </a>
+<header class="nav">
+<div class="nav-container">
+<a aria-label="Kraina Twórców: strona główna" class="nav-logo" href="/">
+<img alt="KT" src="/assets/kt-logo.webp"/>
+</a>
+<button aria-controls="navMenu" aria-expanded="false" aria-label="Otwórz menu nawigacji" class="menu-toggle" type="button">
+<span>
+</span>
+<span>
+</span>
+</button>
+<nav aria-label="Główna nawigacja" class="nav-links" id="navMenu"><a href="/">Uniwersum</a><a href="/#tworcy">Twórcy</a><details class="nav-group"><summary>Historia</summary><div class="nav-group-menu"><a href="/odcinki/">Odcinki</a><a href="/rozdzialy/">Rozdziały</a><a href="/postacie/">Postacie</a></div></details><a href="/szukaj/">Szukaj</a><a class="nav-discord" href="https://discord.gg/jRWkeeDrTb" rel="noopener noreferrer" target="_blank">Discord</a></nav>
+</div>
+</header>
+
+<main id="main">
+<section class="hero error-hero" aria-labelledby="error-title">
+<div class="error-mark" aria-hidden="true">404</div>
+<div class="hero-content error-copy">
+<p class="hero-kicker">Błąd 404</p>
+<h1 id="error-title">
+    Zgubiliśmy
+    <br/>
+<span>
+     tę ścieżkę
+    </span>
+</h1>
+<p>
+    Ta strona nie istnieje lub została przeniesiona. Wróć do Krainy Twórców albo odkryj jej historię od nowa.
+   </p>
+<div class="hero-actions">
+<a class="button button-primary" href="/">
+    Wróć do uniwersum
+    <span aria-hidden="true">↗</span>
+</a>
+<a class="button button-secondary" href="/odcinki/">
+    Zobacz odcinki
+</a>
+</div>
+</div>
+</section>
+</main>
+<footer class="footer">
+<div class="section-container footer-bottom">
+<p class="footer-disclaimer">Kraina Twórców nie jest powiązana z Mojang AB ani Microsoft Corporation. Minecraft jest znakiem towarowym Mojang AB.</p>
+<a class="footer-top-link" href="#top">Do góry ↑</a>
+</div>
+</footer>
+<script defer="" src="/js/wiki-search-index.js?v=20261023-polish1"></script>
+<script defer src="/js/catalog-sync.js?v=20261024-publish1"></script>
+<script defer="" src="/js/main.js?v=20261024-publish1">
+</script>
+</body>
+</html>

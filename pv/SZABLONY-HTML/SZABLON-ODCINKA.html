@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>[TYTUŁ ODCINKA] | Kraina Twórców</title>
+  <meta name="description" content="[KRÓTKI OPIS ODCINKA]">
+  <meta name="theme-color" content="#090b09">
+  <link rel="icon" href="/assets/kt.webp">
+  <link rel="stylesheet" href="/css/main.css?v=20261023-palette3">
+</head>
+<body class="library-page">
+  <a class="skip-link" href="#main">Przejdź do treści</a>
+  <header class="nav">
+    <div class="nav-container">
+      <a aria-label="Kraina Twórców: strona główna" class="nav-logo" href="/">
+        <img alt="KT" src="/assets/kt-logo.webp">
+      </a>
+      <button aria-controls="navMenu" aria-expanded="false" aria-label="Otwórz menu nawigacji" class="menu-toggle" type="button">
+        <span></span><span></span>
+      </button>
+      <nav aria-label="Główna nawigacja" class="nav-links" id="navMenu">
+        <a href="/">Uniwersum</a><a href="/#tworcy">Twórcy</a>
+        <details class="nav-group"><summary>Historia</summary><div class="nav-group-menu">
+          <a href="/odcinki/">Odcinki</a><a href="/rozdzialy/">Rozdziały</a><a href="/postacie/">Postacie</a>
+        </div></details>
+        <a href="/szukaj/">Szukaj</a><a class="nav-discord" href="https://discord.gg/jRWkeeDrTb" rel="noopener noreferrer" target="_blank">Discord</a>
+      </nav>
+    </div>
+  </header>
+  <main class="library-main" id="main">
+    <section class="page-intro">
+      <p class="breadcrumbs"><a href="/">Uniwersum</a><span aria-hidden="true"> › </span><a href="/odcinki/">Odcinki</a><span aria-hidden="true"> › </span><span aria-current="page">[TYTUŁ ODCINKA]</span></p>
+      <a class="back-link" href="/odcinki/">← Wszystkie odcinki</a>
+      <h1>[TYTUŁ ODCINKA]</h1>
+      <p>[KRÓTKI OPIS ODCINKA]</p>
+      <div class="episode-context">
+        <div class="episode-metadata" aria-label="Informacje o odcinku">
+          <span>Rok wydania: [ROK]</span><span class="episode-meta-separator" aria-hidden="true">·</span><span>Czas trwania: [CZAS, opcjonalnie]</span>
+        </div>
+        <span>Twórca: <a href="/tworca/[SLUG-TWÓRCY]/">[TWÓRCA]</a></span>
+        <span>Sezon: <a href="/odcinki/#sezon-1">[SEZON]</a></span>
+      </div>
+      <section aria-label="Miniatura i odtwarzanie odcinka" class="episode-feature episode-feature-compact">
+        <div aria-label="Podgląd odcinka: [TYTUŁ ODCINKA]" class="episode-thumb" role="img">
+          <img alt="[OPIS GRAFIKI]" loading="lazy" src="/assets/[ścieżka-do-grafiki]">
+          <div class="episode-thumb-overlay"><span class="episode-thumb-number">[NR]</span><strong>[TYTUŁ ODCINKA]</strong></div>
+        </div>
+        <div class="episode-actions">
+          <a class="button button-primary" href="[LINK-YOUTUBE]" target="_blank" rel="noopener noreferrer">Obejrzyj na YouTube</a>
+        </div>
+      </section>
+    </section>
+    <article class="lore-article">
+      <h2>Opis odcinka</h2>
+      <p>[PEŁNY OPIS ODCINKA — możesz dodać kolejne akapity <code>&lt;p&gt;...&lt;/p&gt;</code> oraz nagłówki <code>&lt;h2&gt;</code>.</p>
+      <!-- Opcjonalnie dodaj powiązane postacie lub inne sekcje, kopiując istniejący fragment z podobnej strony. -->
+    </article>
+  </main>
+
+  <script defer src="/js/wiki-search-index.js?v=20261023-polish1"></script>
+  <script defer src="/js/catalog-sync.js?v=20261023-search1"></script>
+  <script defer src="/js/main.js?v=20261023-search1"></script>
+</body>
+</html>
