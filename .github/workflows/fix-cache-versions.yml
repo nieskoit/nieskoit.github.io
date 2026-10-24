@@ -1,6 +1,13 @@
 name: Fix HTML cache versions
 
 on:
+  push:
+    branches:
+      - pv
+    paths:
+      - 'public/**/*.html'
+      - 'public/**/index.html'
+      - '.github/workflows/fix-cache-versions.yml'
   workflow_dispatch:
 
 permissions:
