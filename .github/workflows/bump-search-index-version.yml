@@ -44,7 +44,7 @@ jobs:
               r'wiki-search-index\.js\?v=(\d+)'
           )
 
-          html_files = [path for root in roots if root.exists() for path in root.rglob("*.html")]
+          html_files = [path for root in root if root.exists() for path in root.rglob("*.html")]
           current_versions = []
 
           for path in html_files:
