@@ -1,0 +1,42 @@
+name: Validate PV branch
+
+on:
+  push:
+    branches:
+      - pv
+    paths:
+      - 'public/**'
+      - 'pv/**'
+      - 'tools/**'
+      - '.github/workflows/validate-pv.yml'
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Check website without deploying
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Check catalog generation
+        run: node tools/generate-catalog.js --check
+
+      - name: Validate wiki
+        run: node tools/validate-wiki.js
+
+      - name: Generate sitemap in test environment
+        run: python3 tools/generate_sitemap.py
+
+      - name: Check whitespace errors
+        run: git diff --check
