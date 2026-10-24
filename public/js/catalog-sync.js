@@ -9,17 +9,40 @@
   const creators = byKind('Twórca');
   const characters = byKind('Postać');
   const esc = value => String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+  // Security boundary for URLs from the wiki index: allow same-site paths only.
+  const safeLocalUrl = value => {
+    if (typeof value !== "string" || !value || value.startsWith("//") || /[\\\s\u0000-\u001f\u007f]/.test(value) || /%(?:2f|5c|00|0[0-9a-f]|1[0-9a-f]|7f)/i.test(value)) return "/";
+    let parsed;
+    try { parsed = new URL(value, window.location.origin); } catch (_) { return "/"; }
+    if (parsed.origin !== window.location.origin || !parsed.pathname.startsWith("/") || /(?:^|\/)\.{1,2}(?:\/|$)/.test(parsed.pathname)) return "/";
+    return `${parsed.pathname}${parsed.search}${parsed.hash}`;
+  };
+  const safeAsset = value => {
+    if (typeof value !== "string" || !value.startsWith("/assets/") || value.startsWith("//") || /[\\\s\u0000-\u001f\u007f]/.test(value) || /%(?:2f|5c|00|0[0-9a-f]|1[0-9a-f]|7f)/i.test(value)) return "/assets/kt.webp";
+    let parsed;
+    try { parsed = new URL(value, window.location.origin); } catch (_) { return "/assets/kt.webp"; }
+    if (parsed.origin !== window.location.origin || !parsed.pathname.startsWith("/assets/") || parsed.pathname.split("/").some(part => part === "." || part === "..")) return "/assets/kt.webp";
+    return `${parsed.pathname}${parsed.search}${parsed.hash}`;
+  };
+  const safeYouTubeUrl = value => {
+    if (typeof value !== "string") return "";
+    try {
+      const parsed = new URL(value);
+      const host = parsed.hostname.toLowerCase().replace(/^www\./, "");
+      if (parsed.protocol !== "https:" || !["youtube.com", "m.youtube.com", "youtu.be"].includes(host)) return "";
+      if (host === "youtu.be" && !parsed.pathname.slice(1)) return "";
+      if (host.endsWith("youtube.com") && !["/watch", "/shorts/", "/embed/"].some(prefix => parsed.pathname.startsWith(prefix))) return "";
+      return parsed.href;
+    } catch (_) { return ""; }
+  };
   const slug = value => String(value || '').toLocaleLowerCase('pl').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
   const pathNow = location.pathname.replace(/index\.html$/, '').replace(/\/{2,}/g, '/');
   const findByUrl = (items, path) => items.find(item => item.url && item.url.replace(/index\.html$/, '').replace(/\/$/, '/') === path);
   const relates = (item, other) => (item.related || []).includes(other.id) || (other.related || []).includes(item.id);
   // Grafiki katalogu pochodzą wyłącznie z lokalnego /assets/. Nigdy nie używamy miniaturek YouTube ani zewnętrznych URL-i.
-  const localAsset = value => typeof value === 'string' && value.startsWith('/assets/') && !value.includes('..') ? value : '/assets/kt.webp';
+  const localAsset = value => safeAsset(value);
   const imageFor = item => localAsset(item && (item.thumbnail || item.image));
-  const youtubeFor = item => {
-    const url = String(item?.youtube || '').trim();
-    return /^https?:\/\/(?:www\.)?(?:youtube\.com\/(?:watch\?v=|shorts\/)|youtu\.be\/)/i.test(url) ? url : '';
-  };
+  const youtubeFor = item => safeYouTubeUrl(item?.youtube);
   const metaFor = item => [item.year, item.duration].filter(Boolean).map(esc).join(' · ');
   // Numeracja jest osobna dla każdego twórcy i zachowuje kolejność rekordów w indeksie.
   const episodeNumber = item => episodes.filter(candidate => slug(candidate.creator) === slug(item.creator)).findIndex(candidate => candidate.id === item.id) + 1;
@@ -37,10 +60,10 @@
     const meta = metaFor(item);
     const youtube = youtubeFor(item);
     const youtubeButton = youtube ? `<a class="button button-primary" href="${esc(youtube)}" target="_blank" rel="noopener noreferrer">Obejrzyj na YouTube</a>` : '';
-    if (compact) return `<li class="episode-row" data-creator="${esc(slug(item.creator))}"><a class="episode-row-thumb" href="${esc(item.url)}" aria-label="Otwórz: ${esc(item.title)}"><img alt="${esc(item.thumbnailAlt || `Miniatura odcinka: ${item.title}`)}" loading="lazy" src="${esc(image)}"></a><div class="episode-row-main"><h3><span class="episode-title-line">${episodeBadge(item)}<a href="${esc(item.url)}">${esc(item.title)}</a></span></h3>${meta ? `<p class="episode-row-meta episode-row-meta-data">${meta}</p>` : ''}<p>${esc(item.summary || 'Opis odcinka zostanie uzupełniony.')}</p>${chapter ? `<p class="episode-row-meta">Rozdział: <a href="${esc(chapter.url)}">${esc(chapter.title)}</a></p>` : ''}</div><div class="episode-row-actions"><a class="button button-secondary" href="${esc(item.url)}">Szczegóły odcinka</a>${youtubeButton}</div></li>`;
-    return `<article class="lore-card wiki-result-card episode-catalog-card" data-creator="${esc(slug(item.creator))}" data-entity="episode"><a class="episode-card-thumb" href="${esc(item.url)}" aria-label="Otwórz: ${esc(item.title)}"><img alt="${esc(item.thumbnailAlt || `Miniatura odcinka: ${item.title}`)}" loading="lazy" src="${esc(image)}"></a><div class="episode-card-content"><h3><span class="episode-title-line">${episodeBadge(item)}<a href="${esc(item.url)}">${esc(item.title)}</a></span></h3>${meta ? `<p class="episode-row-meta-data">${meta}</p>` : ''}<p>${esc(item.summary || 'Opis odcinka zostanie uzupełniony.')}</p><p class="card-relations"><span>Twórca: <a href="/tworca/${esc(slug(item.creator))}/">${esc(item.creator || 'Nieznany')}</a></span>${chapter ? `<span>Rozdział: <a href="${esc(chapter.url)}">${esc(chapter.title)}</a></span>` : ''}</p></div><div class="episode-card-actions"><a class="button button-secondary episode-card-read" href="${esc(item.url)}">Szczegóły odcinka <span aria-hidden="true">↗</span></a>${youtube ? `<a class="button button-primary episode-card-youtube" href="${esc(youtube)}" target="_blank" rel="noopener noreferrer">Obejrzyj na YouTube <span aria-hidden="true">↗</span></a>` : ''}</div></article>`;
+    if (compact) return `<li class="episode-row" data-creator="${esc(slug(item.creator))}"><a class="episode-row-thumb" href="${esc(safeLocalUrl(item.url))}" aria-label="Otwórz: ${esc(item.title)}"><img alt="${esc(item.thumbnailAlt || `Miniatura odcinka: ${item.title}`)}" loading="lazy" src="${esc(image)}"></a><div class="episode-row-main"><h3><span class="episode-title-line">${episodeBadge(item)}<a href="${esc(safeLocalUrl(item.url))}">${esc(item.title)}</a></span></h3>${meta ? `<p class="episode-row-meta episode-row-meta-data">${meta}</p>` : ''}<p>${esc(item.summary || 'Opis odcinka zostanie uzupełniony.')}</p>${chapter ? `<p class="episode-row-meta">Rozdział: <a href="${esc(safeLocalUrl(chapter.url))}">${esc(chapter.title)}</a></p>` : ''}</div><div class="episode-row-actions"><a class="button button-secondary" href="${esc(safeLocalUrl(item.url))}">Szczegóły odcinka</a>${youtubeButton}</div></li>`;
+    return `<article class="lore-card wiki-result-card episode-catalog-card" data-creator="${esc(slug(item.creator))}" data-entity="episode"><a class="episode-card-thumb" href="${esc(safeLocalUrl(item.url))}" aria-label="Otwórz: ${esc(item.title)}"><img alt="${esc(item.thumbnailAlt || `Miniatura odcinka: ${item.title}`)}" loading="lazy" src="${esc(image)}"></a><div class="episode-card-content"><h3><span class="episode-title-line">${episodeBadge(item)}<a href="${esc(safeLocalUrl(item.url))}">${esc(item.title)}</a></span></h3>${meta ? `<p class="episode-row-meta-data">${meta}</p>` : ''}<p>${esc(item.summary || 'Opis odcinka zostanie uzupełniony.')}</p><p class="card-relations"><span>Twórca: <a href="/tworca/${esc(slug(item.creator))}/">${esc(item.creator || 'Nieznany')}</a></span>${chapter ? `<span>Rozdział: <a href="${esc(safeLocalUrl(chapter.url))}">${esc(chapter.title)}</a></span>` : ''}</p></div><div class="episode-card-actions"><a class="button button-secondary episode-card-read" href="${esc(safeLocalUrl(item.url))}">Szczegóły odcinka <span aria-hidden="true">↗</span></a>${youtube ? `<a class="button button-primary episode-card-youtube" href="${esc(youtube)}" target="_blank" rel="noopener noreferrer">Obejrzyj na YouTube <span aria-hidden="true">↗</span></a>` : ''}</div></article>`;
   };
-  const chapterCard = chapter => `<article class="lore-card wiki-result-card" data-entity="chapter"><a class="episode-card-thumb chapter-card-thumb" href="${esc(chapter.url)}"><img alt="Okładka: ${esc(chapter.title)}" loading="lazy" src="${esc(imageFor(chapter))}"></a><h3><a href="${esc(chapter.url)}">${esc(chapter.title)}</a></h3><p>${esc(chapter.summary || '')}</p><p class="card-relations">${chapter.creator ? `<span>Twórca: <a href="/tworca/${esc(slug(chapter.creator))}/">${esc(chapter.creator)}</a></span>` : ''}${chapter.season ? `<span>Sezon: <a href="/odcinki/#${esc(slug(chapter.season))}">${esc(chapter.season)}</a></span>` : ''}</p><a class="text-link" href="${esc(chapter.url)}">Otwórz rozdział</a></article>`;
+  const chapterCard = chapter => `<article class="lore-card wiki-result-card" data-entity="chapter"><a class="episode-card-thumb chapter-card-thumb" href="${esc(safeLocalUrl(chapter.url))}"><img alt="Okładka: ${esc(chapter.title)}" loading="lazy" src="${esc(imageFor(chapter))}"></a><h3><a href="${esc(safeLocalUrl(chapter.url))}">${esc(chapter.title)}</a></h3><p>${esc(chapter.summary || '')}</p><p class="card-relations">${chapter.creator ? `<span>Twórca: <a href="/tworca/${esc(slug(chapter.creator))}/">${esc(chapter.creator)}</a></span>` : ''}${chapter.season ? `<span>Sezon: <a href="/odcinki/#${esc(slug(chapter.season))}">${esc(chapter.season)}</a></span>` : ''}</p><a class="text-link" href="${esc(safeLocalUrl(chapter.url))}">Otwórz rozdział</a></article>`;
   const renderLinkedList = (heading, items, emptyText, linkLabel = item => item.title, options = {}) => {
     if (!heading) return;
     const isEpisodeList = items.length > 0 && items.every(item => item.kind === 'Odcinek');
@@ -51,7 +74,7 @@
       const creatorLink = options.showEpisodeCreator && item.creator
         ? `<span class="appearance-creator">u <a href="/tworca/${esc(slug(item.creator))}/">${esc(item.creator)}</a></span>`
         : '';
-      return `<li>${isEpisodeList && !options.hideEpisodeNumbers ? episodeBadge(item) : ''}<a href="${esc(item.url)}">${esc(linkLabel(item))}</a>${creatorLink}</li>`;
+      return `<li>${isEpisodeList && !options.hideEpisodeNumbers ? episodeBadge(item) : ''}<a href="${esc(safeLocalUrl(item.url))}">${esc(linkLabel(item))}</a>${creatorLink}</li>`;
     }).join('') || `<li>${esc(emptyText)}</li>`;
   };
   const replaceSectionContent = (heading, node) => {
@@ -68,7 +91,7 @@
     // Karty twórców na stronie głównej też pochodzą z indeksu.
     if (pathNow === '/') {
       const grid = document.querySelector('.home .creators .creator-grid, .creators .creator-grid');
-      if (grid) grid.innerHTML = creators.map(item => `<a class="creator-card" href="${esc(item.url)}"><span class="avatar-wrap"><img class="creator-avatar" alt="${esc(item.title)}" loading="lazy" src="${esc(imageFor(item))}"></span><span class="creator-meta"><strong>${esc(item.title)}</strong></span></a>`).join('');
+      if (grid) grid.innerHTML = creators.map(item => `<a class="creator-card" href="${esc(safeLocalUrl(item.url))}"><span class="avatar-wrap"><img class="creator-avatar" alt="${esc(item.title)}" loading="lazy" src="${esc(imageFor(item))}"></span><span class="creator-meta"><strong>${esc(item.title)}</strong></span></a>`).join('');
     }
     if (pathNow === '/odcinki/') {
       const container = document.querySelector('.episode-seasons-directory');
@@ -148,7 +171,7 @@
         const sidebarLink = creatorSidebar.querySelector('a');
         if (sidebarHeading) sidebarHeading.textContent = `Więcej odcinków twórcy: ${creatorName}`;
         if (sidebarParagraph) sidebarParagraph.textContent = `Poznaj pozostałe odcinki opublikowane przez twórcę ${creatorName}.`;
-        if (sidebarLink) { sidebarLink.href = `/tworca/${esc(slug(creatorName))}/`; sidebarLink.textContent = 'Zobacz profil twórcy'; }
+        if (sidebarLink) { sidebarLink.href = safeLocalUrl(`/tworca/${slug(creatorName)}/`); sidebarLink.textContent = 'Zobacz profil twórcy'; }
       }
       // The shared index is the source of truth; never leave copied text from a different episode.
       const article = document.querySelector('.lore-article');
@@ -166,11 +189,11 @@
           characterHeading.insertAdjacentElement('afterend', list);
         }
         const people = all.filter(item => ['Postać', 'Twórca'].includes(item.kind) && relates(currentEpisode, item));
-        list.innerHTML = people.map(item => `<li>${item.url ? `<a class="character-link${item.kind === 'Twórca' ? ' creator-character-link' : ''}" href="${esc(item.url)}">${esc(item.title)}</a>` : `<span class="character-unlinked">${esc(item.title)}</span>`}</li>`).join('') || '<li class="character-unlinked">Nie dodano ważnych postaci.</li>';
+        list.innerHTML = people.map(item => `<li>${item.url ? `<a class="character-link${item.kind === 'Twórca' ? ' creator-character-link' : ''}" href="${esc(safeLocalUrl(item.url))}">${esc(item.title)}</a>` : `<span class="character-unlinked">${esc(item.title)}</span>`}</li>`).join('') || '<li class="character-unlinked">Nie dodano ważnych postaci.</li>';
       }
       const chapterHeading = article && [...article.querySelectorAll('h2')].find(h => /powiązany rozdział/i.test(h.textContent));
       const primaryChapter = chapterLinksFor(currentEpisode)[0];
-      if (chapterHeading) { let chapterPara = chapterHeading.nextElementSibling; if (!chapterPara || chapterPara.tagName !== 'P') { chapterPara = document.createElement('p'); chapterHeading.insertAdjacentElement('afterend', chapterPara); } chapterPara.innerHTML = primaryChapter ? `<a href="${esc(primaryChapter.url)}">${esc(primaryChapter.title)}</a>` : 'Nie przypisano rozdziału.'; }
+      if (chapterHeading) { let chapterPara = chapterHeading.nextElementSibling; if (!chapterPara || chapterPara.tagName !== 'P') { chapterPara = document.createElement('p'); chapterHeading.insertAdjacentElement('afterend', chapterPara); } chapterPara.innerHTML = primaryChapter ? `<a href="${esc(safeLocalUrl(primaryChapter.url))}">${esc(primaryChapter.title)}</a>` : 'Nie przypisano rozdziału.'; }
     }
     // [CTRL+F: KT10 SZCZEGÓŁY ROZDZIAŁU]
     // Szczegóły rozdziału: opis, okładka i lista odcinków są generowane z indeksu.
@@ -213,7 +236,7 @@
           if (heading) {
             if (!list || !list.matches('ul,ol')) { list = document.createElement('ul'); heading.insertAdjacentElement('afterend', list); }
             list.className = 'linked-list';
-            list.innerHTML = relatedCharacters.map(item => `<li>${item.url ? `<a href="${esc(item.url)}">${esc(item.title)}</a>` : esc(item.title)}</li>`).join('') || '<li>Brak przypisanych postaci.</li>';
+            list.innerHTML = relatedCharacters.map(item => `<li>${item.url ? `<a href="${esc(safeLocalUrl(item.url))}">${esc(item.title)}</a>` : esc(item.title)}</li>`).join('') || '<li>Brak przypisanych postaci.</li>';
           }
         }
       }
@@ -244,7 +267,7 @@
         if (chaptersHeading) {
           const list = document.createElement('ul');
           list.className = 'linked-list';
-          list.innerHTML = creatorChapters.map(item => `<li><a href="${esc(item.url)}">${esc(item.title)}</a></li>`).join('') || '<li>Brak przypisanych rozdziałów.</li>';
+          list.innerHTML = creatorChapters.map(item => `<li><a href="${esc(safeLocalUrl(item.url))}">${esc(item.title)}</a></li>`).join('') || '<li>Brak przypisanych rozdziałów.</li>';
           replaceSectionContent(chaptersHeading, list);
         }
       }
@@ -362,7 +385,7 @@
     // Katalog postaci: synchronizuj karty i miniatury z indeksu.
     if (pathNow === '/postacie/') {
       const grid = document.querySelector('.catalog-grid');
-      if (grid) grid.innerHTML = characters.map(item => `<a class="lore-card wiki-result-card catalog-entity-card" data-entity="character" href="${esc(item.url)}"><span class="catalog-profile-head">${(item.thumbnail || item.image) && (item.thumbnail || item.image).startsWith('/assets/') ? `<img class="catalog-profile-avatar" src="${esc(imageFor(item))}" alt="${esc(item.title)}" loading="lazy">` : `<span class="catalog-profile-placeholder" aria-hidden="true">✦</span>`}<strong>${esc(item.title)}</strong></span><p>${esc(item.summary || '')}</p><span class="text-link">Otwórz profil <span aria-hidden="true">→</span></span></a>`).join('');
+      if (grid) grid.innerHTML = characters.map(item => `<a class="lore-card wiki-result-card catalog-entity-card" data-entity="character" href="${esc(safeLocalUrl(item.url))}"><span class="catalog-profile-head">${(item.thumbnail || item.image) && (item.thumbnail || item.image).startsWith('/assets/') ? `<img class="catalog-profile-avatar" src="${esc(imageFor(item))}" alt="${esc(item.title)}" loading="lazy">` : `<span class="catalog-profile-placeholder" aria-hidden="true">✦</span>`}<strong>${esc(item.title)}</strong></span><p>${esc(item.summary || '')}</p><span class="text-link">Otwórz profil <span aria-hidden="true">→</span></span></a>`).join('');
     }
   });
 })();

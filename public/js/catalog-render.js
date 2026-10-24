@@ -12,15 +12,39 @@
     '"': '&quot;',
     "'": '&#39;'
   })[ch]);
+  // Security boundary for URLs from the wiki index: allow same-site paths only.
+  const safeLocalUrl = value => {
+    if (typeof value !== "string" || !value || value.startsWith("//") || /[\\\s\u0000-\u001f\u007f]/.test(value) || /%(?:2f|5c|00|0[0-9a-f]|1[0-9a-f]|7f)/i.test(value)) return "/";
+    let parsed;
+    try { parsed = new URL(value, window.location.origin); } catch (_) { return "/"; }
+    if (parsed.origin !== window.location.origin || !parsed.pathname.startsWith("/") || /(?:^|\/)\.{1,2}(?:\/|$)/.test(parsed.pathname)) return "/";
+    return `${parsed.pathname}${parsed.search}${parsed.hash}`;
+  };
+  const safeAsset = value => {
+    if (typeof value !== "string" || !value.startsWith("/assets/") || value.startsWith("//") || /[\\\s\u0000-\u001f\u007f]/.test(value) || /%(?:2f|5c|00|0[0-9a-f]|1[0-9a-f]|7f)/i.test(value)) return "/assets/kt.webp";
+    let parsed;
+    try { parsed = new URL(value, window.location.origin); } catch (_) { return "/assets/kt.webp"; }
+    if (parsed.origin !== window.location.origin || !parsed.pathname.startsWith("/assets/") || parsed.pathname.split("/").some(part => part === "." || part === "..")) return "/assets/kt.webp";
+    return `${parsed.pathname}${parsed.search}${parsed.hash}`;
+  };
+  const safeYouTubeUrl = value => {
+    if (typeof value !== "string") return "";
+    try {
+      const parsed = new URL(value);
+      const host = parsed.hostname.toLowerCase().replace(/^www\./, "");
+      if (parsed.protocol !== "https:" || !["youtube.com", "m.youtube.com", "youtu.be"].includes(host)) return "";
+      if (host === "youtu.be" && !parsed.pathname.slice(1)) return "";
+      if (host.endsWith("youtube.com") && !["/watch", "/shorts/", "/embed/"].some(prefix => parsed.pathname.startsWith(prefix))) return "";
+      return parsed.href;
+    } catch (_) { return ""; }
+  };
   const slug = value => String(value || '')
     .toLocaleLowerCase('pl')
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '')
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-|-$/g, '');
-  const localAsset = value => typeof value === 'string' && value.startsWith('/assets/') && !value.includes('..')
-    ? value
-    : '/assets/kt.webp';
+  const localAsset = value => safeAsset(value);
   const imageFor = item => localAsset(item && (item.thumbnail || item.image));
 
   const renderEpisodeDirectory = all => {
@@ -48,7 +72,7 @@
         ? `<img class="season-cover" alt="Grafika sezonu: ${esc(season.title)}" loading="lazy" src="${esc(imageFor(season))}">`
         : '';
 
-      return `<section class="season-block" id="${esc(seasonSlug)}"><header class="season-block-heading">${cover}<div><h2>${esc(season.title)}</h2><p>${esc(season.summary || '')}</p></div><span>${items.length} odcinków</span></header><div class="season-grid">${groups.map(group => `<section class="season-creator"><header><img alt="${esc(group.creator.title)}" loading="lazy" src="${esc(imageFor(group.creator))}"><div><h3><a href="/tworca/${esc(slug(group.creator.title))}/">${esc(group.creator.title)}</a></h3></div></header><ol class="season-episode-list">${group.items.map(item => `<li><a class="season-episode-image" href="${esc(item.url)}" aria-label="Otwórz odcinek: ${esc(item.title)}"><img src="${esc(imageFor(item))}" alt="Miniatura odcinka: ${esc(item.title)}" loading="lazy"></a><div class="season-episode-info"><a class="episode-title-line" href="${esc(item.url)}">${episodeBadge(item)}<span>${esc(item.title)}</span></a><span class="episode-time-meta">${item.year ? `<span>${esc(item.year)}</span>` : ''}${item.duration ? `<span>${esc(item.duration)}</span>` : ''}</span><p>${esc(item.summary || '')}</p></div></li>`).join('')}</ol></section>`).join('') || '<p>Brak odcinków przypisanych do tego sezonu.</p>'}</div></section>`;
+      return `<section class="season-block" id="${esc(seasonSlug)}"><header class="season-block-heading">${cover}<div><h2>${esc(season.title)}</h2><p>${esc(season.summary || '')}</p></div><span>${items.length} odcinków</span></header><div class="season-grid">${groups.map(group => `<section class="season-creator"><header><img alt="${esc(group.creator.title)}" loading="lazy" src="${esc(imageFor(group.creator))}"><div><h3><a href="/tworca/${esc(slug(group.creator.title))}/">${esc(group.creator.title)}</a></h3></div></header><ol class="season-episode-list">${group.items.map(item => `<li><a class="season-episode-image" href="${esc(safeLocalUrl(item.url))}" aria-label="Otwórz odcinek: ${esc(item.title)}"><img src="${esc(imageFor(item))}" alt="Miniatura odcinka: ${esc(item.title)}" loading="lazy"></a><div class="season-episode-info"><a class="episode-title-line" href="${esc(safeLocalUrl(item.url))}">${episodeBadge(item)}<span>${esc(item.title)}</span></a><span class="episode-time-meta">${item.year ? `<span>${esc(item.year)}</span>` : ''}${item.duration ? `<span>${esc(item.duration)}</span>` : ''}</span><p>${esc(item.summary || '')}</p></div></li>`).join('')}</ol></section>`).join('') || '<p>Brak odcinków przypisanych do tego sezonu.</p>'}</div></section>`;
     }).join('') || '<p>Nie dodano jeszcze sezonów.</p>';
 
     return seasonNavigation + seasonSections;
@@ -63,7 +87,7 @@
       const seasonLink = item.season
         ? `<span><a href="/odcinki/#${esc(slug(item.season))}">${esc(item.season)}</a></span>`
         : '';
-      return `<article class="wiki-result"><span class="result-kind">${esc(item.kind || 'Hasło')}</span><h3><a href="${esc(item.url)}">${esc(item.title)}</a></h3><p>${esc(item.summary || '')}</p><div class="wiki-result-meta">${creatorLink}${seasonLink}</div></article>`;
+      return `<article class="wiki-result"><span class="result-kind">${esc(item.kind || 'Hasło')}</span><h3><a href="${esc(safeLocalUrl(item.url))}">${esc(item.title)}</a></h3><p>${esc(item.summary || '')}</p><div class="wiki-result-meta">${creatorLink}${seasonLink}</div></article>`;
     })
     .join('');
 
