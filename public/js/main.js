@@ -291,6 +291,33 @@ document.addEventListener("DOMContentLoaded", () => {
   const grid = document.querySelector("#featured-grid");
   if (!grid) return;
   const index = (Array.isArray(window.KT_WIKI_INDEX) ? window.KT_WIKI_INDEX : []).filter(item => item && item.published !== false);
+  // Security boundary for URLs from the wiki index: allow same-site paths only.
+  const safeLocalUrl = value => {
+    if (typeof value !== "string" || !value || value.startsWith("//") || /[\\\s\u0000-\u001f\u007f]/.test(value) || /%(?:2f|5c|00|0[0-9a-f]|1[0-9a-f]|7f)/i.test(value)) return "/";
+    let parsed;
+    try { parsed = new URL(value, window.location.origin); } catch (_) { return "/"; }
+    if (parsed.origin !== window.location.origin || !parsed.pathname.startsWith("/") || /(?:^|\/)\.{1,2}(?:\/|$)/.test(parsed.pathname)) return "/";
+    return `${parsed.pathname}${parsed.search}${parsed.hash}`;
+  };
+  const safeAsset = value => {
+    if (typeof value !== "string" || !value.startsWith("/assets/") || value.startsWith("//") || /[\\\s\u0000-\u001f\u007f]/.test(value) || /%(?:2f|5c|00|0[0-9a-f]|1[0-9a-f]|7f)/i.test(value)) return "/assets/kt.webp";
+    let parsed;
+    try { parsed = new URL(value, window.location.origin); } catch (_) { return "/assets/kt.webp"; }
+    if (parsed.origin !== window.location.origin || !parsed.pathname.startsWith("/assets/") || parsed.pathname.split("/").some(part => part === "." || part === "..")) return "/assets/kt.webp";
+    return `${parsed.pathname}${parsed.search}${parsed.hash}`;
+  };
+  const safeYouTubeUrl = value => {
+    if (typeof value !== "string") return "";
+    try {
+      const parsed = new URL(value);
+      const host = parsed.hostname.toLowerCase().replace(/^www\./, "");
+      if (parsed.protocol !== "https:" || !["youtube.com", "m.youtube.com", "youtu.be"].includes(host)) return "";
+      if (host === "youtu.be" && !parsed.pathname.slice(1)) return "";
+      if (host.endsWith("youtube.com") && !["/watch", "/shorts/", "/embed/"].some(prefix => parsed.pathname.startsWith(prefix))) return "";
+      return parsed.href;
+    } catch (_) { return ""; }
+  };
+
   const creatorImages = Object.fromEntries(index
     .filter(item => item.kind === "Twórca" && item.image)
     .map(item => [item.title, item.image]));
@@ -329,32 +356,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const prev = document.querySelector("#featured-prev");
   const next = document.querySelector("#featured-next");
   const esc = value => String(value ?? "").replace(/[&<>"']/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
-  // Security boundary for URLs from the wiki index: allow same-site paths only.
-  const safeLocalUrl = value => {
-    if (typeof value !== "string" || !value || value.startsWith("//") || /[\\\s\u0000-\u001f\u007f]/.test(value) || /%(?:2f|5c|00|0[0-9a-f]|1[0-9a-f]|7f)/i.test(value)) return "/";
-    let parsed;
-    try { parsed = new URL(value, window.location.origin); } catch (_) { return "/"; }
-    if (parsed.origin !== window.location.origin || !parsed.pathname.startsWith("/") || /(?:^|\/)\.{1,2}(?:\/|$)/.test(parsed.pathname)) return "/";
-    return `${parsed.pathname}${parsed.search}${parsed.hash}`;
-  };
-  const safeAsset = value => {
-    if (typeof value !== "string" || !value.startsWith("/assets/") || value.startsWith("//") || /[\\\s\u0000-\u001f\u007f]/.test(value) || /%(?:2f|5c|00|0[0-9a-f]|1[0-9a-f]|7f)/i.test(value)) return "/assets/kt.webp";
-    let parsed;
-    try { parsed = new URL(value, window.location.origin); } catch (_) { return "/assets/kt.webp"; }
-    if (parsed.origin !== window.location.origin || !parsed.pathname.startsWith("/assets/") || parsed.pathname.split("/").some(part => part === "." || part === "..")) return "/assets/kt.webp";
-    return `${parsed.pathname}${parsed.search}${parsed.hash}`;
-  };
-  const safeYouTubeUrl = value => {
-    if (typeof value !== "string") return "";
-    try {
-      const parsed = new URL(value);
-      const host = parsed.hostname.toLowerCase().replace(/^www\./, "");
-      if (parsed.protocol !== "https:" || !["youtube.com", "m.youtube.com", "youtu.be"].includes(host)) return "";
-      if (host === "youtu.be" && !parsed.pathname.slice(1)) return "";
-      if (host.endsWith("youtube.com") && !["/watch", "/shorts/", "/embed/"].some(prefix => parsed.pathname.startsWith(prefix))) return "";
-      return parsed.href;
-    } catch (_) { return ""; }
-  };
   const render = () => {
     grid.innerHTML = order.slice(0, 3).map(item => `
       <article class="featured-card">
