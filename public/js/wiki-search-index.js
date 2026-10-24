@@ -45,7 +45,6 @@ window.KT_WIKI_INDEX = [
     "creator": "Kaicek",
     "season": "Sezon 1",
     "related": [
-      "episode-kaicek-1",
       "episode-nieskot-1",
       "episode-nieskot-3",
       "episode-nieskot-4"
@@ -166,7 +165,7 @@ window.KT_WIKI_INDEX = [
     "summary": "Początki serwera i historia Dombka sprzed głównej osi fabularnej.",
     "creator": "Dombeek",
     "season": "Sezon 1",
-    "related": ["episode-dombeek-1"],
+    "related": [],
     "aliases": []
   },
   {
@@ -290,35 +289,6 @@ window.KT_WIKI_INDEX = [
     "youtube": "https://youtu.be/q0NSw_piCdU",
     "year": "2026",
     "duration": "52:48"
-  },
-  {
-    "id": "episode-kaicek-1",
-    "title": "Jak ZEMŚCIŁEM SIĘ na TYM GRACZU w Minecraft",
-    "kind": "Odcinek",
-    "published": false, // Ustaw true, gdy odcinek będzie gotowy do publikacji
-    "url": "/odcinki/kaicek/zemsta-na-tym-graczu/",
-    "summary": "Kaicek odkrywa niezwykłe właściwości tajemniczego kryształu, a spotkanie z Kaczuchą stawia go przed nowym celem. W poszukiwaniu sojuszników poznaje kolejnych graczy, z których nie wszyscy mają takie same plany wobec przyszłości krainy.",
-    "description": "Kaicek rozpoczyna swoją przygodę w jaskini, gdzie znajduje tajemniczy kryształ. Po starciu z Kaczuchą, który otwarcie zapowiada przejęcie władzy nad krainą, odkrywa niezwykłe właściwości znaleziska. Nie chcąc dopuścić do realizacji planów przeciwnika, zawiera sojusz z Dombkiem i Zjavexem. Nowi towarzysze chcą stworzyć spokojną wioskę, jednak Kaicek nie zdradza im wszystkiego ze swojej przeszłości. Podczas poszukiwań odpowiedniego miejsca spotyka Blau erda, który opowiada mu o wcześniejszych starciach z Kaczuchą. Ich rozmowa prowadzi do nawiązania kolejnego sojuszu.\n\nKaicek trafia następnie do miasta, którego mieszkańcy również chcą przeciwstawić się Kaczusze. Wspólnie zaczynają przygotowywać plan uderzenia na jego królestwo. Sytuacja komplikuje się, gdy okazuje się, że wśród sprzymierzeńców mogą znajdować się osoby, którym nie można w pełni zaufać. Kaicek staje przed szansą na powstrzymanie rosnącej potęgi przeciwnika, ale konsekwencje podjętych działań mogą sięgnąć znacznie dalej, niż zakładał.",
-    "creator": "Kaicek",
-    "season": "Sezon 1",
-    "related": ["creator-kaicek", "season-1"],
-    "aliases": [],
-    "year": "2026"
-  },
-   {
-    "id": "episode-dombeek-1",
-    "chapter": "chapter-prequel",
-    "title": "Jak uwolnilem PRZYJACIELA Z NIEWOLI na TYM SMP",
-    "kind": "Odcinek",
-    "published": false, // Ustaw true, gdy odcinek będzie gotowy do publikacji
-    "url": "/odcinki/dombeek/jak-uwolnilem-przyjaciela/",
-    "summary": "Dombeek udaje się wyrwać z niewoli swojego przyjaciela, który został schwytany przez wroga.",
-    "description": "Dombeek rozpoczyna swoją przygodę w jaskini, gdzie znajduje tajemniczy kryształ. Po starciu z Kaczuchą, który otwarcie zapowiada przejęcie władzy nad krainą, odkrywa niezwykłe właściwości znaleziska. Nie chcąc dopuścić do realizacji planów przeciwnika, zawiera sojusz z Kaicekiem i Zjavexem. Nowi towarzysze chcą stworzyć spokojną wioskę, jednak Dombeek nie zdradza im wszystkiego ze swojej przeszłości. Podczas poszukiwań odpowiedniego miejsca spotyka Blau erda, który opowiada mu o wcześniejszych starciach z Kaczuchą. Ich rozmowa prowadzi do nawiązania kolejnego sojuszu.\n\nDombeek trafia następnie do miasta, którego mieszkańcy również chcą przeciwstawić się Kaczusze. Wspólnie zaczynają przygotowywać plan uderzenia na jego królestwo. Sytuacja komplikuje się, gdy okazuje się, że wśród sprzymierzeńców mogą znajdować się osoby, którym nie można w pełni zaufać. Dombeek staje przed szansą na powstrzymanie rosnącej potęgi przeciwnika, ale konsekwencje podjętych działań mogą sięgnąć znacznie dalej, niż zakładał.",
-    "creator": "Dombeek",
-    "season": "Sezon 1",
-    "related": ["creator-dombeek", "season-1", "character-zjavex"],
-    "aliases": [],
-    "year": "2026"
   },
   {
     "id": "season-2",
