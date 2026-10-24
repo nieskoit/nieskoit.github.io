@@ -68,12 +68,30 @@ for (const item of items) {
     fail(`Rekord ${item.id || item.title} nie ma kind.`);
   }
 
-  if (!item.url || !item.url.startsWith('/')) {
-    fail(`Rekord ${item.id || item.title} nie ma lokalnego url zaczynającego się od /.`);
-  } else if (urls.has(item.url)) {
-    fail(`Powielony url "${item.url}" w rekordach ${urls.get(item.url)} i ${item.id}.`);
+  if (typeof item.url !== 'string' || item.url.length === 0) {
+    fail(`Rekord ${item.id || item.title} nie ma poprawnego url.`);
   } else {
-    urls.set(item.url, item.id);
+    const url = item.url;
+    const pathname = url.split(/[?#]/, 1)[0];
+
+    const isSafeLocalUrl =
+      url.startsWith('/') &&
+      !url.startsWith('//') &&
+      !/[\\\s]/.test(url) &&
+      !/[\u0000-\u001F\u007F]/.test(url) &&
+      !/%(?:2f|5c|00|0[0-9a-f]|1[0-9a-f]|7f)/i.test(url) &&
+      !/^[a-z][a-z0-9+.-]*:/i.test(url) &&
+      !pathname.split('/').some(
+        segment => segment === '.' || segment === '..'
+      );
+
+    if (!isSafeLocalUrl) {
+      fail(`Rekord ${item.id || item.title} ma niebezpieczny lub niepoprawny url: "${url}".`);
+    } else if (urls.has(url)) {
+      fail(`Powielony url "${url}" w rekordach ${urls.get(url)} i ${item.id}.`);
+    } else {
+      urls.set(url, item.id);
+    }
   }
 
   for (const rel of item.related || []) {
