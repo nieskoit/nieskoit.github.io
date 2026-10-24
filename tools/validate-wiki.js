@@ -6,6 +6,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
+const crypto = require('node:crypto');
 const { spawnSync } = require('node:child_process');
 
 const ROOT = path.resolve(__dirname, '..');
@@ -213,9 +214,9 @@ walk(PUBLIC);
 
 const expectedVersions = {
   'main.css': '20261024-episode-title-white2',
-  'main.js': '20261024-security1',
-  'catalog-render.js': '20261024-security1',
-  'catalog-sync.js': '20261024-security1',
+  'main.js': crypto.createHash('sha256').update(read(path.join(PUBLIC, 'js', 'main.js'))).digest('hex').slice(0, 12),
+  'catalog-render.js': crypto.createHash('sha256').update(read(path.join(PUBLIC, 'js', 'catalog-render.js'))).digest('hex').slice(0, 12),
+  'catalog-sync.js': crypto.createHash('sha256').update(read(path.join(PUBLIC, 'js', 'catalog-sync.js'))).digest('hex').slice(0, 12),
 };
 
 // Wersja indeksu wyszukiwania jest numeryczna i może zmieniać się przy bumpowaniu.
@@ -274,8 +275,11 @@ for (const file of htmlFiles) {
             `oczekiwano ?v=${expectedSearchIndexVersion}.`
           );
         }
-      } else if (!ref.includes(`?v=${expectedVersions[asset]}`)) {
-        fail(`${relative}: ${asset} ma niespójną wersję cache: ${ref}.`);
+      } else {
+        const versionMatch = ref.match(/[?&]v=([^&]+)/);
+        if (!versionMatch || versionMatch[1] !== expectedVersions[asset]) {
+          fail(`${relative}: ${asset} ma niespójną wersję cache: ${ref}; oczekiwano ?v=${expectedVersions[asset]}.`);
+        }
       }
 
       const pathname = ref.split(/[?#]/)[0];
