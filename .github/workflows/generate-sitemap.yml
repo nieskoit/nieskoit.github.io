@@ -1,3 +1,4 @@
+
 name: Generate sitemap
 
 on:
@@ -25,18 +26,23 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
       - name: Generate episode catalog
-        run: node tools/generate-catalog.js
+        run: node tools/generate-catalog.js --generated-only
+
       - name: Validate wiki data and local references
         run: node tools/validate-wiki.js
+
       - name: Generate sitemap.xml
         run: python3 tools/generate_sitemap.py
+
       - name: Commit sitemap if changed
         run: |
           if git diff --quiet -- public/sitemap.xml public/odcinki/index.html public/szukaj/index.html; then
             echo "Generated files are already up to date"
             exit 0
           fi
+
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add public/sitemap.xml public/odcinki/index.html public/szukaj/index.html
