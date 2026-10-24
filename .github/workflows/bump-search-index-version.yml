@@ -1,4 +1,3 @@
-
 name: Bump search index version
 
 on:
@@ -7,6 +6,7 @@ on:
       - pv
     paths:
       - 'public/js/wiki-search-index.js'
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -77,12 +77,16 @@ jobs:
           echo "version=$(cat version.txt)" >> "$GITHUB_OUTPUT"
           rm version.txt
 
+      - name: Regenerate catalog and search fallback
+        run: node tools/generate-catalog.js --generated-only
+
       - name: Commit version changes
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
           git add -u -- public
+          git add -- public/odcinki/index.html public/szukaj/index.html
 
           if git diff --cached --quiet; then
             echo "No HTML references needed updating."
