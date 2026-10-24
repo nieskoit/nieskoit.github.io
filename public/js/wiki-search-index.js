@@ -109,7 +109,7 @@ window.KT_WIKI_INDEX = [
     "title": "xBAJZEL",
     "kind": "Postać",
     "url": "/postacie/xbajzel/",
-    "summary": "Postać spotkana przez Nieskota, która powraca w kolejnych wydarzeniach i ma znaczenie dla wątku uzbrojenia.",
+    "summary": "Niezależny gracz, który początkowo unika kontaktu z innymi. Dysponuje wiedzą o serwerze i ma własne spojrzenie na rozgrywające się wydarzenia.",
     "creator": "Nieskot",
     "season": "Sezon 1",
     "image": "/assets/characters/xbajzel.webp",
