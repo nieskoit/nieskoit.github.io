@@ -29,6 +29,9 @@ jobs:
         with:
           node-version: 22
 
+      - name: Synchronize JavaScript cache versions in workspace
+        run: node tools/update-asset-versions.js
+
       - name: Check catalog generation
         run: node tools/generate-catalog.js --check
 
