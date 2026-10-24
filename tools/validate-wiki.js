@@ -72,9 +72,9 @@ const htmlFiles = [];
 function walk(dir) { for (const entry of fs.readdirSync(dir, { withFileTypes: true })) { const full = path.join(dir, entry.name); if (entry.isDirectory()) walk(full); else if (entry.isFile() && entry.name.endsWith('.html')) htmlFiles.push(full); } }
 walk(PUBLIC);
 const expectedVersions = {
-  'main.css': '20261023-palette14',
+  'main.css': '20261024-episode-title-white2',
   'main.js': '20261024-publish1',
-  'wiki-search-index.js': '20261023-polish1',
+  'wiki-search-index.js': '20261023-polish3',
   'catalog-render.js': '20261023-polish1',
   'catalog-sync.js': '20261024-publish1',
 };
