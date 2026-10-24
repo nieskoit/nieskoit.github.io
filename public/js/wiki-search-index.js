@@ -76,7 +76,7 @@ window.KT_WIKI_INDEX = [
     "title": "Nieuczesany",
     "kind": "Postać",
     "url": "/postacie/nieuczesany/",
-    "summary": "Były władca, którego upadek i późniejszy powrót wpływają na losy Nieskota.",
+    "summary": "Były władca, którego upadek wpływa na losy Nieskota.",
     "creator": "Nieskot",
     "season": "Sezon 1",
     "image": "/assets/characters/nieuczesany.webp",
