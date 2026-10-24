@@ -1,3 +1,4 @@
+
 #!/usr/bin/env node
 'use strict';
 
@@ -7,6 +8,7 @@ const vm = require('node:vm');
 
 const ROOT = path.resolve(__dirname, '..');
 const CHECK_ONLY = process.argv.includes('--check');
+const GENERATED_ONLY = process.argv.includes('--generated-only');
 const INDEX = path.join(ROOT, 'public', 'js', 'wiki-search-index.js');
 
 const { renderSearchFallback, renderEpisodeDirectory } = require('../public/js/catalog-render.js');
@@ -43,9 +45,9 @@ if (!Array.isArray(items)) {
 
 const visibleItems = items.filter(item => item && item.published !== false);
 
-// Obsługa szkiców jest wykonywana wyłącznie podczas normalnego generowania.
-// Tryb --check musi pozostać bez efektów ubocznych.
-if (!CHECK_ONLY) {
+// Tryb --generated-only odświeża wyłącznie generowane strony.
+// Nie zmienia statusów publikacji szkiców.
+if (!CHECK_ONLY && !GENERATED_ONLY) {
   const DRAFTS = path.join(ROOT, 'pv', 'drafts');
 
   const publicationTypes = [
@@ -62,7 +64,6 @@ if (!CHECK_ONLY) {
   ];
 
   for (const type of publicationTypes) {
-    // Przenieś nieopublikowane strony do katalogu szkiców.
     for (const item of items.filter(
       item => item &&
         item.kind === type.kind &&
@@ -92,7 +93,6 @@ if (!CHECK_ONLY) {
       }
     }
 
-    // Przywróć strony, których status zmienił się na opublikowany.
     for (const item of items.filter(
       item => item &&
         item.kind === type.kind &&
