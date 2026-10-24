@@ -104,11 +104,23 @@ for (const item of items) {
     const value = item[field];
 
     if (typeof value === 'string' && value.startsWith('/assets/')) {
-      const file = path.join(PUBLIC, value.replace(/^\//, ''));
+      const pathname = value.split(/[?#]/, 1)[0];
+      const safeAssetPath = pathname.startsWith('/assets/') &&
+        !pathname.startsWith('//') &&
+        !/[\\\s\u0000-\u001f\u007f]/.test(value) &&
+        !/%(?:2f|5c|00|0[0-9a-f]|1[0-9a-f]|7f)/i.test(value) &&
+        !pathname.split('/').some(segment => segment === '.' || segment === '..');
 
-      if (!fs.existsSync(file)) {
-        fail(`${item.id}: ${field} wskazuje na nieistniejący plik ${value}.`);
+      if (!safeAssetPath) {
+        fail(`${item.id}: ${field} ma niebezpieczną ścieżkę: "${value}".`);
+      } else {
+        const file = path.join(PUBLIC, pathname.replace(/^\//, ''));
+        if (!fs.existsSync(file)) {
+          fail(`${item.id}: ${field} wskazuje na nieistniejący plik ${value}.`);
+        }
       }
+    } else if (typeof value === 'string' && value) {
+      fail(`${item.id}: ${field} musi być lokalną ścieżką /assets/.`);
     }
   }
 
@@ -137,11 +149,15 @@ for (const item of items) {
       warn(`${item.id}: opis miniatury wygląda na tymczasowy.`);
     }
 
-    if (
-      item.youtube &&
-      !/^https?:\/\/(?:www\.)?(?:youtube\.com\/|youtu\.be\/)/i.test(item.youtube)
-    ) {
-      fail(`${item.id}: niepoprawny adres YouTube.`);
+    if (item.youtube) {
+      let parsedYouTube = null;
+      try { parsedYouTube = new URL(item.youtube); } catch (_) {}
+      const host = parsedYouTube?.hostname.toLowerCase().replace(/^www\./, '');
+      const validYouTube = parsedYouTube && parsedYouTube.protocol === 'https:' &&
+        ['youtube.com', 'm.youtube.com', 'youtu.be'].includes(host) &&
+        (host === 'youtu.be' ? Boolean(parsedYouTube.pathname.slice(1)) :
+          ['/watch', '/shorts/', '/embed/'].some(prefix => parsedYouTube.pathname.startsWith(prefix)));
+      if (!validYouTube) fail(`${item.id}: niepoprawny adres YouTube.`);
     }
   }
 }
@@ -197,9 +213,9 @@ walk(PUBLIC);
 
 const expectedVersions = {
   'main.css': '20261024-episode-title-white2',
-  'main.js': '20261024-publish1',
-  'catalog-render.js': '20261023-polish1',
-  'catalog-sync.js': '20261024-publish1',
+  'main.js': '20261024-security1',
+  'catalog-render.js': '20261024-security1',
+  'catalog-sync.js': '20261024-security1',
 };
 
 // Wersja indeksu wyszukiwania jest numeryczna i może zmieniać się przy bumpowaniu.
