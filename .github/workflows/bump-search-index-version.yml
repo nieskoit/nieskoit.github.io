@@ -36,7 +36,11 @@ jobs:
           from pathlib import Path
           import re
 
-          root = Path("public")
+          roots = [
+              Path("public"),
+              Path("pv/SZABLONY-HTML"),
+          ]
+
           pattern = re.compile(
               r'(wiki-search-index\.js)(?:\?v=[^"\'\s&]*)?'
           )
@@ -44,7 +48,13 @@ jobs:
               r'wiki-search-index\.js\?v=(\d+)'
           )
 
-          html_files = [path for root in root if root.exists() for path in root.rglob("*.html")]
+          html_files = [
+              path
+              for root in roots
+              if root.exists()
+              for path in root.rglob("*.html")
+          ]
+
           current_versions = []
 
           for path in html_files:
