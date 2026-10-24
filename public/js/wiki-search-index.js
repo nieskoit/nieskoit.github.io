@@ -292,6 +292,32 @@ window.KT_WIKI_INDEX = [
     "duration": "52:48"
   },
   {
+  "id": "episode-kaicek-1",
+  "title": "Wkrótce",
+  "kind": "Odcinek",
+  "published": false,
+  "summary": "",
+  "description": "",
+  "creator": "Kaicek",
+  "season": "Sezon 1",
+  "related": [],
+  "aliases": [],
+  "year": "2026"
+},
+{
+  "id": "episode-dombeek-1",
+  "title": "Wkrótce",
+  "kind": "Odcinek",
+  "published": false,
+  "summary": "",
+  "description": "",
+  "creator": "Dombeek",
+  "season": "Sezon 1",
+  "related": [],
+  "aliases": [],
+  "year": "2026"
+},
+  {
     "id": "season-2",
     "title": "Sezon 2",
     "kind": "Sezon",
