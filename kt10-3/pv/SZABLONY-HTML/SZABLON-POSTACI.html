@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>[NAZWA POSTACI] | Kraina Twórców</title>
+  <meta name="description" content="[KRÓTKI OPIS POSTACI]">
+  <meta name="theme-color" content="#090b09">
+  <link rel="icon" href="/assets/kt.webp">
+  <link rel="stylesheet" href="/css/main.css?v=20261023-palette3">
+</head>
+<body class="library-page">
+  <a class="skip-link" href="#main">Przejdź do treści</a>
+  <header class="nav">
+    <div class="nav-container">
+      <a aria-label="Kraina Twórców: strona główna" class="nav-logo" href="/"><img alt="KT" src="/assets/kt-logo.webp"></a>
+      <button aria-controls="navMenu" aria-expanded="false" aria-label="Otwórz menu nawigacji" class="menu-toggle" type="button"><span></span><span></span></button>
+      <nav aria-label="Główna nawigacja" class="nav-links" id="navMenu">
+        <a href="/">Uniwersum</a><a href="/#tworcy">Twórcy</a>
+        <details class="nav-group"><summary>Historia</summary><div class="nav-group-menu"><a href="/odcinki/">Odcinki</a><a href="/rozdzialy/">Rozdziały</a><a href="/postacie/">Postacie</a></div></details>
+        <a href="/szukaj/">Szukaj</a><a class="nav-discord" href="https://discord.gg/jRWkeeDrTb" rel="noopener noreferrer" target="_blank">Discord</a>
+      </nav>
+    </div>
+  </header>
+  <main class="library-main" id="main">
+    <section class="page-intro">
+      <p class="breadcrumbs"><a href="/">Uniwersum</a><span aria-hidden="true"> › </span><a href="/postacie/">Postacie</a><span aria-hidden="true"> › </span><span aria-current="page">[NAZWA POSTACI]</span></p>
+      <a class="back-link" href="/postacie/">← Wszystkie postacie</a>
+      <div class="profile-heading">
+        <!-- Jeśli masz portret, zamień poniższy placeholder na: <img class="profile-image" src="/assets/characters/[PLIK.webp]" alt="Portret [NAZWA POSTACI]"> -->
+        <div aria-hidden="true" class="profile-placeholder">✦</div>
+        <div><h1>[NAZWA POSTACI]</h1><p>[KRÓTKI OPIS POSTACI]</p></div>
+      </div>
+    </section>
+    <section class="section-container profile-layout">
+      <article class="lore-article">
+        <h2>Historia</h2>
+        <p>[OPIS HISTORII POSTACI. Używaj tylko informacji potwierdzonych w odcinkach.]</p>
+        <h2>Znaczenie w historii</h2>
+        <p>[MOTYWACJE, CELE I WAŻNE WYDARZENIA]</p>
+      </article>
+      <aside class="lore-sidebar">
+        <section><h2>Powiązania</h2><ul><li><a href="/[TYP]/[SLUG]/">[POWIĄZANA POSTAĆ LUB TWÓRCA]</a> <span>: [RELACJA]</span></li></ul></section>
+        <section><h2>Rozdziały</h2><ul><li><a href="/rozdzialy/[SLUG-ROZDZIALU]/">[NAZWA ROZDZIAŁU]</a></li></ul></section>
+        <section><h2>Wystąpienia</h2><ul><li><a href="/odcinki/[TWORCA]/[SLUG-ODCINKA]/">[TYTUŁ ODCINKA]</a></li></ul></section>
+      </aside>
+    </section>
+  </main>
+  <footer class="footer"><div class="section-container footer-bottom"><p class="footer-disclaimer">Kraina Twórców nie jest powiązana z Mojang AB ani Microsoft Corporation. Minecraft jest znakiem towarowym Mojang AB.</p><a class="footer-top-link" href="#top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">Do góry ↑</a></div></footer>
+
+  <script defer src="/js/wiki-search-index.js?v=20261023-polish1"></script>
+  <script defer src="/js/catalog-sync.js?v=20261023-search1"></script>
+  <script defer src="/js/main.js?v=20261023-search1"></script>
+</body>
+</html>

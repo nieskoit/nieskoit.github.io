@@ -1,0 +1,13 @@
+// Sezon renderuje się na /odcinki/#sezon-N; nie twórz osobnej strony HTML dla sezonu.
+{
+  "id": "season-2",
+  "title": "Sezon 2",
+  "kind": "Sezon",
+  "url": "/odcinki/#sezon-2",
+  "summary": "Opis sezonu.",
+  "creator": "",
+  "season": "Sezon 2",
+  "related": ["creator-TWORCA"],
+  "aliases": [],
+  "thumbnail": "/assets/seasons/sezon-2.webp"
+}

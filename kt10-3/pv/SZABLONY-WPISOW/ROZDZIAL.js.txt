@@ -1,0 +1,13 @@
+// Wklej obiekt do window.KT_WIKI_INDEX. Najpierw utwórz stronę z SZABLON-ROZDZIALU.html.
+{
+  "id": "chapter-SLUG",
+  "title": "Nazwa rozdziału",
+  "kind": "Rozdział",
+  "url": "/rozdzialy/slug-rozdzialu/",
+  "summary": "Opis wątku.",
+  "creator": "Nazwa twórcy z indeksu",
+  "season": "Sezon 1",
+  "related": ["episode-ID-1", "episode-ID-2", "character-ID"],
+  "aliases": [],
+  "thumbnail": "/assets/chapters/slug-rozdzialu.webp"
+}

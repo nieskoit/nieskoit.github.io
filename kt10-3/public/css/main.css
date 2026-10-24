@@ -1,0 +1,1468 @@
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/inter/Inter-VariableFont_opsz%2Cwght.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "DM Serif Display";
+  src: url("../fonts/dm-serif-display/DMSerifDisplay-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  color-scheme: dark;
+  --bg: #0c0f0b;
+  --bg-raised: #121711;
+  --surface: #161c15;
+  --surface-2: #1d251b;
+  --line: rgb(236 244 226 / 0.09);
+  --line-strong: rgb(236 244 226 / 0.18);
+  --text: #eef2e8;
+  --muted: #a3a7a2;
+  --link: var(--text);
+  --accent: #b7e44f;
+  --accent-ink: #0c0f0b;
+  --accent-soft: rgb(183 228 79 / 0.12);
+  --danger: #f08a7e;
+
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "DM Serif Display", "Georgia", serif;
+
+  --step--1: clamp(0.8125rem, 0.79rem + 0.08vw, 0.875rem);
+  --step-0: clamp(0.9375rem, 0.91rem + 0.12vw, 1rem);
+  --step-1: clamp(1.0625rem, 1.02rem + 0.18vw, 1.1875rem);
+  --step-2: clamp(1.25rem, 1.13rem + 0.45vw, 1.5rem);
+  --step-3: clamp(1.625rem, 1.4rem + 0.9vw, 2.125rem);
+  --step-4: clamp(2.25rem, 1.75rem + 2.2vw, 3.5rem);
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 2.5rem;
+  --space-16: 3rem;
+  --space-24: 4rem;
+
+  --radius-s: 6px;
+  --radius-m: 10px;
+  --radius-l: 14px;
+
+  --max: 1200px;
+  --nav-height: 68px;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --t: 180ms;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-height) + 16px); -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: var(--step-0);
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+img, svg, video { display: block; max-width: 100%; height: auto; }
+img { background: var(--surface); }
+a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
+h1, h2, h3, h4 { margin: 0; line-height: 1.12; font-weight: 600; letter-spacing: -0.02em; text-wrap: balance; }
+p { margin: 0; text-wrap: pretty; }
+button, input { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; border-radius: 4px; }
+
+.skip-link {
+  position: absolute; left: var(--space-4); top: -100px; z-index: 100;
+  padding: var(--space-2) var(--space-4); background: var(--accent); color: var(--accent-ink);
+  border-radius: var(--radius-s); font-weight: 600;
+}
+.skip-link:focus { top: var(--space-4); }
+
+.section-container, .library-main .page-intro {
+  width: min(var(--max), calc(100% - 2 * clamp(20px, 4vw, 48px)));
+  margin-inline: auto;
+}
+.section { padding-block: clamp(var(--space-16), 9vw, var(--space-24)); }
+.eyebrow, .hero-kicker, .universe-card-number, .lore-card-meta {
+  font-size: var(--step--1); font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent);
+}
+.muted-text { color: var(--muted); }
+.icon-accent { stroke: var(--accent); }
+
+/* ---------- Nawigacja ---------- */
+.nav {
+  position: sticky; top: 0; z-index: 50;
+  height: var(--nav-height);
+  background: var(--bg);
+  border-bottom: 1px solid transparent;
+  transition: border-color var(--t) var(--ease);
+}
+.nav.scrolled { border-bottom-color: var(--line); }
+.nav-container {
+  height: 100%; width: min(var(--max), calc(100% - 2 * clamp(20px, 4vw, 48px)));
+  margin-inline: auto; display: flex; align-items: center; justify-content: space-between; gap: var(--space-6);
+}
+.nav-logo { display: inline-flex; align-items: center; height: 40px; }
+.nav-logo img { height: 40px; width: auto; background: none; }
+.nav-links { display: flex; align-items: center; gap: var(--space-1); }
+.nav-links > a, .nav-group > summary {
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-s);
+  color: var(--muted);
+  font-size: var(--step--1);
+  font-weight: 500;
+  text-decoration: none;
+  transition: color var(--t), background-color var(--t);
+  cursor: pointer; list-style: none;
+}
+.nav-links > a:hover, .nav-group > summary:hover { color: var(--text); background: var(--surface); }
+.nav-links > a[aria-current="page"] { color: var(--text); background: var(--surface-2); }
+.nav-group { position: relative; }
+.nav-group > summary::-webkit-details-marker { display: none; }
+.nav-group > summary::after { content: "▾"; margin-left: 6px; font-size: 0.7em; opacity: 0.6; }
+.nav-group-menu {
+  position: absolute; top: calc(100% + 8px); left: 0; min-width: 200px;
+  display: grid; gap: 2px; padding: var(--space-2);
+  background: var(--surface); border: 1px solid var(--line-strong); border-radius: var(--radius-m);
+  box-shadow: 0 16px 40px rgb(0 0 0 / 0.35);
+}
+.nav-group-menu a { padding: var(--space-2) var(--space-3); border-radius: var(--radius-s); color: var(--muted); text-decoration: none; font-size: var(--step--1); }
+.nav-group-menu a:hover { color: var(--text); background: var(--surface-2); }
+.nav-discord {
+  margin-left: var(--space-2);
+  padding: var(--space-2) var(--space-4) !important;
+  border: 1px solid var(--line-strong); border-radius: 999px;
+  color: var(--text) !important; font-size: var(--step--1); font-weight: 600; text-decoration: none;
+}
+.nav-discord:hover { background: var(--surface); color: var(--accent) !important; }
+.menu-toggle {
+  display: none; width: 44px; height: 44px; padding: 0; border: 0; background: none; cursor: pointer;
+  position: relative;
+}
+.menu-toggle span {
+  position: absolute; left: 11px; right: 11px; height: 1.5px; background: var(--text);
+  transition: transform var(--t) var(--ease), opacity var(--t);
+}
+.menu-toggle span:nth-child(1) { top: 16px; }
+.menu-toggle span:nth-child(2) { top: 26px; }
+.menu-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(5px) rotate(45deg); }
+.menu-toggle[aria-expanded="true"] span:nth-child(2) { transform: translateY(-5px) rotate(-45deg); }
+
+@media (max-width: 900px) {
+  .menu-toggle { display: block; }
+  .nav-links {
+    position: fixed; inset: var(--nav-height) 0 auto 0;
+    flex-direction: column; align-items: stretch; gap: 2px;
+    max-height: calc(100vh - var(--nav-height)); overflow-y: auto;
+    padding: var(--space-4) clamp(20px, 4vw, 48px) var(--space-8);
+    background: var(--bg-raised); border-bottom: 1px solid var(--line);
+    transform: translateY(-8px); opacity: 0; visibility: hidden;
+    transition: opacity var(--t) var(--ease), transform var(--t) var(--ease), visibility var(--t);
+  }
+  .nav-links.open { transform: none; opacity: 1; visibility: visible; }
+  .nav-links > a, .nav-group > summary { padding: var(--space-3) 0; font-size: var(--step-0); }
+  .nav-group-menu { position: static; box-shadow: none; border: 0; background: none; padding: 0 0 var(--space-2) var(--space-3); }
+  .nav-discord { margin: var(--space-3) 0 0; justify-content: center; text-align: center; }
+}
+
+/* ---------- Przyciski i linki ---------- */
+h1 a, h2 a, h3 a, h4 a, .card-relations a, .season-creator a, .season-episode-list a,
+.featured-card a, .creator-card a, .creator-wiki-card, .wiki-result a, .kt-search-result {
+  text-decoration: none;
+}
+.button {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);
+  min-height: 44px; padding: 0 var(--space-6);
+  border-radius: 999px; border: 1px solid transparent;
+  font-size: var(--step--1); font-weight: 600; text-decoration: none;
+  transition: background-color var(--t);
+}
+.button-primary { background: var(--accent); color: var(--accent-ink); }
+.button-primary:hover { background: #c2e85e; }
+.button-secondary { border-color: var(--line-strong); color: var(--text); background: transparent; }
+.button-secondary:hover { background: var(--surface-2); }
+.button:focus-visible { outline-color: var(--accent); }
+.button-discord { background: var(--text); color: var(--bg); }
+.button-discord:hover { background: var(--muted); }
+.text-link { display: inline-flex; gap: 6px; align-items: center; color: var(--link); font-size: var(--step--1); font-weight: 600; margin-top: auto; padding-top: var(--space-6); text-decoration: underline; text-decoration-color: var(--line-strong); text-underline-offset: .2em; transition: color var(--t), text-decoration-color var(--t); }
+.text-link:hover { color: var(--accent); text-decoration-color: var(--accent); }
+.text-link:focus-visible { color: var(--link); text-decoration-color: var(--accent); }
+.back-link { display: inline-block; margin-bottom: var(--space-8); color: var(--muted); font-size: var(--step--1); text-decoration: none; }
+.back-link:hover { color: var(--text); text-decoration: underline; text-decoration-color: var(--accent); }
+.breadcrumbs { font-size: var(--step--1); color: var(--muted); margin-bottom: var(--space-4); }
+.breadcrumbs a { color: var(--link); text-decoration: underline; text-decoration-color: var(--line-strong); text-underline-offset: .2em; }
+.breadcrumbs a:hover { color: var(--accent); text-decoration-color: var(--accent); }
+
+/* ---------- Hero ---------- */
+.hero {
+  position: relative; min-height: min(78svh, 760px);
+  display: flex; align-items: flex-end; isolation: isolate; overflow: hidden;
+}
+.hero-background { position: absolute; inset: 0; z-index: -2; }
+.hero-background-image {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  opacity: 0; transition: opacity 900ms var(--ease);
+}
+.hero-background-image.is-active { opacity: 0.55; }
+.hero::after {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(to top, var(--bg) 8%, rgb(12 15 11 / 0.55) 60%, rgb(12 15 11 / 0.2));
+}
+.hero-glow { display: none; }
+.hero-content {
+  width: min(var(--max), calc(100% - 2 * clamp(20px, 4vw, 48px)));
+  margin-inline: auto; padding-bottom: clamp(var(--space-12), 9vh, 104px);
+  max-width: min(var(--max), calc(100% - 2 * clamp(20px, 4vw, 48px)));
+}
+.hero h1 {
+  font-family: var(--font-display); font-weight: 400; font-size: var(--step-4);
+  line-height: 0.95; letter-spacing: -0.025em;
+}
+.hero h1 span { color: var(--accent); }
+.hero-description { margin-top: var(--space-6); max-width: 46ch; color: var(--muted); font-size: var(--step-1); }
+.hero-actions { display: flex; flex-wrap: wrap; gap: var(--space-3); margin-top: var(--space-8); }
+.hero-scroll {
+  position: absolute; bottom: var(--space-4); left: 50%; transform: translateX(-50%);
+  color: var(--muted); text-decoration: none; font-size: var(--step-1); line-height: 1;
+}
+.scroll-arrow { display: inline-block; animation: nudge 1.6s var(--ease) 3; }
+@keyframes nudge { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
+
+/* ---------- Sekcje ogólne ---------- */
+.section-title, .universe-heading h2, .creators-heading h2, .featured-heading h2, .page-intro h1, .profile-heading h1 {
+  font-size: var(--step-3); letter-spacing: -0.03em;
+}
+.section-title span, .universe-heading h2 span, .creators-heading h2 span { color: var(--accent); }
+.featured-episodes { padding-top: var(--space-16); }
+.featured-heading { display: flex; align-items: end; justify-content: space-between; gap: var(--space-4); margin-bottom: var(--space-8); }
+.featured-heading h2 { font-size: var(--step-2); }
+.featured-controls { display: flex; gap: var(--space-2); }
+.featured-controls button {
+  width: 44px; height: 44px; border-radius: 999px; border: 1px solid var(--line-strong);
+  background: none; cursor: pointer; font-size: var(--step-0); color: var(--text);
+  transition: border-color var(--t), color var(--t);
+}
+.featured-controls button:hover { background: var(--surface); color: var(--accent); }
+.featured-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-6); transition: opacity var(--t); }
+.featured-grid.is-changing { opacity: 0.4; }
+.featured-card { display: flex; flex-direction: column; gap: var(--space-3); }
+.featured-card-image { overflow: hidden; border-radius: var(--radius-m); aspect-ratio: 16 / 9; background: var(--surface); }
+.featured-card-image img { width: 100%; height: 100%; object-fit: cover; }
+.featured-card-meta { font-size: var(--step--1); color: var(--muted); }
+.featured-card h3 { font-size: var(--step-1); }
+.featured-card-body p { color: var(--muted); font-size: var(--step--1); }
+.featured-card-actions { display: flex; gap: var(--space-4); font-size: var(--step--1); font-weight: 600; }
+.featured-card-actions .button { min-height: 40px; padding: 0 var(--space-4); font-size: 13px; }
+.featured-card-actions .button-secondary { color: var(--text); }
+.featured-card-actions .button-primary { color: var(--accent-ink); }
+
+/* ---------- Uniwersum (karty) ---------- */
+.universe-intro { border-top: 1px solid var(--line); }
+.universe-heading { max-width: 720px; margin-bottom: var(--space-12); }
+.universe-heading h2 { margin: var(--space-3) 0 var(--space-4); }
+.universe-heading > p:last-child, .creators-lead { color: var(--muted); font-size: var(--step-1); max-width: 62ch; }
+.universe-grid, .catalog-grid, .creator-grid, .creator-wiki-grid {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-4);
+}
+.universe-card, .lore-card, .creator-card {
+  display: flex; flex-direction: column; min-width: 0;
+  padding: var(--space-8); border: 1px solid var(--line); border-radius: var(--radius-l);
+  background: var(--surface); color: inherit; text-decoration: none;
+  transition: border-color var(--t), background-color var(--t);
+}
+.universe-card:hover, .lore-card:hover, .creator-card:hover { border-color: var(--line-strong); background: var(--surface-2); }
+.universe-card-icon { width: 40px; height: 40px; margin-bottom: var(--space-8); fill: none; stroke: var(--text); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+.universe-card h3, .lore-card h3 { font-size: var(--step-2); margin-bottom: var(--space-3); letter-spacing: -0.02em; }
+.universe-card p, .lore-card p { color: var(--muted); font-size: var(--step--1); }
+.universe-card .text-link { margin-top: auto; }
+.universe-card:nth-child(n) .universe-card-icon { stroke: var(--text); }
+.universe-card-number { margin-bottom: var(--space-4); }
+
+/* ---------- Crystal (sekcja narracyjna) ---------- */
+.crystal { background: var(--bg-raised); border-block: 1px solid var(--line); }
+.crystal-layout { display: block; max-width: 720px; }
+.crystal-copy h2 { font-size: var(--step-3); }
+.crystal-copy h2 span { color: var(--accent); }
+.crystal-copy p { color: var(--muted); margin-top: var(--space-6); max-width: 56ch; font-size: var(--step-1); }
+.crystal-copy strong { color: var(--text); }
+.crystal-visual { position: relative; aspect-ratio: 4 / 5; border-radius: var(--radius-l); overflow: hidden; background: var(--surface); }
+.crystal-art { position: absolute; inset: 0; display: grid; place-items: center; }
+.crystal-art img { width: 70%; height: auto; }
+.crystal-shadow, .crystal-glow, .crystal-grid-line { display: none !important; }
+.crystal-name {color: var(--accent); font-weight: 600;}
+.crystal-cta { display: inline-flex; margin-top: var(--space-8); }
+
+/* ---------- Discord ---------- */
+.discord-panel {display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-8); padding: var(--space-12); border: 1px solid var(--line); border-radius: var(--radius-l); background: var(--surface);}
+.discord-brand-symbol { width: 56px; height: 56px; }
+.discord-copy { flex: 1 1 360px; min-width: 0; }
+.discord-copy h2 { font-size: var(--step-3); }
+.discord-subtitle { color: var(--muted); margin-top: var(--space-4); font-size: var(--step-0); max-width: 44ch; }
+.discord-right { display: flex; flex: 0 0 auto; justify-content: flex-end; }
+
+/* ---------- Strony katalogów i nagłówki ---------- */
+.library-main { padding-top: 0; min-height: 70vh; }
+.library-main .page-intro { padding: clamp(var(--space-12), 8vw, var(--space-24)) 0 var(--space-8); }
+.page-intro h1 { margin: var(--space-3) 0 var(--space-4); }
+.page-intro > p:not(.eyebrow):not(.search-status) { max-width: 60ch; color: var(--muted); font-size: var(--step-1); }
+.catalog-search {
+  display: block; width: min(100%, 560px); margin-top: var(--space-6); padding: var(--space-3) var(--space-4);
+  background: var(--surface); border: 1px solid var(--line-strong); border-radius: var(--radius-m);
+  transition: border-color var(--t);
+}
+.catalog-search:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+.search-label { display: block; margin-top: var(--space-6); color: var(--muted); font-size: var(--step--1); }
+.search-status { margin-top: var(--space-2); color: var(--muted); font-size: var(--step--1); }
+.catalog-section { margin-top: var(--space-12); }
+.catalog-section-heading { font-size: var(--step-2); margin-bottom: var(--space-6); padding-bottom: var(--space-4); border-bottom: 1px solid var(--line); }
+.catalog-grid { padding-bottom: var(--space-24); }
+.lore-card { min-height: 0; }
+.lore-card-meta { margin-bottom: var(--space-4); }
+.empty-state { text-align: center; padding: var(--space-16) var(--space-6); color: var(--muted); }
+.error-page { padding: var(--space-24) 0; text-align: center; }
+
+/* Wiersze odcinków */
+.episode-catalog-list { list-style: none; padding: 0; margin: 0; }
+.episode-catalog-list .lore-card, .episode-row {
+  display: grid; grid-template-columns: minmax(150px, 220px) minmax(0, 1fr) auto; align-items: center; gap: var(--space-6);
+  padding: var(--space-6) 0; border: 0; border-top: 1px solid var(--line); border-radius: 0; background: transparent;
+}
+.episode-catalog-list .lore-card:hover { background: transparent; }
+.episode-catalog-list > li:last-child .lore-card { border-bottom: 1px solid var(--line); }
+.episode-row-thumb img, .episode-card-thumb img, .episode-thumb img, .season-episode-thumb img, .chapter-card-thumb img, .kt-search-thumb img {
+  width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: var(--radius-s);
+}
+.episode-row-main h3, .episode-card-content h3 { font-size: var(--step-1); margin-bottom: var(--space-1); }
+.episode-row-main p, .episode-card-content p { color: var(--muted); font-size: var(--step--1); }
+.episode-row-meta, .episode-row-meta-data, .episode-meta-row, .episode-time-meta { font-size: var(--step--1); color: var(--muted); }
+.episode-order, .episode-number-badge {
+  display: inline-block; margin-right: var(--space-2); padding: 2px 8px; border-radius: 999px;
+  background: var(--accent-soft); color: var(--accent); font-size: 12px; font-weight: 600; letter-spacing: 0.02em; white-space: nowrap;
+}
+.episode-row-actions, .episode-card-actions { display: flex; flex-direction: column; gap: var(--space-2); }
+.episode-card-actions { flex-direction: row; flex-wrap: wrap; margin-top: var(--space-4); }
+.episode-card-actions .button, .episode-row-actions .button { min-height: 40px; padding: 0 var(--space-4); font-size: 13px; }
+.episode-card-thumb { display: block; margin-bottom: var(--space-4); }
+.episode-card-content { display: flex; flex-direction: column; gap: var(--space-2); }
+.episode-catalog-card { padding: var(--space-6); }
+.card-relations { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-4); font-size: var(--step--1); color: var(--muted); }
+.card-relations a { color: var(--text); }
+.episode-meta-separator { opacity: 0.4; margin: 0 var(--space-2); }
+.episode-description { color: var(--text); }
+
+/* Sezony */
+.seasons-list { grid-template-columns: 1fr; gap: var(--space-16); }
+.season-block {display: grid; gap: var(--space-8); align-items: start;}
+.season-cover { border-radius: var(--radius-l); overflow: hidden; background: var(--surface); max-width: 360px; }
+.season-cover img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+.season-block-heading { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-4); padding-bottom: var(--space-4); border-bottom: 1px solid var(--line); }
+.season-block-heading h2 { font-size: var(--step-3); }
+.season-block-heading > span { color: var(--muted); font-size: var(--step--1); }
+.season-block-heading p, .season-block > p { color: var(--muted); font-size: var(--step-1); max-width: 62ch; margin-top: var(--space-3); }
+.season-creator { color: var(--accent); font-size: var(--step--1); font-weight: 600; }
+.season-episode-list { list-style: none; padding: 0; margin: var(--space-6) 0; display: grid; gap: var(--space-3); }
+.season-episode-list li {display: grid; grid-template-columns: 48px minmax(0, 1fr); column-gap: var(--space-4); row-gap: 2px; align-items: baseline; padding: var(--space-4) 0; border-top: 1px solid var(--line);}
+.season-episode-info h4 { font-size: var(--step-0); }
+.season-episode-info p { color: var(--muted); font-size: var(--step--1); }
+.season-cta { margin-top: var(--space-4); }
+.season-block-empty { color: var(--muted); padding: var(--space-6); border: 1px dashed var(--line-strong); border-radius: var(--radius-m); }
+
+/* Twórcy */
+.creators { padding-top: var(--space-8); }
+.creator-card { gap: var(--space-4); padding: var(--space-6); }
+.creator-avatar, .creator-profile-image, .profile-image, .profile-placeholder {
+  width: 84px; height: 84px; border-radius: 999px; object-fit: cover; background: var(--surface-2); border: 1px solid var(--line);
+}
+.creator-card .creator-avatar { width: 96px; height: 96px; }
+.creator-meta h3 { font-size: var(--step-1); }
+.creator-meta p { color: var(--muted); font-size: var(--step--1); }
+.avatar-wrap { display: inline-flex; }
+.profile-heading { display: flex; align-items: center; gap: clamp(var(--space-6), 4vw, var(--space-12)); margin-bottom: var(--space-12); }
+.profile-image, .profile-placeholder { width: clamp(96px, 14vw, 160px); height: clamp(96px, 14vw, 160px); }
+.profile-placeholder { display: grid; place-items: center; color: var(--accent); font-size: var(--step-3); }
+.profile-heading p:last-child { color: var(--muted); max-width: 60ch; margin-top: var(--space-3); }
+.creator-profile-description { color: var(--muted); max-width: 60ch; margin-top: var(--space-3); line-height: 1.7; }
+.creator-profile-links { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-4); }
+.creator-wiki-card { padding: var(--space-6); }
+.profile-layout { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(240px, 0.8fr); gap: clamp(var(--space-8), 5vw, var(--space-16)); padding-bottom: var(--space-24); }
+.lore-article h2, .lore-sidebar h2 { font-size: var(--step-2); margin-bottom: var(--space-4); }
+.lore-article p { color: var(--muted); line-height: 1.8; margin-bottom: var(--space-6); max-width: 68ch; }
+.lore-article a:not(.button), .lore-sidebar a:not(.button), .linked-list a,
+.card-relations a, .episode-context a, .creator-profile-links a { color: var(--link); text-decoration: underline; text-decoration-color: var(--line-strong); text-underline-offset: .2em; transition: color var(--t), text-decoration-color var(--t); }
+.profile-layout .lore-article a:not(.button), .profile-layout .lore-sidebar a:not(.button),
+.card-relations a, .episode-context a, .creator-profile-links a { color: var(--accent); }
+.lore-article a:not(.button):hover, .lore-sidebar a:not(.button):hover,
+.linked-list a:hover, .card-relations a:hover, .episode-context a:hover, .creator-profile-links a:hover {
+  color: var(--accent);
+  text-decoration-color: var(--accent);
+}
+.lore-article a:not(.button):focus-visible, .lore-sidebar a:not(.button):focus-visible,
+.linked-list a:focus-visible, .card-relations a:focus-visible, .episode-context a:focus-visible, .creator-profile-links a:focus-visible {
+  color: var(--link);
+  text-decoration-color: var(--accent);
+}
+.lore-sidebar { display: grid; align-content: start; gap: var(--space-4); }
+.lore-sidebar section { padding: var(--space-6); border: 1px solid var(--line); border-radius: var(--radius-l); background: var(--surface); }
+.lore-sidebar section > .button { margin-top: var(--space-4); }
+.lore-sidebar p { color: var(--muted); }
+.lore-sidebar ul, .linked-list { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--space-3); }
+.lore-sidebar li, .linked-list li { color: var(--muted); font-size: var(--step--1); line-height: 1.5; }
+.lore-sidebar li span { color: var(--muted); }
+.lore-sidebar .appearance-creator {
+  display: block;
+  margin-top: .15rem;
+  color: var(--muted);
+  font-size: .92em;
+}
+.lore-sidebar .appearance-creator a { font-weight: 600; }
+.profile-layout .lore-article a:not(.button):hover,
+.profile-layout .lore-article a:not(.button):focus-visible,
+.profile-layout .lore-sidebar a:not(.button):hover,
+.profile-layout .lore-sidebar a:not(.button):focus-visible {
+  text-underline-offset: .2em;
+}
+.relation-chip { display: inline-flex; align-items: center; margin: 2px; padding: 4px 10px; border-radius: 999px; font-size: 13px; text-decoration: none; border: 1px solid var(--line-strong); }
+.relation-chip-active { color: var(--accent); border-color: rgb(183 228 79 / 0.4); }
+.relation-chip-active:hover { background: var(--accent-soft); }
+.relation-chip-inactive { color: var(--muted); }
+.character-link { color: var(--accent); }
+.character-unlinked { color: var(--muted); }
+.wiki-relations, .wiki-note { font-size: var(--step--1); color: var(--muted); margin-top: var(--space-6); }
+.creator-profile-image { width: 84px; }
+
+/* Rozdziały */
+.chapter-card-thumb { overflow: hidden; border-radius: var(--radius-m); margin-bottom: var(--space-4); }
+.chapter-cover { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; border-radius: var(--radius-l); overflow: hidden; background: var(--surface); }
+.chapter-cover img { width: 100%; height: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+
+/* Postacie */
+.character-card-image { border-radius: var(--radius-m); overflow: hidden; aspect-ratio: 4 / 5; background: var(--surface-2); margin-bottom: var(--space-4); }
+.character-card-image img { width: 100%; height: 100%; object-fit: cover; }
+
+/* ---------- Wyszukiwarka ---------- */
+.search-filters { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-6); }
+.search-input-row { display: flex; gap: var(--space-2); align-items: center; }
+.search-input-row .catalog-search { width: 100%; }
+.search-help { color: var(--muted); font-size: var(--step--1); margin-top: var(--space-3); }
+.search-mode-switch { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); margin-top: var(--space-6); }
+.search-mode-switch > span { padding: 0 var(--space-4); color: var(--accent); font-size: var(--step--1); font-weight: 600; }
+.search-mode-switch .button { min-height: 40px; }
+.search-results-heading { font-size: var(--step-1); margin: var(--space-8) 0 var(--space-4); }
+.wiki-results-list { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--space-4); }
+.wiki-result, .wiki-result-card { padding: var(--space-6); border: 1px solid var(--line); border-radius: var(--radius-l); background: var(--surface); }
+.wiki-result h3 { font-size: var(--step-1); margin: var(--space-2) 0; }
+.wiki-result p { color: var(--muted); font-size: var(--step--1); }
+.wiki-result-meta { display: flex; flex-wrap: wrap; gap: var(--space-3); font-size: var(--step--1); color: var(--muted); margin-top: var(--space-3); }
+.result-kind { display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); }
+.search-match { outline: 1px solid var(--accent); }
+.query-title-highlight, .query-related-highlight { color: var(--accent); }
+.wiki-search-results:empty { display: none; }
+
+/* Overlay wyszukiwania */
+.kt-search-overlay {
+  position: fixed; inset: 0; z-index: 1200; display: none;
+  background: rgb(6 8 6 / 0.72); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+}
+.kt-search-overlay.is-open { display: block; }
+.kt-search-content {
+  width: min(680px, calc(100% - 32px)); max-height: min(78vh, 720px); margin: 12vh auto 0;
+  display: flex; flex-direction: column; overflow: hidden;
+  background: var(--bg-raised); border: 1px solid var(--line-strong); border-radius: var(--radius-l);
+  box-shadow: 0 24px 70px rgb(0 0 0 / 0.5);
+}
+.kt-search-top { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-4); border-bottom: 1px solid var(--line); }
+.kt-search-symbol { color: var(--muted); }
+.kt-search-field-wrap { flex: 1; min-width: 0; }
+.kt-search-input { width: 100%; padding: var(--space-2) 0; background: none; border: 0; font-size: var(--step-0); }
+.kt-search-input:focus { outline: none; }
+.kt-search-top:focus-within { box-shadow: inset 0 -2px 0 var(--accent); }
+.kt-search-shortcut, .kt-search-hint { font-size: 12px; color: var(--muted); border: 1px solid var(--line-strong); border-radius: 6px; padding: 2px 6px; }
+.kt-search-close { width: 36px; height: 36px; border: 0; background: none; border-radius: var(--radius-s); cursor: pointer; color: var(--muted); }
+.kt-search-close:hover { color: var(--text); background: var(--surface); }
+.kt-search-quicklinks { display: flex; flex-wrap: wrap; gap: var(--space-2); padding: var(--space-3) var(--space-4); border-bottom: 1px solid var(--line); }
+.kt-search-quicklinks button { padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line-strong); background: none; font-size: 13px; cursor: pointer; color: var(--muted); }
+.kt-search-quicklinks button:hover { color: var(--accent); }
+.kt-search-quicklinks button.is-active { color: var(--accent-ink); background: var(--accent); border-color: var(--accent); }
+.kt-search-results { overflow-y: auto; padding: var(--space-2); }
+.kt-search-section-label { padding: var(--space-3) var(--space-3) var(--space-1); font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.kt-search-result {
+  display: grid; grid-template-columns: 56px minmax(0, 1fr) auto; align-items: center; gap: var(--space-3);
+  padding: var(--space-2) var(--space-3); border-radius: var(--radius-s); text-decoration: none;
+}
+.kt-search-result:hover, .kt-search-result:focus-visible { background: var(--surface); }
+.kt-search-thumb { width: 56px; }
+.kt-search-thumb img { aspect-ratio: 16 / 9; }
+.kt-search-result-copy strong { display: block; font-size: var(--step--1); font-weight: 600; }
+.kt-search-result-copy span { display: block; font-size: 12px; color: var(--muted); }
+.kt-search-arrow { color: var(--muted); }
+.kt-search-result:hover .kt-search-arrow { color: var(--accent); }
+.kt-search-empty, .kt-search-status-row, .kt-search-summary, .kt-search-meta { font-size: var(--step--1); color: var(--muted); padding: var(--space-3); }
+.kt-search-all { display: block; margin: var(--space-2); padding: var(--space-3); text-align: center; color: var(--accent); font-size: var(--step--1); font-weight: 600; text-decoration: none; border-radius: var(--radius-s); }
+.kt-search-all:hover { background: var(--surface); color: var(--text); text-decoration: underline; }
+
+/* ---------- Stopka ---------- */
+.footer { border-top: 1px solid var(--line); padding-block: var(--space-12) var(--space-8); color: var(--muted); font-size: var(--step--1); }
+.footer-top-link { display: inline-block; margin-bottom: var(--space-6); color: var(--text); text-decoration: none; }
+.footer-top-link:hover { color: var(--accent); text-decoration: underline; text-underline-offset: .2em; }
+.footer-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--space-4); }
+.footer-links { display: flex; flex-wrap: wrap; gap: var(--space-4); }
+.footer-links a { color: var(--link); text-decoration: underline; text-decoration-color: var(--line-strong); text-underline-offset: .2em; }
+.footer-links a:hover { color: var(--accent); text-decoration-color: var(--accent); }
+.footer-disclaimer { max-width: 60ch; }
+.library-page .footer { margin-top: var(--space-8); }
+
+/* ---------- Adaptacja ---------- */
+@media (max-width: 1024px) {
+  .featured-grid, .universe-grid, .catalog-grid, .creator-grid, .creator-wiki-grid, .season-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .crystal-layout { grid-template-columns: 1fr; }
+  .crystal-visual { aspect-ratio: 16 / 10; }
+}
+@media (max-width: 900px) {
+  .profile-layout { grid-template-columns: 1fr; }
+  .season-block { grid-template-columns: 1fr; }
+  .discord-panel { grid-template-columns: 1fr; padding: var(--space-8); }
+  .discord-right { justify-content: flex-start; }
+}
+@media (max-width: 720px) {
+  .episode-catalog-list .lore-card, .episode-row { grid-template-columns: 1fr; gap: var(--space-3); }
+  .episode-row-actions { flex-direction: row; flex-wrap: wrap; }
+}
+@media (max-width: 600px) {
+  body { font-size: var(--step-0); }
+  .featured-grid, .universe-grid, .catalog-grid, .creator-grid, .creator-wiki-grid, .season-grid { grid-template-columns: 1fr; }
+  .universe-card { padding: var(--space-6); }
+  .hero { min-height: min(74svh, 680px); }
+  .hero-actions .button { flex: 1 1 auto; }
+  .season-episode-list li { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; }
+}
+
+/* ---------- Ruch ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition-duration: 0.01ms !important; }
+}
+
+/* Season internals: creator header and episode rows */
+.season-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-6); }
+.season-creator > header { display: flex; align-items: center; gap: var(--space-4); margin: var(--space-6) 0 var(--space-2); }
+.season-creator > header img { width: 56px; height: 56px; border-radius: 999px; object-fit: cover; background: var(--surface-2); border: 1px solid var(--line); }
+.season-creator h3 { font-size: var(--step-1); }
+.season-creator h3 a { color: var(--text); }
+.season-episode-list { display: block; list-style: none; padding: 0; }
+.season-episode-list li > a { grid-column: 2; font-weight: 600; color: var(--text); }
+.season-episode-list li > span:last-child { grid-column: 2; color: var(--muted); font-size: var(--step--1); line-height: 1.6; }
+.season-episode-thumb { grid-row: span 2; font-variant-numeric: tabular-nums; color: var(--accent); font-size: var(--step--1); font-weight: 600; padding-top: 2px; }
+
+/* Creators: name and description stacked; uniform image sizes */
+.creator-card { flex-direction: row; align-items: center; gap: var(--space-4); }
+.creator-meta { display: block; min-width: 0; }
+.creator-meta strong { display: block; font-size: var(--step-1); font-weight: 600; color: var(--text); }
+.creator-meta p, .creator-meta span { display: block; color: var(--muted); font-size: var(--step--1); margin-top: 2px; }
+.creator-wiki-card { display: flex; flex-direction: column; padding: 0; overflow: hidden; }
+.creator-wiki-card img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 0; background: var(--surface-2); }
+.creator-wiki-card > div { padding: var(--space-4) var(--space-6) var(--space-6); }
+.creator-wiki-card h2 { font-size: var(--step-1); }
+.universe-card > *, .creator-card > * { min-width: 0; }
+
+@media (max-width: 600px) {
+  .discord-right .button { width: 100%; }
+}
+
+
+/* ---------- Corrective polish: compact rhythm, search dialog, and overflow safety ---------- */
+:where(button, input, select, textarea) { max-width: 100%; }
+:where(p, li, .lore-card, .wiki-result, .episode-row-main) { overflow-wrap: anywhere; }
+.nav, .nav-container { min-width: 0; }
+.nav-logo img { max-width: 124px; }
+.nav-links { min-width: 0; }
+.hero h1 { line-height: 0.98; }
+.hero-description { max-width: 42ch; }
+.section { padding-block: clamp(2.75rem, 6vw, 4.5rem); }
+.featured-card { min-width: 0; }
+.featured-card-actions { flex-wrap: wrap; gap: var(--space-2); }
+.featured-card-actions .button { white-space: normal; text-align: center; }
+.universe-card { padding: clamp(1.25rem, 2.2vw, 1.75rem); }
+.discord-panel { padding: clamp(1.25rem, 3vw, 2rem); }
+.profile-heading { gap: clamp(1rem, 3vw, 2rem); }
+.profile-layout { grid-template-columns: minmax(0, 1.6fr) minmax(220px, 0.8fr); }
+.catalog-grid { align-items: stretch; }
+.lore-card, .wiki-result, .wiki-result-card { min-width: 0; }
+.catalog-search { min-height: 44px; }
+
+/* The search field and result list are one centered dialog, not two detached panels. */
+.kt-search-overlay.is-open {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: clamp(1rem, 7vh, 4rem) 16px 24px;
+  overflow-y: auto;
+}
+.kt-search-top, .kt-search-content {
+  width: min(680px, 100%);
+  margin: 0;
+  background: var(--bg-raised);
+  border-left: 1px solid var(--line-strong);
+  border-right: 1px solid var(--line-strong);
+  box-shadow: 0 24px 70px rgb(0 0 0 / 0.32);
+}
+.kt-search-top {
+  flex: 0 0 auto;
+  border-top: 1px solid var(--line-strong);
+  border-radius: var(--radius-l) var(--radius-l) 0 0;
+}
+.kt-search-content {
+  max-height: min(68vh, 620px);
+  border-bottom: 1px solid var(--line-strong);
+  border-radius: 0 0 var(--radius-l) var(--radius-l);
+  box-shadow: 0 24px 70px rgb(0 0 0 / 0.32);
+}
+.kt-search-status-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.kt-search-all { flex: 0 0 auto; margin: 0; }
+.kt-search-result { min-width: 0; }
+.kt-search-result-copy { min-width: 0; }
+.kt-search-result-copy .kt-search-summary { padding: 4px 0 0; line-height: 1.45; }
+.kt-search-result-copy .kt-search-meta { padding: 0; }
+.kt-search-close { flex: 0 0 36px; }
+
+@media (max-width: 900px) {
+  .nav-links { padding-top: 1rem; }
+  .nav-links > a, .nav-group > summary { min-height: 44px; display: flex; align-items: center; }
+  .nav-group > summary { justify-content: space-between; }
+  .profile-layout { grid-template-columns: minmax(0, 1fr); }
+  .discord-panel { gap: 1.5rem; }
+}
+@media (max-width: 600px) {
+  .section-container, .library-main .page-intro, .hero-content, .nav-container {
+    width: calc(100% - 32px);
+  }
+  .hero { min-height: min(72svh, 620px); }
+  .hero-content { padding-bottom: 5rem; }
+  .hero h1 { font-size: clamp(2.5rem, 12vw, 3.25rem); }
+  .hero-description { font-size: 1rem; }
+  .hero-actions { gap: 0.625rem; }
+  .hero-actions .button { flex: 1 1 100%; }
+  .featured-heading { gap: 1rem; }
+  .featured-grid { gap: 1rem; }
+  .featured-card-actions .button { flex: 1 1 100%; }
+  .profile-heading { align-items: flex-start; }
+  .profile-image, .profile-placeholder { width: 88px; height: 88px; flex: 0 0 88px; }
+  .episode-catalog-list .lore-card, .episode-row { padding-block: 1rem; }
+  .kt-search-overlay.is-open { padding: 12px; }
+  .kt-search-top { padding: 12px; gap: 8px; }
+  .kt-search-shortcut { display: none; }
+  .kt-search-content { max-height: 76vh; }
+  .kt-search-status-row { align-items: flex-start; }
+  .kt-search-quicklinks { gap: 6px; }
+  .kt-search-quicklinks button { min-height: 36px; padding: 6px 10px; }
+  .kt-search-result { grid-template-columns: 44px minmax(0, 1fr) auto; padding: 8px; gap: 8px; }
+  .kt-search-thumb { width: 44px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .scroll-arrow { animation: none; }
+}
+
+
+/* ---------- Final corrective pass: stable content sizing and editorial rhythm ---------- */
+/* Prevent grid/flex children from collapsing to min-content width. */
+.library-main,
+.library-main > *,
+.section-container,
+.page-intro,
+.catalog-section,
+.season-block,
+.season-grid,
+.season-creator,
+.profile-layout,
+.lore-article,
+.lore-sidebar,
+.creator-wiki-card,
+.episode-catalog-card,
+.lore-card,
+.chapter-card,
+.chapter-card-content,
+.episode-row-main,
+.episode-card-content {
+  min-width: 0;
+}
+.season-block { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-8); }
+.episode-seasons-directory .season-block + .season-block { margin-top: var(--space-16); }
+.episode-seasons-directory .season-block-heading { padding-bottom: var(--space-6); }
+.season-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1rem, 2vw, 2rem); align-items: start; }
+.season-creator { min-width: 0; color: var(--text); }
+.season-creator > header { display: flex; align-items: center; gap: .75rem; margin-bottom: .75rem; }
+.season-creator > header img { width: 42px; height: 42px; flex: 0 0 42px; object-fit: cover; border-radius: 50%; }
+.season-creator h3 { font-size: var(--step-1); margin: 0; }
+.season-episode-list { display: grid !important; gap: 0; margin: .75rem 0 0; padding: 0; }
+.season-episode-list li {
+  display: grid;
+  grid-template-columns: 2.25rem minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  column-gap: .85rem;
+  row-gap: .25rem;
+  align-items: start;
+  min-width: 0;
+  padding: 1rem 0;
+  border-top: 1px solid var(--line);
+}
+.season-episode-list li > .season-episode-thumb { grid-column: 1; grid-row: 1 / span 2; padding-top: .15rem; color: var(--accent); font-size: var(--step--1); font-weight: 700; }
+.season-episode-list li > a { grid-column: 2; grid-row: 1; min-width: 0; font-weight: 650; line-height: 1.4; overflow-wrap: anywhere; color: var(--text); }
+.season-episode-list li > span:last-child { grid-column: 2; grid-row: 2; min-width: 0; color: var(--muted); font-size: var(--step--1); line-height: 1.55; }
+.season-episode-list li > a,
+.season-episode-list li > span:last-child { width: auto; max-width: 100%; }
+.season-episode-list img { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; }
+.season-block-heading { align-items: flex-start; }
+.season-block-heading > span { white-space: nowrap; }
+.season-block-empty { margin-top: var(--space-8); }
+.episode-catalog-list { display: grid; gap: 0; }
+.episode-catalog-list > li { min-width: 0; }
+.episode-catalog-list .lore-card,
+.episode-row { grid-template-columns: minmax(180px, 280px) minmax(0, 1fr) auto; min-width: 0; }
+.episode-row-thumb,
+.episode-card-thumb,
+.chapter-card-thumb,
+.kt-search-thumb { display: block; min-width: 0; overflow: hidden; }
+.episode-row-thumb img,
+.episode-card-thumb img,
+.episode-thumb img,
+.season-episode-thumb img,
+.chapter-card-thumb img,
+.kt-search-thumb img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: var(--radius-m);
+}
+.chapter-card { min-width: 0; }
+.chapter-card-thumb { width: 100%; }
+.chapter-card-content { overflow-wrap: anywhere; }
+.chapter-card h2,
+.chapter-card h3 { text-wrap: balance; }
+.profile-heading { min-width: 0; }
+.profile-image.creator-profile-image { width: 84px; height: 112px; flex: 0 0 84px; object-fit: cover; border-radius: var(--radius-m); }
+.profile-layout { align-items: start; }
+.lore-article > * + h2 { margin-top: var(--space-6); }
+.lore-sidebar section { padding: var(--space-6); border: 1px solid var(--line); border-radius: var(--radius-l); background: var(--surface); }
+.page-intro { padding-bottom: var(--space-8); }
+.breadcrumbs { display: flex; flex-wrap: wrap; gap: .4rem; align-items: center; overflow-wrap: anywhere; }
+img { max-width: 100%; }
+@media (max-width: 900px) {
+  .season-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .episode-catalog-list .lore-card, .episode-row { grid-template-columns: minmax(150px, 220px) minmax(0, 1fr); }
+  .episode-row-actions, .episode-card-actions { grid-column: 2; }
+}
+@media (max-width: 640px) {
+  .season-grid { grid-template-columns: minmax(0, 1fr); }
+  .season-block-heading { flex-wrap: wrap; }
+  .episode-catalog-list .lore-card, .episode-row { grid-template-columns: minmax(0, 1fr); }
+  .episode-row-actions, .episode-card-actions { grid-column: 1; }
+  .profile-image.creator-profile-image { width: 68px; height: 90px; flex-basis: 68px; }
+  .page-intro { padding-bottom: var(--space-6); }
+}
+
+
+/* ---------- Layout correction: real catalog markup ----------
+   These rules intentionally target the DOM emitted by catalog-sync.js,
+   rather than the legacy static markup that used the same class names. */
+.episode-catalog-directory,
+.episode-catalog-directory > section,
+.episode-catalog-list,
+.episode-row,
+.episode-row-main,
+.episode-card-content,
+.chapter-card-thumb,
+.season-block,
+.season-grid,
+.season-creator,
+.season-episode-list,
+.season-episode-list > li { min-width: 0; }
+
+/* Episode directory: thumbnail, flexible text, actions. */
+.episode-catalog-list > li { list-style: none; }
+.episode-catalog-list .episode-row {
+  display: grid;
+  grid-template-columns: minmax(180px, 260px) minmax(0, 1fr) minmax(150px, 190px);
+  align-items: center;
+  gap: clamp(1rem, 2.4vw, 2rem);
+  padding: clamp(1.25rem, 2.5vw, 1.75rem) 0;
+  border-top: 1px solid var(--line);
+}
+.episode-row-thumb { display: block; min-width: 0; margin: 0; overflow: hidden; border-radius: var(--radius-m); background: var(--surface); }
+.episode-row-thumb img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; }
+.episode-row-main { min-width: 0; overflow-wrap: normal; }
+.episode-row-main h3 { margin: 0 0 .4rem; font-size: clamp(1rem, 1.25vw, 1.25rem); line-height: 1.35; }
+.episode-row-main .episode-title-line { display: flex; flex-wrap: wrap; align-items: center; gap: .45rem .6rem; }
+.episode-row-main .episode-title-line > a { min-width: 0; overflow-wrap: anywhere; }
+.episode-row-main > p { margin: .45rem 0 0; line-height: 1.65; }
+.episode-row-actions { display: flex; flex-direction: column; align-items: stretch; gap: .55rem; min-width: 0; }
+.episode-row-actions .button { width: 100%; min-width: 0; white-space: normal; text-align: center; }
+
+/* Seasons: each creator gets a full-width lane; episode artwork never shares the number column. */
+.season-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(1.5rem, 3vw, 2.5rem); }
+.season-creator { padding: clamp(1rem, 2vw, 1.5rem); border: 1px solid var(--line); border-radius: var(--radius-l); background: var(--surface); }
+.season-creator > header { display: flex; align-items: center; gap: .875rem; margin: 0 0 1rem; }
+.season-creator > header img { width: 48px; height: 48px; flex: 0 0 48px; object-fit: cover; border-radius: 50%; }
+.season-creator > header h3 { margin: 0; }
+.season-episode-list { display: grid !important; gap: 0; margin: 0; padding: 0; list-style: none; }
+.season-episode-list > li {
+  display: grid;
+  grid-template-columns: minmax(160px, 240px) minmax(0, 1fr);
+  align-items: start;
+  gap: clamp(1rem, 2.5vw, 1.75rem);
+  min-width: 0;
+  padding: 1.1rem 0;
+  border-top: 1px solid var(--line);
+}
+.season-episode-image { display: block; min-width: 0; overflow: hidden; border-radius: var(--radius-m); background: var(--surface-2); }
+.season-episode-image img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; }
+.season-episode-info { min-width: 0; }
+.season-episode-info > .episode-title-line { display: flex; flex-wrap: wrap; align-items: center; gap: .45rem .6rem; color: var(--text); font-weight: 650; line-height: 1.45; }
+.season-episode-info > .episode-title-line > span:last-child { min-width: 0; overflow-wrap: anywhere; }
+.season-episode-info .episode-time-meta { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .45rem; color: var(--muted); font-size: var(--step--1); }
+.season-episode-info > p { margin: .55rem 0 0; color: var(--muted); font-size: var(--step--1); line-height: 1.65; overflow-wrap: normal; }
+
+/* Chapter cards: a predictable image slot and a content area that can shrink safely. */
+.catalog-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1rem, 2vw, 1.5rem); }
+.catalog-grid > .lore-card { display: flex; flex-direction: column; min-width: 0; padding: 1rem; }
+.catalog-grid > .lore-card .chapter-card-thumb,
+.catalog-grid > .lore-card > .episode-card-thumb { display: block; width: 100%; margin: 0 0 1rem; overflow: hidden; border-radius: var(--radius-m); background: var(--surface-2); }
+.catalog-grid > .lore-card .chapter-card-thumb img,
+.catalog-grid > .lore-card > .episode-card-thumb img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; }
+.catalog-grid > .lore-card h3 { margin: 0 0 .5rem; font-size: var(--step-1); line-height: 1.3; }
+.catalog-grid > .lore-card > p { margin: 0 0 .75rem; line-height: 1.6; overflow-wrap: normal; }
+.catalog-grid > .lore-card .card-relations { display: flex; flex-wrap: wrap; gap: .4rem .85rem; margin-top: auto; padding-top: .25rem; }
+.catalog-grid > .lore-card > .text-link { align-self: flex-start; margin-top: .75rem; }
+
+/* Prevent generic break-anywhere safety rules from splitting ordinary Polish words. */
+.lore-card p,
+.episode-row-main p,
+.season-episode-info p,
+.creator-meta p { overflow-wrap: break-word; word-break: normal; }
+
+@media (max-width: 900px) {
+  .episode-catalog-list .episode-row { grid-template-columns: minmax(140px, 210px) minmax(0, 1fr); }
+  .episode-row-actions { grid-column: 2; flex-direction: row; flex-wrap: wrap; }
+  .episode-row-actions .button { width: auto; flex: 0 1 auto; }
+  .season-episode-list > li { grid-template-columns: minmax(140px, 200px) minmax(0, 1fr); }
+  .catalog-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 600px) {
+  .episode-catalog-list .episode-row { grid-template-columns: minmax(0, 1fr); gap: .9rem; }
+  .episode-row-thumb { width: 100%; max-width: none; }
+  .episode-row-actions { grid-column: 1; }
+  .episode-row-actions .button { flex: 1 1 140px; }
+  .season-creator { padding: 1rem; }
+  .season-episode-list > li { grid-template-columns: minmax(0, 1fr); gap: .75rem; }
+  .season-episode-image { width: 100%; }
+  .catalog-grid { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* Creator directory: compact editorial cards instead of oversized poster tiles. */
+.creator-wiki-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: stretch; }
+.creator-wiki-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+  min-width: 0;
+  padding: 1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-l);
+  background: var(--surface);
+  transition: border-color var(--t), background-color var(--t);
+}
+.creator-wiki-card:hover { border-color: var(--line-strong); background: var(--surface-2); }
+.creator-wiki-card > img {
+  display: block;
+  flex: 0 0 88px;
+  width: 88px;
+  height: 88px;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+}
+.creator-wiki-card > div { min-width: 0; padding: 0; }
+.creator-wiki-card h2 { margin: 0; font-size: var(--step-1); line-height: 1.3; }
+@media (max-width: 900px) { .creator-wiki-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px) {
+  .creator-wiki-grid { grid-template-columns: minmax(0, 1fr); }
+  .creator-wiki-card > img { flex-basis: 76px; width: 76px; height: 76px; }
+}
+
+
+/* ---------- Final screenshot-driven fixes (2026-10-20) ---------- */
+/* Crystal is a supporting illustration, not a full-width poster. */
+.crystal-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 360px);
+  align-items: center;
+  gap: clamp(2rem, 6vw, 5rem);
+  max-width: 1040px;
+  margin-inline: auto;
+}
+.crystal-copy { min-width: 0; }
+.crystal-visual {
+  width: 100%;
+  max-width: 360px;
+  justify-self: end;
+  aspect-ratio: 1 / 1;
+  background: var(--surface);
+}
+.crystal-art { width: 100%; height: 100%; inset: 0; }
+.crystal-art path:not(.crystal-shadow) { vector-effect: non-scaling-stroke; }
+.crystal-cta { margin-bottom: .25rem; }
+
+/* Featured cards need breathing room before the next section divider. */
+.featured-episodes { padding-bottom: clamp(2.5rem, 5vw, 4rem); }
+.featured-grid { align-items: start; }
+.featured-card { min-width: 0; padding-bottom: .25rem; }
+.featured-card-actions { flex-wrap: wrap; gap: .5rem; }
+.featured-card-actions .button { white-space: nowrap; }
+
+/* Season artwork is a thumbnail, not a hero image. */
+.season-episode-list > li {
+  grid-template-columns: minmax(150px, 210px) minmax(0, 1fr);
+  align-items: start;
+  gap: clamp(.9rem, 2vw, 1.4rem);
+}
+.season-episode-image { width: 100%; max-width: 210px; align-self: start; }
+.season-episode-image img { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; }
+.season-cover { width: 112px; max-width: 112px; height: 64px; object-fit: cover; border-radius: var(--radius-m); }
+.season-block-heading { min-width: 0; }
+
+/* Homepage creator cards are intentionally name-only; avatars share one size. */
+.creator-grid { align-items: stretch; }
+.creator-card { flex-direction: row; align-items: center; justify-content: flex-start; gap: 1rem; padding: 1rem 1.125rem; min-height: 88px; }
+.creator-card .avatar-wrap { width: 56px; height: 56px; flex: 0 0 56px; overflow: hidden; border-radius: 50%; }
+.creator-card .creator-avatar { display: block; width: 100%; height: 100%; object-fit: cover; }
+.creator-meta { min-width: 0; }
+.creator-meta strong { line-height: 1.25; }
+.creator-card .creator-meta > span, .creator-card .creator-meta > p { display: none !important; }
+
+/* Use a clean, correctly proportioned Discord glyph; do not show a black tile. */
+.button-discord { display: inline-flex; align-items: center; justify-content: center; gap: .75rem; min-height: 48px; padding: .45rem 1.1rem .45rem .55rem; white-space: nowrap; }
+.button-discord .discord-brand-symbol { display: block; width: 32px; height: 24px; flex: 0 0 32px; object-fit: contain; background: transparent !important; filter: invert(1); }
+.discord-right { min-width: 0; flex: 1 1 420px; align-items: center; gap: 1.25rem; flex-wrap: wrap; }
+.discord-right > p { min-width: 0; flex: 1 1 320px; }
+
+@media (max-width: 900px) {
+  .crystal-layout { grid-template-columns: minmax(0, 1fr) minmax(220px, 300px); gap: 2rem; }
+  .crystal-visual { max-width: 300px; }
+  .season-episode-list > li { grid-template-columns: minmax(130px, 180px) minmax(0, 1fr); }
+  .season-episode-image { max-width: 180px; }
+}
+@media (max-width: 680px) {
+  .crystal-layout { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; }
+  .crystal-visual { width: min(100%, 320px); max-width: 320px; justify-self: start; aspect-ratio: 1 / 1; }
+  .featured-episodes { padding-top: 2.5rem; padding-bottom: 3rem; }
+  .featured-heading { align-items: center; margin-bottom: 1.25rem; }
+  .featured-card-actions { gap: .5rem; }
+  .featured-card-actions .button { flex: 0 1 auto; }
+  .season-episode-list > li { grid-template-columns: minmax(0, 1fr); gap: .75rem; }
+  .season-episode-image { width: 100%; max-width: 100%; }
+  .season-cover { width: 88px; max-width: 88px; height: 54px; }
+  .discord-right { flex: 1 1 100%; }
+  .discord-right > p { flex-basis: 100%; }
+  .button-discord { width: auto !important; }
+}
+
+
+/* ---------- Verified layout fixes (2026-10-20) ---------- */
+/* Anchor navigation lands below the sticky header. */
+#tworcy { scroll-margin-top: calc(var(--nav-height) + 12px); }
+
+/* Season rows use the same thumbnail scale as the episode directory. */
+.season-creator .season-episode-list > li {
+  grid-template-columns: minmax(0, 210px) minmax(0, 1fr) !important;
+  align-items: start;
+  gap: clamp(.9rem, 2vw, 1.4rem);
+}
+.season-creator .season-episode-image {
+  display: block; width: 100%; max-width: 210px; min-width: 0;
+  aspect-ratio: 16 / 9; align-self: start;
+}
+.season-creator .season-episode-image img {
+  display: block; width: 100%; height: 100%; aspect-ratio: 16 / 9; object-fit: cover;
+}
+@media (max-width: 680px) {
+  .season-creator .season-episode-list > li { grid-template-columns: minmax(0, 1fr) !important; }
+  .season-creator .season-episode-image { width: 100%; max-width: 100%; }
+}
+
+/* The crystal is intentionally compact and the featured carousel controls sit below its cards. */
+.crystal-layout { grid-template-columns: minmax(0, 1fr) minmax(240px, 320px); }
+.crystal-visual { width: 100%; max-width: 320px; aspect-ratio: 1 / 1; overflow: hidden; border-radius: var(--radius-l); }
+.crystal-art { display: block; width: 100%; height: 100%; }
+.featured-heading { margin-bottom: 1.5rem; }
+.featured-card-actions { margin-top: .65rem; padding-bottom: .35rem; }
+.featured-episodes { padding-bottom: clamp(3rem, 6vw, 5rem); }
+
+/* Home creator strip: no redundant lead paragraph, consistent circular portraits. */
+.creator-card .avatar-wrap { width: 48px; height: 48px; flex: 0 0 48px; border-radius: 50%; overflow: hidden; }
+.creator-card .creator-avatar { width: 100%; height: 100%; aspect-ratio: 1 / 1; border-radius: 50%; object-fit: cover; }
+
+/* Use the supplied black Discord SVG as-is: inversion made the symbol white. */
+.button-discord .discord-brand-symbol { width: 28px; height: 22px; flex: 0 0 28px; filter: none !important; object-fit: contain; }
+
+/* Creator detail portrait must be a square portrait, never a stretched episode image. */
+.profile-image.creator-profile-image { width: 88px; height: 88px; flex: 0 0 88px; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 50%; }
+
+/* Episode metadata is a readable group, not adjacent words running together. */
+.episode-context { display: flex; flex-wrap: wrap; align-items: center; gap: .45rem 1rem; margin: .75rem 0 1.25rem; color: var(--text); font-size: var(--step--1); line-height: 1.6; }
+.episode-context .episode-meta-row, .episode-context .episode-meta-group { color: var(--text); }
+.episode-context .episode-metadata { display: inline-flex; flex-wrap: wrap; align-items: center; gap: .35rem .55rem; color: var(--text); }
+.episode-context .episode-metadata span, .episode-context > span { color: var(--text); }
+.episode-context > span { display: inline-flex; flex-wrap: wrap; gap: .25rem; }
+.episode-context .episode-meta-separator { color: var(--muted); }
+.episode-context a { color: var(--text); text-decoration: underline; text-decoration-color: var(--line-strong); text-underline-offset: .2em; }
+.episode-context a:hover { color: var(--accent); text-decoration-color: var(--accent); }
+.episode-feature-compact { gap: 1rem; max-width: 1080px; }
+.episode-feature-compact .episode-actions { padding-top: .5rem; }
+.episode-feature-compact .episode-actions .button { margin-top: .15rem; }
+
+/* Chapter directory: one page title, then clear creator-specific arc headings. */
+.catalog-section-heading { display: flex; align-items: end; justify-content: space-between; gap: 1rem; font-size: inherit; }
+.catalog-section-heading h2 { font-size: var(--step-2); line-height: 1.25; margin: 0; }
+.catalog-section-heading p { margin-top: .4rem; color: var(--muted); font-size: var(--step-0); }
+.catalog-section-heading > a { flex: 0 0 auto; font-size: var(--step--1); }
+.catalog-grid > .lore-card > h3 { font-size: var(--step-1); }
+@media (max-width: 680px) {
+  .crystal-layout { grid-template-columns: minmax(0, 1fr); }
+  .crystal-visual { width: min(100%, 300px); max-width: 300px; justify-self: start; }
+  .catalog-section-heading { align-items: start; }
+}
+
+/* catalog-sync.js generated episode metadata */
+.episode-meta-row { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem 1rem; margin-top: .65rem; color: var(--muted); font-size: var(--step--1); line-height: 1.6; }
+.episode-meta-group { display: inline-flex; flex-wrap: wrap; align-items: center; gap: .25rem .45rem; min-width: 0; }
+.episode-meta-publication strong { color: var(--text); font-weight: 650; }
+.episode-feature-compact .episode-actions { margin-top: .35rem; }
+
+
+/* Consistent season episode rows: thumbnail first, editorial copy second. */
+.season-creator .season-episode-list > li {
+  display: grid !important;
+  grid-template-columns: minmax(0, 210px) minmax(0, 1fr) !important;
+  align-items: start;
+}
+.season-creator .season-episode-list > li > .season-episode-image { grid-column: 1; grid-row: 1; }
+.season-creator .season-episode-list > li > .season-episode-info { grid-column: 2; grid-row: 1; }
+.season-creator .season-episode-image { width: 100%; max-width: 210px; aspect-ratio: 16 / 9; }
+.season-creator .season-episode-image img { width: 100%; height: 100%; object-fit: cover; }
+@media (max-width: 680px) {
+  .season-creator .season-episode-list > li { grid-template-columns: minmax(0, 1fr) !important; }
+  .season-creator .season-episode-list > li > .season-episode-image,
+  .season-creator .season-episode-list > li > .season-episode-info { grid-column: 1; grid-row: auto; }
+  .season-creator .season-episode-image { max-width: 100%; }
+}
+
+
+/* Chapter summary appears under the title; the cover follows the summary. */
+.page-intro > h1 + p { line-height: 1.7; }
+.page-intro > .chapter-cover { max-width: 1080px; margin: 1.25rem 0 1rem; }
+
+
+/* Mobile navigation refinement: accessible drawer, stable touch targets, nested menu. */
+@media (max-width: 900px) {
+  .nav-container { gap: .75rem; }
+  .menu-toggle { flex: 0 0 44px; border-radius: var(--radius-s); }
+  .menu-toggle:hover, .menu-toggle:focus-visible { background: var(--surface); }
+  .nav-links {
+    inset: var(--nav-height) 0 0;
+    height: calc(100dvh - var(--nav-height));
+    max-height: none;
+    padding: 1rem clamp(20px, 5vw, 32px) max(2rem, env(safe-area-inset-bottom));
+    gap: .25rem;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    border-bottom: 0;
+    box-shadow: 0 24px 40px rgb(0 0 0 / .22);
+  }
+  .nav-links > a, .nav-group > summary {
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    padding: .75rem 1rem;
+    border-radius: var(--radius-m);
+  }
+  .nav-group { width: 100%; }
+  .nav-group > summary { justify-content: space-between; }
+  .nav-group[open] > summary { color: var(--text); background: var(--surface); }
+  .nav-group-menu { padding: .25rem 0 .5rem .75rem; gap: .15rem; }
+  .nav-group-menu a { display: flex; align-items: center; min-height: 44px; padding: .65rem 1rem; }
+  .nav-discord { margin: .75rem 0 0 !important; min-height: 48px; border-radius: var(--radius-m) !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav-links, .menu-toggle span { transition: none !important; }
+}
+
+
+/* ---------- Mobile UX pass: creator profiles, navigation drawer and search ---------- */
+/* Creator profile rows have a distinct markup from the global episode catalogue.
+   Keep the order marker out of the image/text columns so every child has a clear place. */
+.profile-layout .episode-order-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.profile-layout .episode-order-list > .episode-row {
+  display: grid;
+  grid-template-columns: minmax(180px, 260px) minmax(0, 1fr) minmax(150px, 190px);
+  grid-template-rows: 1fr;
+  align-items: center;
+  gap: .75rem clamp(1rem, 2.4vw, 2rem);
+  padding: clamp(1.25rem, 2.5vw, 1.75rem) 0;
+  border-top: 1px solid var(--line);
+  min-width: 0;
+}
+.profile-layout .episode-order-list > .episode-row > .episode-row-thumb { grid-column: 1; grid-row: 1; width: 100%; }
+.profile-layout .episode-order-list > .episode-row > .episode-row-main { grid-column: 2; grid-row: 1; align-self: center; min-width: 0; }
+.profile-layout .episode-order-list > .episode-row > .episode-row-actions { grid-column: 3; grid-row: 1; align-self: center; }
+.profile-layout .episode-order-list .episode-row-main h3 { display: flex; flex-wrap: wrap; align-items: center; gap: .45rem .6rem; margin: 0 0 .5rem; line-height: 1.35; }
+.profile-layout .episode-order-list .episode-row-main h3 .episode-number-badge { flex: 0 0 auto; }
+.profile-layout .episode-order-list .episode-row-main p { margin: .5rem 0 0; }
+.profile-layout .episode-order-list .episode-row-main .episode-row-meta-data { display: flex; flex-wrap: wrap; gap: .25rem .5rem; }
+.profile-layout .episode-order-list .episode-row-actions { display: flex; flex-direction: column; gap: .5rem; min-width: 0; }
+.profile-layout .episode-order-list .episode-row-actions .button { width: 100%; min-height: 44px; white-space: normal; text-align: center; padding-inline: .75rem; }
+.profile-layout .episode-order-list .episode-row-thumb img { display: block; width: 100%; aspect-ratio: 16 / 9; height: auto; object-fit: cover; border-radius: var(--radius-m); }
+
+/* Drawer: compact side panel inspired by the supplied reference, with a dimmed backdrop. */
+@media (max-width: 900px) {
+  .nav { z-index: 1000; }
+  .nav-container { position: relative; z-index: 3; }
+  .nav.menu-open::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    background: rgb(0 0 0 / .58);
+  }
+  .nav.menu-open { background: transparent; border-bottom-color: transparent; }
+  .nav.menu-open .nav-container { width: 100%; padding-inline: clamp(16px, 4vw, 24px); }
+  /* Keep the logo below the drawer; only the menu toggle stays above it. */
+  .nav-logo { position: relative; z-index: 1; }
+  .menu-toggle {
+    position: relative;
+    z-index: 6;
+    width: 44px;
+    height: 44px;
+    flex: 0 0 44px;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-m);
+    background: var(--bg-raised);
+  }
+  .nav-links {
+    position: fixed;
+    inset: 0 0 0 auto;
+    z-index: 5;
+    width: min(88vw, 420px);
+    height: 100dvh;
+    max-height: 100dvh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: .35rem;
+    padding: calc(var(--nav-height) + 1.25rem) 1rem max(1.5rem, env(safe-area-inset-bottom));
+    background: var(--bg-raised);
+    border-left: 1px solid var(--line-strong);
+    border-bottom: 0;
+    box-shadow: -24px 0 60px rgb(0 0 0 / .28);
+    opacity: 1;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateX(100%);
+    transition: transform 220ms var(--ease), visibility 220ms;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+  .nav-links.open { visibility: visible; pointer-events: auto; transform: translateX(0); }
+  .nav-links > a, .nav-group > summary {
+    width: 100%;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    padding: .75rem 1rem;
+    border-radius: var(--radius-m);
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+  .nav-links > a[aria-current="page"] { color: var(--text); background: var(--surface-2); }
+  .nav-group { width: 100%; }
+  .nav-group > summary { justify-content: space-between; }
+  .nav-group[open] > summary { color: var(--text); background: var(--surface); }
+  .nav-group-menu { position: static; display: grid; gap: .2rem; min-width: 0; padding: .35rem 0 .5rem .75rem; border: 0; border-radius: 0; box-shadow: none; background: transparent; }
+  .nav-group-menu a { display: flex; align-items: center; min-height: 44px; padding: .65rem 1rem; border-radius: var(--radius-s); font-size: .95rem; }
+  .nav-discord { margin: .65rem 0 0 !important; min-height: 48px; justify-content: center; border-radius: var(--radius-m) !important; }
+  .profile-layout .episode-order-list > .episode-row { grid-template-columns: minmax(140px, 34%) minmax(0, 1fr); gap: .75rem 1rem; }
+  .profile-layout .episode-order-list > .episode-row > .episode-row-thumb { grid-column: 1; grid-row: 1; align-self: start; }
+  .profile-layout .episode-order-list > .episode-row > .episode-row-main { grid-column: 2; grid-row: 1; align-self: start; }
+  .profile-layout .episode-order-list > .episode-row > .episode-row-actions { grid-column: 2; grid-row: 2; flex-direction: row; flex-wrap: wrap; align-self: start; }
+  .profile-layout .episode-order-list .episode-row-actions .button { width: auto; flex: 1 1 140px; }
+}
+
+/* Mobile search: use the available width, stack the primary action, and keep results tappable. */
+.catalog-search-form { width: 100%; max-width: 760px; }
+.catalog-search-form .search-input-row { width: 100%; }
+.catalog-search-form .catalog-search { min-width: 0; min-height: 48px; margin-top: 0; font-size: 16px; }
+.catalog-search-form .search-input-row .button { min-height: 48px; }
+.search-filters { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: .5rem 1rem; align-items: center; }
+.search-filter-field { display: grid; gap: .35rem; min-width: 0; }
+.search-filters label { color: var(--muted); font-size: var(--step--1); }
+.search-filters select { width: 100%; min-width: 0; min-height: 44px; padding: .6rem .75rem; color: var(--text); background: var(--surface); border: 1px solid var(--line-strong); border-radius: var(--radius-m); }
+.kt-search-result { min-height: 64px; }
+.kt-search-close { width: 44px; height: 44px; flex-basis: 44px; border: 1px solid var(--line); font-size: 1.6rem; }
+.kt-search-input { min-height: 44px; font-size: 16px; }
+.kt-search-quicklinks button { min-height: 40px; }
+@media (max-width: 600px) {
+  .profile-layout .episode-order-list > .episode-row { grid-template-columns: minmax(0, 1fr); gap: .75rem; }
+  .profile-layout .episode-order-list > .episode-row > .episode-row-thumb,
+  .profile-layout .episode-order-list > .episode-row > .episode-row-main,
+  .profile-layout .episode-order-list > .episode-row > .episode-row-actions { grid-column: 1; grid-row: auto; }
+  .profile-layout .episode-order-list > .episode-row > .episode-row-thumb { width: 100%; }
+  .profile-layout .episode-order-list .episode-row-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .profile-layout .episode-order-list .episode-row-actions .button { width: 100%; min-width: 0; padding-inline: .6rem; }
+  .profile-heading { align-items: center; gap: 1rem; }
+  .profile-image.creator-profile-image { width: 76px; height: 76px; flex: 0 0 76px; }
+  .search-input-row { flex-direction: column; align-items: stretch; }
+  .search-input-row .catalog-search { width: 100%; }
+  .search-input-row .button { width: 100%; }
+  .search-filters { grid-template-columns: minmax(0, 1fr); gap: .35rem; }
+  .search-filters select { margin-bottom: .5rem; }
+  .kt-search-overlay.is-open { align-items: stretch; justify-content: flex-start; padding: max(8px, env(safe-area-inset-top)) 8px max(8px, env(safe-area-inset-bottom)); }
+  .kt-search-top, .kt-search-content { width: 100%; }
+  .kt-search-top { border-radius: var(--radius-m) var(--radius-m) 0 0; padding: .65rem; gap: .5rem; }
+  .kt-search-content { max-height: calc(100dvh - 76px - env(safe-area-inset-top) - env(safe-area-inset-bottom)); border-radius: 0 0 var(--radius-m) var(--radius-m); }
+  .kt-search-status-row { flex-direction: column; align-items: flex-start; gap: .5rem; }
+  .kt-search-all { min-height: 40px; display: inline-flex; align-items: center; }
+  .kt-search-quicklinks { flex-wrap: nowrap; overflow-x: auto; overscroll-behavior-x: contain; padding: .65rem; }
+  .kt-search-quicklinks button { flex: 0 0 auto; white-space: nowrap; }
+  .kt-search-result { grid-template-columns: 52px minmax(0, 1fr) auto; gap: .6rem; padding: .6rem; min-height: 68px; }
+  .kt-search-thumb { width: 52px; }
+  .kt-search-result-copy .kt-search-summary { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav-links { transition: none !important; }
+}
+
+
+/* Final follow-up fixes: center the crystal and keep season hash links stable after rendering. */
+@media (max-width: 680px) {
+  .crystal-visual { justify-self: center; margin-inline: auto; }
+}
+
+
+/* Mobile search must sit above the sticky navigation and remain fully interactive. */
+@media (max-width: 900px) {
+  .kt-search-overlay { z-index: 1200; }
+  .kt-search-overlay.is-open {
+    position: fixed;
+    inset: 0;
+    min-height: 100dvh;
+    padding: max(12px, env(safe-area-inset-top)) 12px max(12px, env(safe-area-inset-bottom));
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+  .kt-search-top { position: relative; z-index: 1; }
+  .kt-search-field-wrap { min-width: 0; flex: 1 1 auto; }
+  .kt-search-input { display: block; min-width: 0; width: 100%; min-height: 44px; color: var(--text); background: transparent; opacity: 1; pointer-events: auto; }
+  .kt-search-input::placeholder { color: var(--muted); opacity: 1; }
+  .kt-search-content { max-height: none; min-height: 0; flex: 0 1 auto; }
+}
+@media (max-width: 600px) {
+  .kt-search-overlay.is-open { padding: max(8px, env(safe-area-inset-top)) 8px max(8px, env(safe-area-inset-bottom)); }
+  .kt-search-top { border-radius: var(--radius-m) var(--radius-m) 0 0; }
+  .kt-search-content { max-height: calc(100dvh - 82px - env(safe-area-inset-top) - env(safe-area-inset-bottom)); overflow: hidden; }
+}
+
+
+/* Szybki wybór sezonu w katalogu odcinków. */
+.season-jump-nav { display: flex; flex-wrap: wrap; gap: .6rem; margin-bottom: var(--space-8); }
+.season-jump-nav a { display: inline-flex; align-items: center; min-height: 44px; padding: .55rem .9rem; border: 1px solid var(--line-strong); border-radius: 999px; color: var(--text); text-decoration: none; }
+.season-jump-nav a:hover, .season-jump-nav a:focus-visible { background: var(--surface-2); color: var(--accent); }
+.season-block[id] { scroll-margin-top: calc(var(--nav-height) + 1rem); }
+
+/* Lists of important characters share one compact style across episode and chapter pages. */
+.episode-character-list a.character-link { color: var(--accent); text-decoration: underline; text-decoration-color: var(--line-strong); text-underline-offset: .2em; }
+.episode-character-list a.character-link:not(.button):hover { color: var(--accent); text-decoration-color: var(--accent); }
+.episode-character-list a.character-link:not(.button):focus-visible { color: var(--link); text-decoration-color: var(--accent); }
+.episode-character-list,
+.lore-sidebar ul.linked-list {
+  display: block;
+  padding-left: 1.25rem;
+  margin: 0;
+  list-style: disc;
+}
+.episode-character-list li,
+.lore-sidebar ul.linked-list li {
+  padding: .15rem 0;
+  color: var(--muted);
+}
+.episode-character-list li:last-child,
+.lore-sidebar ul.linked-list li:last-child { border-bottom: 0; }
+.episode-character-list a.character-link,
+.lore-sidebar .linked-list a {
+  display: inline-flex;
+  color: var(--text);
+  text-decoration: none;
+  transition: color var(--t), text-decoration-color var(--t);
+}
+.episode-character-list a.character-link:hover,
+.lore-sidebar .linked-list a:hover {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-underline-offset: .2em;
+}
+.episode-character-list a.character-link:focus-visible,
+.lore-sidebar .linked-list a:focus-visible {
+  color: var(--text);
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-underline-offset: .2em;
+}
+
+/* Profile: creator links in the related-creators list use the same restrained
+   treatment as other wiki metadata; hover and keyboard focus remain visible. */
+.lore-sidebar section h2 + ul a[href^="/tworca/"] {
+  text-decoration: underline;
+  text-decoration-color: var(--line-strong);
+}
+.lore-sidebar section h2 + ul a[href^="/tworca/"]:not(.button):hover,
+.lore-sidebar section h2 + ul a[href^="/tworca/"]:not(.button):focus-visible {
+  text-decoration-color: var(--accent);
+}
+
+h1 a:not(.button), h2 a:not(.button), h3 a:not(.button), h4 a:not(.button),
+.season-episode-list li > a, .episode-row-main a:not(.episode-row-thumb),
+.wiki-result a:not(.button) {
+  color: var(--link);
+  transition: color var(--t), text-decoration-color var(--t);
+}
+h1 a:not(.button):hover, h2 a:not(.button):hover, h3 a:not(.button):hover, h4 a:not(.button):hover,
+.season-episode-list li > a:hover, .episode-row-main a:not(.episode-row-thumb):hover,
+.season-episode-info > .episode-title-line:hover, .wiki-result a:not(.button):hover {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-underline-offset: .2em;
+}
+h1 a:not(.button):focus-visible, h2 a:not(.button):focus-visible,
+h3 a:not(.button):focus-visible, h4 a:not(.button):focus-visible,
+.season-episode-list li > a:focus-visible, .episode-row-main a:not(.episode-row-thumb):focus-visible,
+.season-episode-info > .episode-title-line:focus-visible, .wiki-result a:not(.button):focus-visible {
+  color: var(--link);
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-underline-offset: .2em;
+}
+
+
+/* Profile descriptions: keep identity in the heading and long story in the article. */
+.creator-profile-description { max-width: 38rem; }
+.creator-history { max-width: 72ch; line-height: 1.75; }
+
+/* Character catalogue cards follow the profile identity pattern. */
+.catalog-grid { align-items: stretch; }
+.catalog-grid > .catalog-entity-card {
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  height: 100%;
+  min-height: 0;
+  gap: var(--space-3);
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+.catalog-profile-head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  min-height: 64px;
+}
+.catalog-profile-head strong {
+  font-size: var(--step-1);
+  line-height: 1.25;
+  color: var(--text);
+}
+.catalog-profile-avatar,
+.catalog-profile-placeholder {
+  display: grid;
+  place-items: center;
+  flex: 0 0 64px;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--line);
+  background: var(--surface-2);
+}
+.catalog-profile-placeholder {
+  color: var(--accent);
+  font-size: 1.5rem;
+}
+.catalog-grid > .catalog-entity-card p {
+  flex: 1 1 auto;
+  margin: 0;
+  line-height: 1.6;
+}
+.catalog-grid > .catalog-entity-card .text-link {
+  margin-top: var(--space-3);
+  padding-top: var(--space-2);
+  text-decoration: underline;
+}
+.catalog-grid > .catalog-entity-card:hover .text-link:not(.button),
+.catalog-grid > .catalog-entity-card:focus-visible .text-link:not(.button) {
+  text-decoration-color: var(--accent);
+}
+.catalog-grid > .catalog-entity-card:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+@media (max-width: 640px) {
+  .catalog-profile-head { gap: var(--space-3); }
+  .catalog-profile-avatar, .catalog-profile-placeholder {
+    flex-basis: 56px;
+    width: 56px;
+    height: 56px;
+  }
+}
+
+
+/* Katalog odcinków: tytuły pozostają jasne, a nie w kolorze akcentu. */
+.season-episode-info > .episode-title-line,
+.season-episode-info > .episode-title-line:hover,
+.season-episode-info > .episode-title-line:focus-visible,
+.episode-card-content h3 a,
+.episode-card-content h3 a:hover,
+.episode-card-content h3 a:focus-visible {
+  color: var(--text);
+}
+
+.profile-layout .episode-order-list .episode-title-line > a,
+.profile-layout .episode-order-list .episode-title-line > a:hover,
+.profile-layout .episode-order-list .episode-title-line > a:focus-visible {
+  color: var(--text);
+}
+
+/* Nazwy twórców w metadanych kart nie używają zielonego akcentu. */
+.card-relations a,
+.card-relations a:hover,
+.card-relations a:focus-visible {
+  color: var(--text);
+}
