@@ -1,0 +1,60 @@
+
+name: Publish public from pv to main
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish-public
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    name: Copy website from pv
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout pv
+        uses: actions/checkout@v4
+        with:
+          ref: pv
+          path: source
+
+      - name: Validate website
+        working-directory: source
+        run: |
+          test -f public/index.html
+          test -f public/404.html
+          test -f public/CNAME
+          test -f public/robots.txt
+          test -f public/sitemap.xml
+          echo "Required website files found."
+
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: target
+
+      - name: Copy only public
+        run: |
+          mkdir -p target/public
+          rsync -a --delete source/public/ target/public/
+
+      - name: Commit and push
+        working-directory: target
+        run: |
+          if git diff --quiet -- public; then
+            echo "public is already up to date."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add public
+          git commit -m "Publish website from pv"
+          git push origin HEAD:main
